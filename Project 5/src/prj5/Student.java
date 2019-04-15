@@ -10,9 +10,9 @@ public class Student
     
     /**
      * Constructor for student object
-     * @param hobby 
-     * @param major
-     * @param state
+     * @param hobby param for hobby field
+     * @param major param for major field
+     * @param state param for state field
      */
     public Student(String hobby, String major, String state)
     {
@@ -21,26 +21,46 @@ public class Student
         this.state = state;
     }
     
+    /**
+     * getter for hobby field
+     * @return hobby field
+     */
     public String getHobby()
     {
         return hobby;
     }
     
+    /**
+     * getter for major field
+     * @return major field
+     */
     public String getMajor()
     {
         return major;
     }
     
+    /**
+     * getter for state field
+     * @return state field
+     */
     public String getState()
     {
         return state;
     }
     
+    /**
+     * getter for songsHeard field
+     * @return songsHeard field
+     */
     public String[] getSongsHeard()
     {
         return songsHeard;
     }
     
+    /**
+     * getter for songsLiked field
+     * @return songsLiked field
+     */
     public String[] getSongsLiked()
     {
         return songsLiked;
