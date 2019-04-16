@@ -1,55 +1,55 @@
-package doublylinkedlist;
+package prj5;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * @param <E>
+ * @param <T>
  *            The type of object the class will store
  */
-public class DLList<E> {
+public class DLList<T> {
     /**
      * A doubly linked node that stores data of type E
      *
-     * @param <E>
+     * @param <T>
      *            The type of object that this class will store
      */
-    private static class Node<E> {
-        private Node<E> next;
-        private Node<E> previous;
-        private E data;
+    private static class Node<T> {
+        private Node<T> next;
+        private Node<T> previous;
+        private T data;
 
 
         /**
          * Creates a new node
          *
-         * @param d
+         * @param data
          *            the data for the node
          */
-        public Node(E d) {
-            data = d;
+        public Node(T data) {
+            this.data = data;
         }
 
 
         /**
          * Sets the node after this node to the given node
          *
-         * @param n
+         * @param next
          *            the node after this node
          */
-        public void setNext(Node<E> n) {
-            next = n;
+        public void setNext(Node<T> next) {
+            this.next = next;
         }
 
 
         /**
          * Sets the node before this to the given node
          *
-         * @param n
+         * @param previous
          *            the node before this node
          */
-        public void setPrevious(Node<E> n) {
-            previous = n;
+        public void setPrevious(Node<T> previous) {
+            this.previous = previous;
         }
 
 
@@ -58,7 +58,7 @@ public class DLList<E> {
          *
          * @return the next node
          */
-        public Node<E> next() {
+        public Node<T> next() {
             return next;
         }
 
@@ -68,7 +68,7 @@ public class DLList<E> {
          *
          * @return the node before this one
          */
-        public Node<E> previous() {
+        public Node<T> previous() {
             return previous;
         }
 
@@ -78,19 +78,20 @@ public class DLList<E> {
          *
          * @return the data in the node
          */
-        public E getData() {
+        public T getData() {
             return data;
         }
     }
 
-
+    // Fields -----------------------------------------------------
     private int size;
-    private Node<E> head;
-    private Node<E> tail;
+    private Node<T> head;
+    private Node<T> tail;
 
 
+    // Constructor ------------------------------------------------
     /**
-     * Create a new DLList object
+     * Creates a new DLList object
      */
     public DLList() {
         init();
@@ -98,12 +99,12 @@ public class DLList<E> {
 
 
     /**
-     * Initializes the DLList with sentinal nodes
+     * Initializes the DLList with sentinel nodes
      */
     private void init() {
-        head = new DLList.Node<E>(null);
-        tail = new DLList.Node<E>(null);
+        head = new DLList.Node<T>(null);
         head.setNext(tail);
+        tail = new DLList.Node<T>(null);
         tail.setPrevious(head);
         size = 0;
     }
@@ -130,7 +131,7 @@ public class DLList<E> {
 
 
     /**
-     * Clears all the entries from the list
+     * Clears all the entries from the list while keeping the sentinel nodes
      */
     public void clear() {
         init();
@@ -144,7 +145,7 @@ public class DLList<E> {
      *            an object that may or may not be in the list
      * @return true the object is in the list
      */
-    public boolean contains(E obj) {
+    public boolean contains(T obj) {
         return lastIndexOf(obj) != -1;
     }
 
@@ -153,12 +154,12 @@ public class DLList<E> {
      * Returns the object at the given index
      *
      * @param index
-     *            where the object is located
-     * @return The object at the given position
+     *            where the object is
+     * @return The object at the given index
      * @throws IndexOutOfBoundsException
-     *             if there no node at the given index
+     *             if the index is not within the size of the list
      */
-    public E get(int index) {
+    public T get(int index) {
         return getNodeAtIndex(index).getData();
     }
 
@@ -167,26 +168,26 @@ public class DLList<E> {
      * Adds a element to the end of the list
      *
      * @param newEntry
-     *            the element to add to the end
+     *            the element to add to the end of the list
      */
-    public void add(E newEntry) {
+    public void add(T newEntry) {
         add(size(), newEntry);
     }
 
 
     /**
-     * Adds the object to the position in the list
+     * Adds the object at the index given to the list
      *
      * @param index
-     *            where to add the object
+     *            where in the list the object goes
      * @param obj
-     *            the object to add
+     *            the object to add to the list
      * @throws IndexOutOfBoundsException
-     *             if index is less than zero or greater than size
+     *             if the index is not within the size of the list
      * @throws IllegalArgumentException
-     *             if obj is null
+     *             if the obj given is null
      */
-    public void add(int index, E obj) {
+    public void add(int index, T obj) {
         if (index < 0 || size < index) {
             throw new IndexOutOfBoundsException();
         }
@@ -195,36 +196,37 @@ public class DLList<E> {
                 + "objects to a list");
         }
 
-        Node<E> nodeAfter;
+        Node<T> current;
         if (index == size) {
-            nodeAfter = tail;
+            current = tail;
         }
         else {
-            nodeAfter = getNodeAtIndex(index);
+            current = getNodeAtIndex(index);
         }
 
-        Node<E> addition = new Node<E>(obj);
-        addition.setPrevious(nodeAfter.previous());
-        addition.setNext(nodeAfter);
-        nodeAfter.previous().setNext(addition);
-        nodeAfter.setPrevious(addition);
+        Node<T> newNode = new Node<T>(obj);
+        newNode.setPrevious(current.previous());
+        newNode.setNext(current);
+        current.previous().setNext(newNode);
+        current.setPrevious(newNode);
         size++;
 
     }
 
 
     /**
-     * gets the node at that index
+     * Returns the node at the index given
      * 
      * @param index
-     * @return node at index
+     *            the index of the node
+     * @return node the node at the index
      */
-    private Node<E> getNodeAtIndex(int index) {
+    private Node<T> getNodeAtIndex(int index) {
         if (index < 0 || size() <= index) {
             throw new IndexOutOfBoundsException("No element exists at "
                 + index);
         }
-        Node<E> current = head.next(); // as we have a sentinel node
+        Node<T> current = head.next(); // as we have a sentinel node
         for (int i = 0; i < index; i++) {
             current = current.next();
         }
@@ -233,56 +235,53 @@ public class DLList<E> {
 
 
     /**
-     * Gets the last time the given object is in the list
+     * Returns the index of the last time the object occurs in the list
      *
      * @param obj
-     *            the object to look for
-     * @return the last position of it. -1 If it is not in the list
+     *            an object in the list
+     * @return the index of the last time the object occurs in the list starting
+     *         at 0, or -1 If the object is not in the list
      */
-    public int lastIndexOf(E obj) {
-        /*
-         * We should go from the end of the list as then we an stop once we find
-         * the first one
-         */
-        Node<E> current = tail.previous();
+    public int lastIndexOf(T obj) {
+        Node<T> current = tail.previous();
         for (int i = size() - 1; i >= 0; i--) {
             if (current.getData().equals(obj)) {
                 return i;
             }
             current = current.previous();
         }
-        return -1; // if we do not find it
+        return -1;
     }
 
 
     /**
-     * Removes the element at the specified index from the list
+     * Removes the entry at the given index from the list
      *
      * @param index
-     *            where the object is located
+     *            where the object is in the list
      * @throws IndexOutOfBoundsException
-     *             if there is not an element at the index
-     * @return true if successful
+     *             if the index is not within the size of the list
+     * @return true if the entry is removed
      */
     public boolean remove(int index) {
-        Node<E> nodeToBeRemoved = getNodeAtIndex(index);
-        nodeToBeRemoved.previous().setNext(nodeToBeRemoved.next());
-        nodeToBeRemoved.next().setPrevious(nodeToBeRemoved.previous());
+        Node<T> node = getNodeAtIndex(index);
+        node.previous().setNext(node.next());
+        node.next().setPrevious(node.previous());
         size--;
         return true;
     }
 
 
     /**
-     * Removes the first object in the list that .equals(obj)
+     * Removes the first time the entry occurs in the list from the list
      *
      * @param obj
      *            the object to remove
-     * @return true if the object was found and removed
+     * @return true if the entry was removed
      */
 
-    public boolean remove(E obj) {
-        Node<E> current = head.next();
+    public boolean remove(T obj) {
+        Node<T> current = head.next();
         while (!current.equals(tail)) {
             if (current.getData().equals(obj)) {
                 current.previous().setNext(current.next());
@@ -297,37 +296,33 @@ public class DLList<E> {
 
 
     /**
-     * Returns a string representation of the list If a list contains A, B, and
-     * C, the following should be returned "{A, B, C}" (Without the quotations)
+     * Returns a string representation of the list
      *
-     * @return a string representing the list
+     * @return a string representation of the list
      */
     @Override
     public String toString() {
-        StringBuilder builder = new StringBuilder("{");
+        String str = "[";
         if (!isEmpty()) {
-            Node<E> currNode = head.next();
-            while (currNode != tail) {
-                E element = currNode.getData();
-                builder.append(element.toString());
-                if (currNode.next != tail) {
-                    builder.append(", ");
+            Node<T> current = head.next();
+            while (current != tail) {
+                str = str + current.getData();
+                if (current.next != tail) {
+                    str = str + ", ";
                 }
-                currNode = currNode.next();
+                current = current.next();
             }
         }
-
-        builder.append("}");
-        return builder.toString();
+        return str + "}";
     }
 
 
     /**
      * Creates an iterator for a DLList
      */
-    private class DLListIterator<A> implements Iterator<E> {
+    private class DLListIterator<A> implements Iterator<T> {
         // Fields
-        private Node<E> nextNode;
+        private Node<T> nextNode;
         private boolean nextCalled;
 
 
@@ -360,7 +355,7 @@ public class DLList<E> {
          *             if there are no nodes left in the list
          */
         @Override
-        public E next() {
+        public T next() {
             if (hasNext()) {
                 nextNode = nextNode.next();
                 nextCalled = true;
@@ -395,110 +390,31 @@ public class DLList<E> {
 
         }
     }
-    
+
+
+    /**
+     * Iterator method creates Iterator object
+     *
+     * @return new Iterator object
+     */
+    public Iterator<T> iterator() {
+        return new DLListIterator<T>();
+    }
+
+
     /**
      * Returns an array representing the doubly linked list
      *
      * @return an array representing the doubly linked list
      */
-    public Object[] toArray(){|
+    public Object[] toArray() {
         Object[] arr = new Object[size];
-        Node current = head;
-        for(int i = 0; i < size; i++){
+        Node<T> current = head;
+        for (int i = 0; i < size; i++) {
             arr[i] = current.getData();
             current = current.next();
-        } 
+        }
         return arr;
     }
-    
-    /**
-     * Iterator method creates Iterator object
-     *
-     * @return new Iterator object
-     */
-    public Iterator<E> iterator() {
-        return new DLListIterator<E>();
-    }
 
-
-    private class RDLListIterator<A> implements Iterator<E> {
-        // Fields
-        private Node<E> nextNode;
-        private boolean nextCalled;
-
-
-        // Constructor
-        /**
-         * Creates a new DLListIterator
-         */
-        public RDLListIterator() {
-            nextNode = tail;
-            nextCalled = false;
-        }
-
-
-        /**
-         * Checks if there are more elements in the list
-         *
-         * @return true if there are more elements in the list
-         */
-        @Override
-        public boolean hasNext() {
-            return nextNode.previous().getData() != null;
-        }
-
-
-        /**
-         * Gets the next value in the list
-         *
-         * @return the next value
-         * @throws NoSuchElementException
-         *             if there are no nodes left in the list
-         */
-        @Override
-        public E next() {
-            if (hasNext()) {
-                nextNode = nextNode.previous();
-                nextCalled = true;
-                return nextNode.getData();
-            }
-            else {
-                throw new NoSuchElementException("Illegal call to next(); "
-                    + "iterator is after end of list.");
-            }
-        }
-
-
-        /**
-         * Removes the last object returned with next() from the list
-         *
-         * @throws IllegalStateException
-         *             if next has not been called yet
-         *             and if the element has already been removed
-         */
-        @Override
-        public void remove() {
-            if (nextCalled) {
-                nextNode.previous().setNext(nextNode.next());
-                nextNode.next().setPrevious(nextNode.previous());
-                size--;
-                nextCalled = false;
-            }
-            else {
-                throw new IllegalStateException("Illegal call to remove(); "
-                    + "next() was not called.");
-            }
-
-        }
-    }
-
-
-    /**
-     * Iterator method creates Iterator object
-     *
-     * @return new Iterator object
-     */
-    public Iterator<E> reverseIterator() {
-        return new RDLListIterator<E>();
-    }
 }
