@@ -1,20 +1,19 @@
 /**
-* @author Avni Trasi (avnitrasi)
-* @version 2019.04.15
-* @author James Livingston (jamesrliving)
-* @version 2019.04.15
-* @author Oliver Luo (luooc)
-* @version 2019.04.15
-* @author Sabrina Lesser (brinalesser)
-* @version 2019.04.15
-*/
+ * @author Avni Trasi (avnitrasi)
+ * @version 2019.04.15
+ * @author James Livingston (jamesrliving)
+ * @version 2019.04.15
+ * @author Oliver Luo (luooc)
+ * @version 2019.04.15
+ * @author Sabrina Lesser (brinalesser)
+ * @version 2019.04.15
+ */
 
 package prj5;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import student.TestCase;
-
 
 public class DLListTest extends TestCase {
     /**
@@ -38,7 +37,7 @@ public class DLListTest extends TestCase {
      * Tests that the method remove works as intended
      */
     public void testRemove() {
-        //Makes sure remove throws the correct exceptions
+        // Makes sure remove throws the correct exceptions
         list.add("0");
         Exception e = null;
         try {
@@ -48,7 +47,7 @@ public class DLListTest extends TestCase {
             e = exception;
         }
         assertTrue(e instanceof IndexOutOfBoundsException);
-        
+
         e = null;
         try {
             list.remove(-1);
@@ -57,7 +56,7 @@ public class DLListTest extends TestCase {
             e = exception;
         }
         assertTrue(e instanceof IndexOutOfBoundsException);
-        
+
         assertTrue(list.remove("0"));
         e = null;
         try {
@@ -67,7 +66,7 @@ public class DLListTest extends TestCase {
             e = exception;
         }
         assertTrue(e instanceof IndexOutOfBoundsException);
-        
+
         e = null;
         try {
             emptyList.remove(0);
@@ -76,7 +75,7 @@ public class DLListTest extends TestCase {
             e = exception;
         }
         assertTrue(e instanceof IndexOutOfBoundsException);
-        
+
         list.add("0");
         Iterator<String> iter = list.iterator();
         e = null;
@@ -87,12 +86,12 @@ public class DLListTest extends TestCase {
             e = exception;
         }
         assertTrue(e instanceof IllegalStateException);
-        
-        assertEquals(list.size(),1);
+
+        assertEquals(list.size(), 1);
         iter.next();
         iter.remove();
-        assertEquals(list.size(),0);
-        
+        assertEquals(list.size(), 0);
+
         e = null;
         try {
             iter.remove();
@@ -101,8 +100,8 @@ public class DLListTest extends TestCase {
             e = exception;
         }
         assertTrue(e instanceof IllegalStateException);
-        
-        //Makes sure remove works when calling with an index
+
+        // Makes sure remove works when calling with an index
         list.add("0");
         list.add("1");
         assertEquals(2, list.size());
@@ -111,8 +110,8 @@ public class DLListTest extends TestCase {
         assertEquals(1, list.size());
         assertFalse(list.contains("1"));
         assertFalse(list.remove(null));
-        
-        //Makes sure remove works when calling with an object
+
+        // Makes sure remove works when calling with an object
         list.clear();
         list.add("0");
         list.add("1");
@@ -123,14 +122,14 @@ public class DLListTest extends TestCase {
         assertEquals("1", list.get(0));
         assertEquals(1, list.size());
         assertFalse(list.remove("0"));
-        
-        //Makes sure the iterator's remove works 
+
+        // Makes sure the iterator's remove works
         list.clear();
         list.add("0");
         list.add("1");
         list.add("2");
         iter = list.iterator();
-        
+
         assertEquals(list.size(), 3);
         assertTrue(list.contains("0"));
         iter.next();
@@ -144,7 +143,7 @@ public class DLListTest extends TestCase {
      * Tests that the method add works as intended
      */
     public void testAdd() {
-        //Makes sure the one parameter add method works
+        // Makes sure the one parameter add method works
         assertEquals(0, list.size());
         list.add("0");
         assertEquals(1, list.size());
@@ -153,7 +152,7 @@ public class DLListTest extends TestCase {
         assertEquals(2, list.size());
         assertEquals("1", list.get(1));
 
-        //Makes sure the two parameter add method works
+        // Makes sure the two parameter add method works
         list.clear();
         list.add(0, "1");
         assertEquals(1, list.size());
@@ -164,9 +163,9 @@ public class DLListTest extends TestCase {
         list.add(0, "0");
         assertEquals(3, list.size());
         assertEquals("0", list.get(0));
-        assertEquals("1",list.get(1));
+        assertEquals("1", list.get(1));
 
-        //Makes sure the correct exceptions are thrown
+        // Makes sure the correct exceptions are thrown
         Exception e = null;
         try {
             list.add(null);
@@ -194,7 +193,7 @@ public class DLListTest extends TestCase {
             e = exception;
         }
         assertTrue(e instanceof IndexOutOfBoundsException);
-        
+
         list.add("0");
         e = null;
         try {
@@ -204,7 +203,7 @@ public class DLListTest extends TestCase {
             e = exception;
         }
         assertTrue(e instanceof IndexOutOfBoundsException);
-        
+
         e = null;
         try {
             list.add(-1, "-1");
@@ -216,15 +215,13 @@ public class DLListTest extends TestCase {
     }
 
 
-
-
     /**
      * Tests to make sure the method get works as intended
      */
     public void testGet() {
         list.add("0");
-        assertEquals("0",list.get(0));
-        
+        assertEquals("0", list.get(0));
+
         Exception e = null;
         try {
             list.get(-1);
@@ -233,7 +230,7 @@ public class DLListTest extends TestCase {
             e = exception;
         }
         assertTrue(e instanceof IndexOutOfBoundsException);
-        
+
         e = null;
         try {
             list.get(1);
@@ -350,16 +347,17 @@ public class DLListTest extends TestCase {
         }
         assertTrue(e instanceof NoSuchElementException);
     }
-    
+
+
     /**
      * Tests to make sure the method toArray works as intended
      */
     public void testToArray() {
         list.clear();
-        assertEquals(list.toArray().length,0);
+        assertEquals(list.toArray().length, 0);
         list.add("0");
         list.add("1");
-        assertEquals(list.toArray().length,2);
-        
+        assertEquals(list.toArray().length, 2);
+
     }
 }
