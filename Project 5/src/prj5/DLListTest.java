@@ -114,14 +114,15 @@ public class DLListTest extends TestCase {
         
         //Makes sure remove works when calling with an object
         list.clear();
-        list.add("A");
-        list.add("B");
-        assertTrue(list.remove("A"));
-        assertEquals("B", list.get(0));
+        list.add("0");
+        list.add("1");
+        assertFalse(list.remove("2"));
+        assertEquals("0", list.get(0));
+        assertEquals(2, list.size());
+        assertTrue(list.remove("0"));
+        assertEquals("1", list.get(0));
         assertEquals(1, list.size());
-        list.add("C");
-        assertTrue(list.remove("C"));
-        assertEquals("B", list.get(0));
+        assertFalse(list.remove("0"));
         
         //Makes sure the iterator's remove works 
         list.clear();
@@ -348,5 +349,17 @@ public class DLListTest extends TestCase {
             e = exception;
         }
         assertTrue(e instanceof NoSuchElementException);
+    }
+    
+    /**
+     * Tests to make sure the method toArray works as intended
+     */
+    public void testToArray() {
+        list.clear();
+        assertEquals(list.toArray().length,0);
+        list.add("0");
+        list.add("1");
+        assertEquals(list.toArray().length,2);
+        
     }
 }
