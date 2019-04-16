@@ -4,6 +4,17 @@ import CS2114.Button;
 import CS2114.Window;
 import CS2114.WindowSide;
 
+/**
+* @author Avni Trasi (avnitrasi)
+* @version 2019.04.15
+* @author James Livingston (jamesrliving)
+* @version 2019.04.15
+* @author Oliver Luo (luooc)
+* @version 2019.04.15
+* @author Sabrina Lesser (brinalesser)
+* @version 2019.04.15
+*/
+
 public class GUIWindow {
     private Window window;
     private DLList<Student> students;
