@@ -318,9 +318,8 @@ public class DLListTest extends TestCase {
      */
     public void testHasNext() {
         list.clear();
-        Iterator<String> iter = list.iterator();
         list.add("0");
-        iter = list.iterator();
+        Iterator<String> iter = list.iterator();
         assertEquals(iter.hasNext(), true);
         iter.next();
         assertEquals(iter.hasNext(), false);
