@@ -89,4 +89,58 @@ public class Sorter {
         }
         return sorted;
     }
+    
+    public DLList<Student> sortByHobby(DLList<Student> songs){
+        DLList<Student> sorted = new DLList<Student>();
+        Object[] sortingArray = songs.toArray();
+        for(int i = 0; i < sorted.size(); i++) {
+            Song student1 = (Student) sortingArray[i];
+            for(int j = 0; j < sorted.size(); i++) {
+                Song student2 = (Student) sortingArray[j];
+                if(student1.getHobby() < student2.getHobby()) {
+                    Object temp = sortingArray[i];
+                    sortingArray[i] = sortingArray[j];
+                    sortingArray[j] = temp;
+                }
+            }
+            sorted.add((Song) sortingArray[i]);
+        }
+        return sorted;
+    }
+    
+    public DLList<Student> sortByMajor(DLList<Student> songs){
+        DLList<Student> sorted = new DLList<Student>();
+        Object[] sortingArray = songs.toArray();
+        for(int i = 0; i < sorted.size(); i++) {
+            Song student1 = (Student) sortingArray[i];
+            for(int j = 0; j < sorted.size(); i++) {
+                Song student2 = (Student) sortingArray[j];
+                if(student1.getMajor() < student2.getMajor()) {
+                    Object temp = sortingArray[i];
+                    sortingArray[i] = sortingArray[j];
+                    sortingArray[j] = temp;
+                }
+            }
+            sorted.add((Song) sortingArray[i]);
+        }
+        return sorted;
+    }
+    
+    public DLList<Student> sortByRegion(DLList<Student> songs){
+        DLList<Student> sorted = new DLList<Student>();
+        Object[] sortingArray = songs.toArray();
+        for(int i = 0; i < sorted.size(); i++) {
+            Song student1 = (Student) sortingArray[i];
+            for(int j = 0; j < sorted.size(); i++) {
+                Song student2 = (Student) sortingArray[j];
+                if(student1.getRegion() < student2.getRegion()) {
+                    Object temp = sortingArray[i];
+                    sortingArray[i] = sortingArray[j];
+                    sortingArray[j] = temp;
+                }
+            }
+            sorted.add((Song) sortingArray[i]);
+        }
+        return sorted;
+    }
 }
