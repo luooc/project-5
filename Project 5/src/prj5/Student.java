@@ -91,4 +91,44 @@ public class Student {
     public String[] getSongsLiked() {
         return songsLiked;
     }
+
+
+    /**
+     * Returns a String representation of the Student
+     * 
+     * @return a String representation of the Student
+     */
+    public String toString() {
+        return "Hobby: " + hobby + " Major: " + major + " State: " + state
+            + " Songs heard: " + songsHeard + "Songs Liked: " + songsLiked;
+    }
+
+
+    /**
+     * Returns whether or not an object is equal to this student
+     * 2 students are considered equal if their 5 input fields are the same
+     * 
+     * @param obj
+     *            an object to compare against
+     * @return true if they are equals
+     */
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass().equals(this.getClass())) {
+            Student other = (Student)obj;
+            if (other.getHobby().equals(this.getHobby()) && other.getMajor()
+                .equals(this.getMajor()) && other.getState().equals(this
+                    .getState()) && other.getSongsLiked().equals(this
+                        .getSongsLiked()) && other.getSongsHeard().equals(this
+                            .getSongsHeard())) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
