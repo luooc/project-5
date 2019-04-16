@@ -368,6 +368,7 @@ public class DLListTest extends TestCase {
         list.add("0");
         list.add("1");
         assertEquals(list.toArray().length, 2);
-
+        assertEquals((String)list.toArray()[0], "0");
+        assertEquals((String)list.toArray()[1], "1");
     }
 }
