@@ -120,4 +120,10 @@ public class GUIWindow {
     private void drawLegend() {
         
     }
+    
+    private class Glyph(){
+        public Glyph(){
+
+        }
+    }
 }
