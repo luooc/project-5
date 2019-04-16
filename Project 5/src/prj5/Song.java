@@ -76,4 +76,43 @@ public class Song {
     public int getDate() {
         return date;
     }
+
+
+    /**
+     * Returns a String representation of a Song object
+     * 
+     * @return a String representation of a Song object
+     */
+    public String toString() {
+        return "Artist: " + artist + " Title: " + title + " Genre: " + genre
+            + " Release Year: " + date;
+    }
+
+
+    /**
+     * Returns a boolean value representing whether an object is equal to this
+     * Song
+     * 2 Songs are considered equal if all 4 of their input values are the same
+     * 
+     * @param obj
+     *            an Object to compare aginst
+     * @return true if the the object is equal to this Song
+     */
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (obj == this) {
+            return true;
+        }
+        if (obj.getClass().equals(this.getClass())) {
+            Song other = (Song)obj;
+            if (other.getArtist().equals(this.getArtist()) && other
+                .getDate() == this.getDate() && other.getGenre().equals(this
+                    .getGenre()) && other.getTitle().equals(this.getTitle())) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
