@@ -45,9 +45,31 @@ public class SongReader
         while (file.hasNext())
         {
             String nextLine = file.nextLine();
+            if ()
+            {
+                StringBuilder s = new StringBuilder();                
+            }
             
         }
         file.close();
         return copy;
+    }
+    
+    /**
+     * getter for songList field
+     * @return songList DLList
+     */
+    public DLList<Song> getSong()
+    {
+        return songList;
+    }
+    
+    /**
+     * getter for studentList field
+     * @return studentList DLList
+     */
+    public DLList<Student> getStudents()
+    {
+        return studentList;
     }
 }
