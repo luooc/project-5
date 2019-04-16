@@ -18,6 +18,7 @@ public class Input {
 
 
     public static void main(String[] args) {
-        GUIWindow window = new GUIWindow("songFileName", "studentFileName");
+        GUIWindow window = new GUIWindow("SongList2018.csv",
+            "MusicSurveyData2018.csv");
     }
 }
