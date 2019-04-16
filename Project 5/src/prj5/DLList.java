@@ -430,7 +430,7 @@ public class DLList<T> {
      */
     public Object[] toArray() {
         Object[] arr = new Object[size];
-        Node<T> current = head;
+        Node<T> current = head.next();
         for (int i = 0; i < size; i++) {
             arr[i] = current.getData();
             current = current.next();
