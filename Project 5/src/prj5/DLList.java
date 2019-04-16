@@ -281,6 +281,9 @@ public class DLList<T> {
      */
 
     public boolean remove(T obj) {
+        if (obj == null) {
+            return false;
+        }
         Node<T> current = head.next();
         while (!current.equals(tail)) {
             if (current.getData().equals(obj)) {
@@ -313,7 +316,7 @@ public class DLList<T> {
                 current = current.next();
             }
         }
-        return str + "}";
+        return str + "]";
     }
 
 
@@ -322,7 +325,7 @@ public class DLList<T> {
      */
     private class DLListIterator<A> implements Iterator<T> {
         // Fields
-        private Node<T> nextNode;
+        private Node<T> node;
         private boolean nextCalled;
 
 
@@ -331,7 +334,7 @@ public class DLList<T> {
          * Creates a new DLListIterator
          */
         public DLListIterator() {
-            nextNode = head;
+            node = head;
             nextCalled = false;
         }
 
@@ -343,7 +346,7 @@ public class DLList<T> {
          */
         @Override
         public boolean hasNext() {
-            return nextNode.next().getData() != null;
+            return node.next() != tail;
         }
 
 
@@ -357,9 +360,9 @@ public class DLList<T> {
         @Override
         public T next() {
             if (hasNext()) {
-                nextNode = nextNode.next();
+                node = node.next();
                 nextCalled = true;
-                return nextNode.getData();
+                return node.getData();
             }
             else {
                 throw new NoSuchElementException("Illegal call to next(); "
@@ -378,8 +381,8 @@ public class DLList<T> {
         @Override
         public void remove() {
             if (nextCalled) {
-                nextNode.previous().setNext(nextNode.next());
-                nextNode.next().setPrevious(nextNode.previous());
+                node.previous().setNext(node.next());
+                node.next().setPrevious(node.previous());
                 size--;
                 nextCalled = false;
             }
