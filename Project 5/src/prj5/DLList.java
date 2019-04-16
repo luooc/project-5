@@ -11,43 +11,51 @@ public class DLList<T> implements DoublyLinkedList<T>, Iterable<T>
     
     @Override
     public boolean isEmpty() {
-        // TODO Auto-generated method stub
-        return false;
+        return size == 0;
     }
 
     @Override
     public int size() {
-        // TODO Auto-generated method stub
-        return 0;
+        return size;
     }
 
     @Override
     public void clear() {
-        // TODO Auto-generated method stub
-        
+        size = 0;
+        head = null;
+        tail = null;
     }
 
     @Override
     public boolean contains(T obj) {
-        // TODO Auto-generated method stub
+        Node current = head;
+        while(current != null){
+            if(current.data.equals(obj)){
+                return true;
+            }
+            current = current.next;
+        }
         return false;
     }
 
     @Override
     public T get(int index) {
-        // TODO Auto-generated method stub
-        return null;
+        Node current = head;
+        for(int i = 0; i <= index; i++){
+            current = current.next;
+        }
+        return current.data;
     }
 
     @Override
     public void add(T newEntry) {
-        // TODO Auto-generated method stub
+        
         
     }
 
     @Override
     public void add(int index, T obj) {
-        // TODO Auto-generated method stub
+        
         
     }
 
