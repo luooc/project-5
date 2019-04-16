@@ -61,7 +61,7 @@ public class GUIWindow implements Observer {
         hobby.onClick(this, "clickedHobby");
 
         try {
-            reader = new SongReader(songFileName, studentFileName);
+            reader = new Reader(songFileName, studentFileName);
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
