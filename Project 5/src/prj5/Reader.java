@@ -85,7 +85,7 @@ public class Reader {
      * 
      * @return songList DLList
      */
-    public DLList<Song> getSong() {
+    public DLList<Song> getSongs() {
         return songList;
     }
 
