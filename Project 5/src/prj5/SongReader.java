@@ -9,9 +9,10 @@ public class SongReader
     private DLList<Song> songList;
     private DLList<Student> studentList;
     
-    public SongReader(String songFileName, String studentFileName)
+    public SongReader(String songFileName, String studentFileName) throws FileNotFoundException
     {
-        
+        songList = readSongFile(songFileName);
+        studentList = readStudentFile(studentFileName);
     }
     
     private DLList<Song> readSongFile(String fileName) throws FileNotFoundException
@@ -33,12 +34,20 @@ public class SongReader
             }
         }
         file.close();
-        return copy;
-        
+        return copy;  
     }
     
     private DLList<Student> readStudentFile(String fileName) throws FileNotFoundException
     {
         Scanner file = new Scanner(new File(fileName));
+        DLList<Student> copy = new DLList<Student>();
+        
+        while (file.hasNext())
+        {
+            String nextLine = file.nextLine();
+            
+        }
+        file.close();
+        return copy;
     }
 }
