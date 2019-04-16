@@ -14,11 +14,13 @@ public class Student
      * @param major param for major field
      * @param state param for state field
      */
-    public Student(String hobby, String major, String state)
+    public Student(String hobby, String major, String state, String[] songsHeard, String[] songsLiked)
     {
         this.hobby = hobby;
         this.major = major;
         this.state = state;
+        this.songsHeard = songsHeard;
+        this.songsLiked = songsLiked;
     }
     
     /**
