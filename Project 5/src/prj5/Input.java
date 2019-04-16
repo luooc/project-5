@@ -11,13 +11,14 @@ package prj5;
 * @version 2019.04.15
 */
 
-public class Input 
-{
-    public Input(){
+public class Input {
+    public Input() {
 
     }
-    public static void main(String[] args)
-    {
+
+
+    public static void main(String[] args) {
         GUIWindow window = new GUIWindow();
     }
 }
+
