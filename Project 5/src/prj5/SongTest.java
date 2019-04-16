@@ -1,3 +1,13 @@
+// Virginia Tech Honor Code Pledge:
+//
+// As a Hokie, I will conduct myself with honor and integrity at all times.
+// I will not lie, cheat, or steal, nor will I accept the actions of those who
+// do.
+// -- Avni Trasi (avnitrasi)
+// -- James Livingston (jamesrliving)
+// -- Oliver Luo (luooc)
+// -- Sabrina Lesser (brinalesser)
+
 package prj5;
 
 public class SongTest extends student.TestCase {
