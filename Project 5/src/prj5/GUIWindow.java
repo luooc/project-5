@@ -25,12 +25,12 @@ public class GUIWindow implements Observer {
     private Button previous;
     private Button next;
     private Glyph[] glyphs;
-    private SongReader reader;
+    private Reader reader;
     private Sorter sorter;
     private int glyphIndex;
 
 
-    public GUIWindow() {
+    public GUIWindow(String songFileName, String studentFileName) {
         window = new Window();
         previous = new Button("<- Previous");
         window.addButton(previous, WindowSide.NORTH);
@@ -61,7 +61,7 @@ public class GUIWindow implements Observer {
         hobby.onClick(this, "clickedHobby");
 
         try {
-            reader = new SongReader("", "");
+            reader = new SongReader(songFileName, studentFileName);
         }
         catch (FileNotFoundException e) {
             e.printStackTrace();
