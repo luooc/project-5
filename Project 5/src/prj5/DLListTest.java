@@ -7,23 +7,17 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 import student.TestCase;
 
-/**
- * @author Eric
- * @author maellis1
- * @version 11-2-15
- * @author Sabrina Lesser (brinalesser)
- * @version 4/5/2019
- */
+
 public class DLListTest extends TestCase {
     /**
-     * the list we will use
+     * Fields
      */
     private DLList<String> list;
     private DLList<String> inventory;
 
 
     /**
-     * run before every test case
+     * Creates a new DLList
      */
     @Override
     public void setUp() {
