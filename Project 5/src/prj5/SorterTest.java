@@ -12,7 +12,7 @@ import java.io.FileNotFoundException;
  * @author Sabrina Lesser (brinalesser)
  * @version 2019.04.15
  */
-public class SorterTest {
+public class SorterTest extends student.TestCase {
     /**
      * fields
      */
@@ -27,21 +27,26 @@ public class SorterTest {
     private DLList<Student> students;
     private Sorter sorter;
 
+
     /**
      * sets up variables for testing
      */
     public void setUp() {
-        song1 = new Song("Ariana Grande", "R.E.M.", "Pop", 2018);
-        song2 = new Song("Marc E. Bassy", "Morning", "R&B", 2016);
-        song3 = new Song("Whitney Houston", "I Will Always Love You", "Balad",
-            1974);
+        songs = new DLList<Song>();
+        students = new DLList<Student>();
+        song1 = new Song("Ariana Grande", "R.E.M.", 2018, "Pop");
+        song2 = new Song("Marc E. Bassy", "Morning", 2016, "R&B");
+        song3 = new Song("Whitney Houston", "I Will Always Love You", 1974,
+            "Balad");
         songs.add(song1);
         songs.add(song2);
         songs.add(song3);
-        student1 = new Student("Art", "Computer Science", "Virginia");
-        student2 = new Student("Singing", "Food Science", "Wisconsin");
+        student1 = new Student("Art", "Computer Science", "Virginia",
+            new String[3], new String[3]);
+        student2 = new Student("Singing", "Food Science", "Wisconsin",
+            new String[3], new String[3]);
         student3 = new Student("Animation", "Human Foods & Nutrition",
-            "California");
+            "California", new String[3], new String[3]);
         students.add(student1);
         students.add(student2);
         students.add(student3);
@@ -53,8 +58,7 @@ public class SorterTest {
      * tests sortByGenre() method
      */
     public void testSortByGenre() {
-        sorter.sortByGenre();
-        DLList<Song> temp = sorter.getSongList();
+        DLList<Song> temp = sorter.sortByGenre();
         assertEquals(temp.get(0), (Song)song2);
         assertEquals(temp.get(1), (Song)song3);
         assertEquals(temp.get(2), (Song)song1);
@@ -65,8 +69,7 @@ public class SorterTest {
      * tests sortByArtist() method
      */
     public void testSortByArtist() {
-        sorter.sortByArtist();
-        DLList<Song> temp = sorter.getSongList();
+        DLList<Song> temp = sorter.sortByArtist();
         assertEquals(temp.get(0), (Song)song1);
         assertEquals(temp.get(1), (Song)song2);
         assertEquals(temp.get(2), (Song)song3);
@@ -77,8 +80,7 @@ public class SorterTest {
      * tests sortByTitle() method
      */
     public void testSortByTitle() {
-        sorter.sortByTitle();
-        DLList<Song> temp = sorter.getSongList();
+        DLList<Song> temp = sorter.sortByTitle();
         assertEquals(temp.get(0), (Song)song3);
         assertEquals(temp.get(1), (Song)song2);
         assertEquals(temp.get(2), (Song)song1);
@@ -89,8 +91,7 @@ public class SorterTest {
      * tests sortByDate() method
      */
     public void testSortByDate() {
-        sorter.sortByDate();
-        DLList<Song> temp = sorter.getSongList();
+        DLList<Song> temp = sorter.sortByDate();
         assertEquals(temp.get(0), (Song)song3);
         assertEquals(temp.get(1), (Song)song2);
         assertEquals(temp.get(2), (Song)song1);
@@ -101,8 +102,7 @@ public class SorterTest {
      * tests sortByHobby() method
      */
     public void testSortByHobby() {
-        sorter.sortByHobby();
-        DLList<Student> temp = sorter.getStudentList();
+        DLList<Student> temp = sorter.sortByHobby();
         assertEquals(temp.get(0), (Student)student1);
         assertEquals(temp.get(1), (Student)student3);
         assertEquals(temp.get(2), (Student)student2);
@@ -113,8 +113,7 @@ public class SorterTest {
      * tests sortByMajor() method
      */
     public void testSortByMajor() {
-        sorter.sortByHobby();
-        DLList<Student> temp = sorter.getStudentList();
+        DLList<Student> temp = sorter.sortByMajor();
         assertEquals(temp.get(0), (Student)student1);
         assertEquals(temp.get(1), (Student)student2);
         assertEquals(temp.get(2), (Student)student3);
@@ -125,8 +124,7 @@ public class SorterTest {
      * tests sortByRegion() method
      */
     public void testSortByRegion() {
-        sorter.sortByHobby();
-        DLList<Student> temp = sorter.getStudentList();
+        DLList<Student> temp = sorter.sortByRegion();
         assertEquals(temp.get(0), (Student)student3);
         assertEquals(temp.get(1), (Student)student1);
         assertEquals(temp.get(2), (Student)student2);
