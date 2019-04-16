@@ -1,8 +1,16 @@
+// Virginia Tech Honor Code Pledge:
+//
+// As a Hokie, I will conduct myself with honor and integrity at all times.
+// I will not lie, cheat, or steal, nor will I accept the actions of those who
+// do.
+// -- Avni Trasi (avnitrasi)
+// -- James Livingston (jamesrliving)
+// -- Oliver Luo (luooc)
+// -- Sabrina Lesser (brinalesser)
+
 package prj5;
 
 import java.io.FileNotFoundException;
-import java.util.Observable;
-import java.util.Observer;
 import CS2114.Button;
 import CS2114.Window;
 import CS2114.WindowSide;
@@ -18,7 +26,7 @@ import CS2114.WindowSide;
  * @version 2019.04.15
  */
 
-public class GUIWindow implements Observer {
+public class GUIWindow {
     private Window window;
     private DLList<Student> students;
     private DLList<Song> songs;
@@ -154,9 +162,4 @@ public class GUIWindow implements Observer {
 
     }
 
-
-    @Override
-    public void update(Observable obs, Object obj) {
-
-    }
 }
