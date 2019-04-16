@@ -68,7 +68,7 @@ public class GUIWindow implements Observer {
         }
 
         students = reader.getStudents();
-        songs = reader.getSong();
+        songs = reader.getSongs();
         sorter = new Sorter(songs, students);
 
         glyphIndex = 0;
