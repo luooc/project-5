@@ -18,6 +18,6 @@ public class Input {
 
 
     public static void main(String[] args) {
-        GUIWindow window = new GUIWindow();
+        GUIWindow window = new GUIWindow("songFileName", "studentFileName");
     }
 }
