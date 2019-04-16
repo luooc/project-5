@@ -1,6 +1,15 @@
+// Virginia Tech Honor Code Pledge:
+//
+// As a Hokie, I will conduct myself with honor and integrity at all times.
+// I will not lie, cheat, or steal, nor will I accept the actions of those who
+// do.
+// -- Avni Trasi (avnitrasi)
+// -- James Livingston (jamesrliving)
+// -- Oliver Luo (luooc)
+// -- Sabrina Lesser (brinalesser)
+
 package prj5;
 
-import static org.junit.Assert.assertEquals;
 import java.io.FileNotFoundException;
 
 /**
@@ -13,7 +22,7 @@ import java.io.FileNotFoundException;
  * @author Sabrina Lesser (brinalesser)
  * @version 2019.04.15
  */
-public class ReaderTest {
+public class ReaderTest extends student.TestCase {
     // Fields -----------------------------------------------
     private Reader reader;
 
