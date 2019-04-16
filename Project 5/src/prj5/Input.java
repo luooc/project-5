@@ -13,8 +13,11 @@ package prj5;
 
 public class Input 
 {
+    public Input(){
+
+    }
     public static void main(String[] args)
     {
-        
+        GUIWindow window = new GUIWindow();
     }
 }
