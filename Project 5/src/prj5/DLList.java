@@ -421,8 +421,22 @@ public class DLList<E> {
 
         }
     }
-
-
+    
+    /**
+     * Returns an array representing the doubly linked list
+     *
+     * @return an array representing the doubly linked list
+     */
+    public Object[] toArray(){|
+        Object[] arr = new Object[size];
+        Node current = head;
+        for(int i = 0; i < size; i++){
+            arr[i] = current.getData();
+            current = current.next();
+        } 
+        return arr;
+    }
+    
     /**
      * Iterator method creates Iterator object
      *
