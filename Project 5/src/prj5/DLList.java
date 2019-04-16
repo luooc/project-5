@@ -4,27 +4,15 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
-* @author Avni Trasi (avnitrasi)
-* @version 2019.04.15
-* @author James Livingston (jamesrliving)
-* @version 2019.04.15
-* @author Oliver Luo (luooc)
-* @version 2019.04.15
-* @author Sabrina Lesser (brinalesser)
-* @version 2019.04.15
-* @param <E>
-*            The type of object the class will store
-*/
+ * @param <E>
+ *            The type of object the class will store
+ */
 public class DLList<E> {
     /**
-     * This represents a node in a doubly linked list. This node stores data, a
-     * pointer to the node before it in the list, and a pointer to the node
-     * after it in the list
+     * A doubly linked node that stores data of type E
      *
      * @param <E>
-     *            This is the type of object that this class will store
-     * @author Mark Wiggans (mmw125)
-     * @version 4/14/2015
+     *            The type of object that this class will store
      */
     private static class Node<E> {
         private Node<E> next;
@@ -33,10 +21,10 @@ public class DLList<E> {
 
 
         /**
-         * Creates a new node with the given data
+         * Creates a new node
          *
          * @param d
-         *            the data to put inside the node
+         *            the data for the node
          */
         public Node(E d) {
             data = d;
@@ -44,10 +32,10 @@ public class DLList<E> {
 
 
         /**
-         * Sets the node after this node
+         * Sets the node after this node to the given node
          *
          * @param n
-         *            the node after this one
+         *            the node after this node
          */
         public void setNext(Node<E> n) {
             next = n;
@@ -55,10 +43,10 @@ public class DLList<E> {
 
 
         /**
-         * Sets the node before this one
+         * Sets the node before this to the given node
          *
          * @param n
-         *            the node before this one
+         *            the node before this node
          */
         public void setPrevious(Node<E> n) {
             previous = n;
@@ -66,7 +54,7 @@ public class DLList<E> {
 
 
         /**
-         * Gets the next node
+         * Returns the next node
          *
          * @return the next node
          */
@@ -76,7 +64,7 @@ public class DLList<E> {
 
 
         /**
-         * Gets the node before this one
+         * Returns the node before this one
          *
          * @return the node before this one
          */
@@ -86,7 +74,7 @@ public class DLList<E> {
 
 
         /**
-         * Gets the data in the node
+         * Returns the data in the node
          *
          * @return the data in the node
          */
@@ -95,26 +83,14 @@ public class DLList<E> {
         }
     }
 
-    /**
-     * How many nodes are in the list
-     */
+
     private int size;
-
-    /**
-     * The first node in the list. THIS IS A SENTINEL NODE AND AS SUCH DOES NOT
-     * HOLD ANY DATA. REFER TO init()
-     */
     private Node<E> head;
-
-    /**
-     * The last node in the list. THIS IS A SENTINEL NODE AND AS SUCH DOES NOT
-     * HOLD ANY DATA. REFER TO init()
-     */
     private Node<E> tail;
 
 
     /**
-     * Create a new DLList object.
+     * Create a new DLList object
      */
     public DLList() {
         init();
@@ -122,7 +98,7 @@ public class DLList<E> {
 
 
     /**
-     * Initializes the object to have the head and tail nodes
+     * Initializes the DLList with sentinal nodes
      */
     private void init() {
         head = new DLList.Node<E>(null);
@@ -134,7 +110,7 @@ public class DLList<E> {
 
 
     /**
-     * Checks if the array is empty
+     * Returns whether or not the list is empty
      *
      * @return true if the array is empty
      */
@@ -144,9 +120,9 @@ public class DLList<E> {
 
 
     /**
-     * Gets the number of elements in the list
+     * Returns the number of entries in the list
      *
-     * @return the number of elements
+     * @return the number of entries in the list
      */
     public int size() {
         return size;
@@ -154,7 +130,7 @@ public class DLList<E> {
 
 
     /**
-     * Removes all of the elements from the list
+     * Clears all the entries from the list
      */
     public void clear() {
         init();
@@ -162,11 +138,11 @@ public class DLList<E> {
 
 
     /**
-     * Checks if the list contains the given object
+     * Checks if the object is in the list
      *
      * @param obj
-     *            the object to check for
-     * @return true if it contains the object
+     *            an object that may or may not be in the list
+     * @return true the object is in the list
      */
     public boolean contains(E obj) {
         return lastIndexOf(obj) != -1;
@@ -174,7 +150,7 @@ public class DLList<E> {
 
 
     /**
-     * Gets the object at the given position
+     * Returns the object at the given index
      *
      * @param index
      *            where the object is located
