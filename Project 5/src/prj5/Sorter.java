@@ -7,6 +7,9 @@
 
 package prj5;
 
+import java.util.Observable;
+import java.util.Observer;
+
 /**
  * @author Avni Trasi (avnitrasi)
  * @version 2019.04.15
@@ -18,7 +21,7 @@ package prj5;
  * @version 2019.04.15
  */
 
-public class Sorter {
+public class Sorter extends Observable {
 
     /**
      * ~ FIELDS ...............................................................
