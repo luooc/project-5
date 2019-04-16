@@ -9,7 +9,7 @@
 * @version 2019.04.15
 */
 
-package doublylinkedlist;
+package prj5;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -21,25 +21,25 @@ public class DLListTest extends TestCase {
      * Fields
      */
     private DLList<String> list;
-    private DLList<String> inventory;
+    private DLList<String> emptyList;
 
 
     /**
-     * Creates a new DLList
+     * Instantiates variables to be used in testing
      */
     @Override
     public void setUp() {
         list = new DLList<String>();
-        inventory = new DLList<String>();
+        emptyList = new DLList<String>();
     }
 
 
     /**
-     * Tests that an IndexOutOfBounds exception is thrown when the index is
-     * greater than or equal to size and less than zero
+     * Tests that the method remove works as intended
      */
-    public void testRemoveException() {
-        list.add("A");
+    public void testRemove() {
+        //Makes sure remove throws the correct exceptions
+        list.add("0");
         Exception e = null;
         try {
             list.remove(2);
@@ -48,6 +48,7 @@ public class DLListTest extends TestCase {
             e = exception;
         }
         assertTrue(e instanceof IndexOutOfBoundsException);
+        
         e = null;
         try {
             list.remove(-1);
@@ -56,118 +57,63 @@ public class DLListTest extends TestCase {
             e = exception;
         }
         assertTrue(e instanceof IndexOutOfBoundsException);
-    }
-
-
-    /**
-     * Tests that objects can be removed at the beginning and end and that the
-     * size is changed
-     */
-    public void testRemoveIndex() {
-        list.add("A");
-        list.add("B");
-        assertTrue(list.remove(1));
-        assertEquals(1, list.size());
-        list.add("B");
-        assertTrue(list.remove(0));
-        assertEquals(1, list.size());
-    }
-
-
-    /**
-     * Tests the add method. Ensures that it adds the object is added at the end
-     * and the size is increased
-     */
-    public void testAdd() {
-        assertEquals(0, list.size());
-        list.add("A");
-        assertEquals(1, list.size());
-        list.add("B");
-        assertEquals(2, list.size());
-        assertEquals("B", list.get(1));
-
-    }
-
-
-    /**
-     * Tests that objects can be added at the beginning and end and that they
-     * are placed correctly
-     */
-    public void testAddIndex() {
-        list.add("B");
-        list.add(0, "A");
-        assertEquals("A", list.get(0));
-        assertEquals(2, list.size());
-        list.add(2, "D");
-        assertEquals("D", list.get(2));
-        list.add(2, "C");
-        assertEquals("C", list.get(2));
-    }
-
-
-    /**
-     * This tests that the add method throws a null pointer exception when
-     * adding null data to the list
-     */
-    public void testAddNullException() {
-        Exception e = null;
-        try {
-            list.add(null);
-        }
-        catch (Exception exception) {
-            e = exception;
-        }
-        assertTrue(e instanceof IllegalArgumentException);
-    }
-
-
-    /**
-     * This tests that the add method throws a Invalid argument when adding null
-     * data to the list
-     */
-    public void testAddIndexNullException() {
-        Exception e = null;
-        try {
-            list.add(0, null);
-        }
-        catch (Exception exception) {
-            e = exception;
-        }
-        assertTrue(e instanceof IllegalArgumentException);
-    }
-
-
-    /**
-     * This tests when the add method is called and the index is greater than
-     * size or less than zero
-     */
-    public void testAddException() {
-        list.add("A");
-        Exception e = null;
-        try {
-            list.add(2, "B");
-        }
-        catch (Exception exception) {
-            e = exception;
-        }
-        assertTrue(e instanceof IndexOutOfBoundsException);
+        
+        assertTrue(list.remove("0"));
         e = null;
         try {
-            list.add(-1, "B");
+            list.remove(0);
         }
-        catch (Exception exception) {
+        catch (IndexOutOfBoundsException exception) {
             e = exception;
         }
         assertTrue(e instanceof IndexOutOfBoundsException);
-    }
-
-
-    /**
-     * Tests removing a object changes the size appropiately and that you can
-     * remove the first and last elements
-     */
-    public void testRemoveObj() {
+        
+        e = null;
+        try {
+            emptyList.remove(0);
+        }
+        catch (IndexOutOfBoundsException exception) {
+            e = exception;
+        }
+        assertTrue(e instanceof IndexOutOfBoundsException);
+        
+        list.add("0");
+        Iterator<String> iter = list.iterator();
+        e = null;
+        try {
+            iter.remove();
+        }
+        catch (IllegalStateException exception) {
+            e = exception;
+        }
+        assertTrue(e instanceof IllegalStateException);
+        
+        assertEquals(list.size(),1);
+        iter.next();
+        iter.remove();
+        assertEquals(list.size(),0);
+        
+        e = null;
+        try {
+            iter.remove();
+        }
+        catch (IllegalStateException exception) {
+            e = exception;
+        }
+        assertTrue(e instanceof IllegalStateException);
+        
+        //Makes sure remove works when calling with an index
+        list.add("0");
+        list.add("1");
+        assertEquals(2, list.size());
+        assertTrue(list.contains("1"));
+        assertTrue(list.remove(1));
+        assertEquals(1, list.size());
+        assertFalse(list.contains("1"));
         assertFalse(list.remove(null));
+        
+        //Makes sure remove works when calling with an object
+        list.clear();
         list.add("A");
         list.add("B");
         assertTrue(list.remove("A"));
@@ -176,142 +122,205 @@ public class DLListTest extends TestCase {
         list.add("C");
         assertTrue(list.remove("C"));
         assertEquals("B", list.get(0));
+        
+        //Makes sure the iterator's remove works 
+        list.clear();
+        list.add("0");
+        list.add("1");
+        list.add("2");
+        iter = list.iterator();
+        
+        assertEquals(list.size(), 3);
+        assertTrue(list.contains("0"));
+        iter.next();
+        iter.remove();
+        assertEquals(list.size(), 2);
+        assertFalse(list.contains("0"));
     }
 
 
     /**
-     * Tests get when the index is greater than or equal to size and when the
-     * index is less than zero
+     * Tests that the method add works as intended
      */
-    public void testGetException() {
-        Exception exception = null;
+    public void testAdd() {
+        //Makes sure the one parameter add method works
+        assertEquals(0, list.size());
+        list.add("0");
+        assertEquals(1, list.size());
+        assertEquals("0", list.get(0));
+        list.add("1");
+        assertEquals(2, list.size());
+        assertEquals("1", list.get(1));
+
+        //Makes sure the two parameter add method works
+        list.clear();
+        list.add(0, "1");
+        assertEquals(1, list.size());
+        assertEquals("1", list.get(0));
+        list.add(1, "2");
+        assertEquals(2, list.size());
+        assertEquals("2", list.get(1));
+        list.add(0, "0");
+        assertEquals(3, list.size());
+        assertEquals("0", list.get(0));
+        assertEquals("1",list.get(1));
+
+        //Makes sure the correct exceptions are thrown
+        Exception e = null;
+        try {
+            list.add(null);
+        }
+        catch (Exception exception) {
+            e = exception;
+        }
+        assertTrue(e instanceof IllegalArgumentException);
+
+        e = null;
+        try {
+            list.add(0, null);
+        }
+        catch (Exception exception) {
+            e = exception;
+        }
+        assertTrue(e instanceof IllegalArgumentException);
+
+        list.clear();
+        e = null;
+        try {
+            list.add(1, "1");
+        }
+        catch (Exception exception) {
+            e = exception;
+        }
+        assertTrue(e instanceof IndexOutOfBoundsException);
+        
+        list.add("0");
+        e = null;
+        try {
+            list.add(2, "2");
+        }
+        catch (Exception exception) {
+            e = exception;
+        }
+        assertTrue(e instanceof IndexOutOfBoundsException);
+        
+        e = null;
+        try {
+            list.add(-1, "-1");
+        }
+        catch (Exception exception) {
+            e = exception;
+        }
+        assertTrue(e instanceof IndexOutOfBoundsException);
+    }
+
+
+
+
+    /**
+     * Tests to make sure the method get works as intended
+     */
+    public void testGet() {
+        list.add("0");
+        assertEquals("0",list.get(0));
+        
+        Exception e = null;
         try {
             list.get(-1);
         }
-        catch (Exception e) {
-            exception = e;
+        catch (Exception exception) {
+            e = exception;
         }
-        assertTrue(exception instanceof IndexOutOfBoundsException);
-        exception = null;
-        list.add("A");
+        assertTrue(e instanceof IndexOutOfBoundsException);
+        
+        e = null;
         try {
             list.get(1);
         }
-        catch (IndexOutOfBoundsException e) {
-            exception = e;
+        catch (IndexOutOfBoundsException exception) {
+            e = exception;
         }
-        assertTrue(exception instanceof IndexOutOfBoundsException);
+        assertTrue(e instanceof IndexOutOfBoundsException);
     }
 
 
     /**
-     * Test contains when it does and does not contain the object
+     * Tests to make sure the method contains works as intended
      */
     public void testContains() {
-        assertFalse(list.contains("A"));
-        list.add("A");
-        assertTrue(list.contains("A"));
-        assertFalse(list.contains("B"));
-        list.add("B");
-        assertTrue(list.contains("B"));
+        assertFalse(list.contains("0"));
+        list.add("0");
+        assertTrue(list.contains("0"));
+        assertFalse(list.contains("1"));
+        list.add("1");
+        assertTrue(list.contains("1"));
+        list.remove("1");
+        assertFalse(list.contains("1"));
     }
 
 
     /**
-     * Test lastIndexOf when the list is empty, when the object is not in the
-     * list, and when it is at the beginning or end
+     * Tests to make sure the method lastIndexOf works as intended
      */
     public void testLastIndexOf() {
-        assertEquals(-1, list.lastIndexOf("A"));
-        list.add("A");
-        assertEquals(0, list.lastIndexOf("A"));
-        list.add("A");
-        assertEquals(1, list.lastIndexOf("A"));
-        list.add("B");
-        assertEquals(1, list.lastIndexOf("A"));
-        assertEquals(2, list.lastIndexOf("B"));
-        list.add("A");
-        assertEquals(3, list.lastIndexOf("A"));
+        assertEquals(-1, list.lastIndexOf("0"));
+        list.add("0");
+        assertEquals(0, list.lastIndexOf("0"));
+        list.add("0");
+        assertEquals(1, list.lastIndexOf("0"));
+        list.add("2");
+        assertEquals(2, list.lastIndexOf("2"));
+        list.add("0");
+        assertEquals(3, list.lastIndexOf("0"));
     }
 
 
     /**
-     * Tests isEmpty when empty and full
+     * Tests to make sure the method isEmpty works as intended
      */
     public void testIsEmpty() {
         assertTrue(list.isEmpty());
-        list.add("A");
+        list.add("0");
         assertFalse(list.isEmpty());
+        list.remove("0");
+        assertTrue(list.isEmpty());
     }
 
 
     /**
-     * Ensures that all of the objects are cleared and the size is changed
+     * Tests to make sure the method clear works as intended
      */
     public void testClear() {
-        list.add("A");
+        list.add("0");
+        assertEquals(1, list.size());
+        assertTrue(list.contains("0"));
         list.clear();
         assertEquals(0, list.size());
-        assertFalse(list.contains("A"));
+        assertFalse(list.contains("0"));
     }
 
 
     /**
-     * Tests the toString when there are 0, 1, and 2 objects in the list
+     * Tests to make sure the method toString works as intended
      */
     public void testToString() {
-        assertEquals("{}", list.toString());
-        list.add("A");
-        assertEquals("{A}", list.toString());
-        list.add("B");
-        assertEquals("{A, B}", list.toString());
+        assertEquals("[]", list.toString());
+        list.add("0");
+        assertEquals("[0]", list.toString());
+        list.add("1");
+        list.add("2");
+        assertEquals("[0, 1, 2]", list.toString());
     }
 
 
     /**
-     * Tests removing from an empty list
-     */
-    public void testRemoveFromEmpty() {
-        list.add("dance");
-        list.add(0, "safety");
-        list.clear();
-        assertFalse(list.remove("safety"));
-        Exception exception;
-        exception = null;
-        try {
-            list.remove(0);
-        }
-        catch (IndexOutOfBoundsException e) {
-            exception = e;
-        }
-        assertTrue(exception instanceof IndexOutOfBoundsException);
-
-        DLList<String> emptyList = new DLList<String>();
-        exception = null;
-        try {
-            emptyList.remove(0);
-        }
-        catch (IndexOutOfBoundsException e) {
-            exception = e;
-        }
-        assertTrue(exception instanceof IndexOutOfBoundsException);
-    }
-
-
-    /**
-     * Tests the hasNext iterator method
+     * Tests to make sure the iterator's hasNext method works as intended
      */
     public void testHasNext() {
-        Iterator<String> iter = inventory.iterator();
-        assertEquals(iter.hasNext(), false);
-        inventory.add("A");
-        inventory.add("B");
-        inventory.add("C");
-        iter = inventory.iterator();
-        assertEquals(iter.hasNext(), true);
-        iter.next();
-        assertEquals(iter.hasNext(), true);
-        iter.next();
+        list.clear();
+        Iterator<String> iter = list.iterator();
+        list.add("0");
+        iter = list.iterator();
         assertEquals(iter.hasNext(), true);
         iter.next();
         assertEquals(iter.hasNext(), false);
@@ -319,167 +328,26 @@ public class DLListTest extends TestCase {
 
 
     /**
-     * Tests the next iterator method
+     * Tests to make sure the iterator's next method works as intended
      */
     public void testNext() {
-        inventory.add("A");
-        inventory.add("B");
-        inventory.add("C");
-        Iterator<String> iter = inventory.iterator();
+        list.clear();
+        list.add("0");
+        list.add("1");
+        list.add("2");
+        Iterator<String> iter = list.iterator();
 
-        assertEquals(iter.next(), "A");
-        assertEquals(iter.next(), "B");
-        assertEquals(iter.next(), "C");
+        assertEquals(iter.next(), "0");
+        assertEquals(iter.next(), "1");
+        assertEquals(iter.next(), "2");
 
-        Exception exception = null;
+        Exception e = null;
         try {
             iter.next();
         }
-        catch (NoSuchElementException e) {
-            exception = e;
+        catch (NoSuchElementException exception) {
+            e = exception;
         }
-        assertTrue(exception instanceof NoSuchElementException);
-    }
-
-
-    /**
-     * Tests the next iterator method
-     */
-    public void testRemove() {
-        Iterator<String> iter = inventory.iterator();
-        Exception exception = null;
-        try {
-            iter.remove();
-        }
-        catch (IllegalStateException e) {
-            exception = e;
-        }
-        assertTrue(exception instanceof IllegalStateException);
-
-        inventory.add("A");
-        inventory.add("B");
-        inventory.add("C");
-        iter = inventory.iterator();
-
-        assertEquals(inventory.size(), 3);
-        assertEquals(inventory.contains("A"), true);
-        iter.next();
-        iter.remove();
-        assertEquals(inventory.size(), 2);
-        assertEquals(inventory.contains("A"), false);
-
-        assertEquals(inventory.contains("B"), true);
-        iter.next();
-        iter.remove();
-        assertEquals(inventory.size(), 1);
-        assertEquals(inventory.contains("B"), false);
-
-        assertEquals(inventory.contains("C"), true);
-        iter.next();
-        iter.remove();
-        assertEquals(inventory.size(), 0);
-        assertEquals(inventory.contains("C"), false);
-
-        exception = null;
-        try {
-            iter.remove();
-        }
-        catch (IllegalStateException e) {
-            exception = e;
-        }
-        assertTrue(exception instanceof IllegalStateException);
-    }
-
-
-    /**
-     * Tests the hasNext iterator method for the reverse iterator
-     */
-    public void testReverseHasNext() {
-        Iterator<String> iter = inventory.reverseIterator();
-        assertEquals(iter.hasNext(), false);
-        inventory.add("A");
-        inventory.add("B");
-        inventory.add("C");
-        iter = inventory.iterator();
-        assertEquals(iter.hasNext(), true);
-        iter.next();
-        assertEquals(iter.hasNext(), true);
-        iter.next();
-        assertEquals(iter.hasNext(), true);
-        iter.next();
-        assertEquals(iter.hasNext(), false);
-    }
-
-
-    /**
-     * Tests the next iterator method for the reverse iterator
-     */
-    public void testReverseNext() {
-        inventory.add("A");
-        inventory.add("B");
-        inventory.add("C");
-        Iterator<String> iter = inventory.reverseIterator();
-
-        assertEquals(iter.next(), "C");
-        assertEquals(iter.next(), "B");
-        assertEquals(iter.next(), "A");
-
-        Exception exception = null;
-        try {
-            iter.next();
-        }
-        catch (NoSuchElementException e) {
-            exception = e;
-        }
-        assertTrue(exception instanceof NoSuchElementException);
-    }
-
-
-    /**
-     * Tests the next iterator method for the reverse iterator
-     */
-    public void testReverseRemove() {
-        Iterator<String> iter = inventory.reverseIterator();
-        Exception exception = null;
-        try {
-            iter.remove();
-        }
-        catch (IllegalStateException e) {
-            exception = e;
-        }
-        assertTrue(exception instanceof IllegalStateException);
-
-        inventory.add("A");
-        inventory.add("B");
-        inventory.add("C");
-        iter = inventory.reverseIterator();
-
-        assertEquals(inventory.size(), 3);
-        assertEquals(inventory.contains("C"), true);
-        iter.next();
-        iter.remove();
-        assertEquals(inventory.size(), 2);
-        assertEquals(inventory.contains("C"), false);
-
-        assertEquals(inventory.contains("B"), true);
-        iter.next();
-        iter.remove();
-        assertEquals(inventory.size(), 1);
-        assertEquals(inventory.contains("B"), false);
-
-        assertEquals(inventory.contains("A"), true);
-        iter.next();
-        iter.remove();
-        assertEquals(inventory.size(), 0);
-        assertEquals(inventory.contains("A"), false);
-
-        exception = null;
-        try {
-            iter.remove();
-        }
-        catch (IllegalStateException e) {
-            exception = e;
-        }
-        assertTrue(exception instanceof IllegalStateException);
+        assertTrue(e instanceof NoSuchElementException);
     }
 }
