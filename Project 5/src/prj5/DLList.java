@@ -4,19 +4,17 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 /**
- * This provides implementation for some of the LList methods.
- *
- * @author Mark Wiggans (mmw125)
- * @version 3/29/15
- * @author Eric Williamson
- * @version 10/30/15
- * @author maellis1
- * @version 11/1/15
- * @author Sabrina Lesser (brinalesser)
- * @version 4/15/2019
- * @param <E>
- *            The type of object the class will store
- */
+* @author Avni Trasi (avnitrasi)
+* @version 2019.04.15
+* @author James Livingston (jamesrliving)
+* @version 2019.04.15
+* @author Oliver Luo (luooc)
+* @version 2019.04.15
+* @author Sabrina Lesser (brinalesser)
+* @version 2019.04.15
+* @param <E>
+*            The type of object the class will store
+*/
 public class DLList<E> {
     /**
      * This represents a node in a doubly linked list. This node stores data, a
