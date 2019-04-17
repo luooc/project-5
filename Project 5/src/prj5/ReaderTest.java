@@ -44,8 +44,8 @@ public class ReaderTest extends student.TestCase {
      * Tests to make sure the method getSongs works as intended
      */
     public void testGetSongs() {
-        DLList<Song> songs = new DLList<Song>();
-        assertEquals(reader.getSongs(), songs);
+        assertEquals(reader.getSongs().get(0), new Song("Hotline Bling",
+            "Drake", 2015, "R&B"));
     }
 
 
@@ -53,7 +53,6 @@ public class ReaderTest extends student.TestCase {
      * Tests to make sure the method getStudents works as intended
      */
     public void testGetStudents() {
-        DLList<Student> students = new DLList<Student>();
-        assertEquals(reader.getStudents(), students);
+        assertEquals(reader.getStudents().get(0).getHobby(), "reading");
     }
 }
