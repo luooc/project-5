@@ -20,6 +20,10 @@ public class SongTest extends student.TestCase {
     private Song otherSong;
     private Song sameSong;
     private Song nullSong;
+    private Song differentArtist;
+    private Song differentDate;
+    private Song differentGenre;
+    private Song differentTitle;
     private Object obj;
 
 
@@ -32,6 +36,10 @@ public class SongTest extends student.TestCase {
         song = new Song("Title", "Artist", 2000, "Genre");
         otherSong = new Song("Other Title", "Artist", 2000, "Genre");
         sameSong = new Song("Title", "Artist", 2000, "Genre");
+        differentArtist = new Song("Title", "Different Artist", 2000, "Genre");
+        differentDate = new Song("Different Title", "Artist", 2000, "Genre");
+        differentGenre = new Song("Title", "Artist", 2000, "Different Genre");
+        differentTitle = new Song("Title", "Artist", 2001, "Genre");
         nullSong = null;
         obj = new Object();
     }
@@ -87,6 +95,10 @@ public class SongTest extends student.TestCase {
         assertFalse(song.equals(otherSong));
         assertFalse(song.equals(nullSong));
         assertFalse(song.equals(obj));
+        assertFalse(song.equals(differentArtist));
+        assertFalse(song.equals(differentTitle));
+        assertFalse(song.equals(differentGenre));
+        assertFalse(song.equals(differentDate));
     }
 
 }
