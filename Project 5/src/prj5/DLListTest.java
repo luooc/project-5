@@ -27,14 +27,14 @@ import student.TestCase;
 
 public class DLListTest extends TestCase {
     /**
-     * Fields
+     * ~ FIELDS ...............................................................
      */
     private DLList<String> list;
     private DLList<String> emptyList;
 
 
     /**
-     * Instantiates variables to be used in testing
+     * Instantiates variables to be used in testing, runs before every test case
      */
     @Override
     public void setUp() {
