@@ -24,7 +24,10 @@ import java.util.Arrays;
  */
 
 public class StudentTest extends student.TestCase {
-    // Fields ---------------------------------------
+   
+    /**
+     * ~ FIELDS ...............................................................
+     */
     private Student student;
     private Student otherStudent;
     private Student sameStudent;
@@ -34,8 +37,10 @@ public class StudentTest extends student.TestCase {
     private String[] songsLiked = { "yes", "no", "yes" };;
 
 
+
     /**
-     * Initializes variables for testing
+     * Instantiates variables to be used in testing, runs before every test
+     * case
      */
     public void setUp() {
         student = new Student("Hobby", "Major", "State", songsHeard,
