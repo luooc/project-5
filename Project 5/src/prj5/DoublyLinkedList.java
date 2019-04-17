@@ -19,6 +19,8 @@ package prj5;
 * @version 2019.04.15
 * @author Sabrina Lesser (brinalesser)
 * @version 2019.04.15
+* @param <T>
+*            The type of object the class will store
 */
 
 public interface DoublyLinkedList<T>
