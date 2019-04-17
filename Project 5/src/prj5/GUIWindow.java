@@ -10,8 +10,8 @@
 
 package prj5;
 
-import java.awt.Button;
-import java.awt.Window;
+import CS2114.Button;
+import CS2114.Window;
 import java.io.FileNotFoundException;
 import java.io.Reader;
 import CS2114.WindowSide;
