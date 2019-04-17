@@ -110,7 +110,8 @@ public class Student {
      */
     public String toString() {
         return "Hobby: " + hobby + " Major: " + major + " State: " + state
-            + " Songs heard: " + songsHeard + "Songs Liked: " + songsLiked;
+            + " Songs heard: " + Arrays.toString(songsHeard) + "Songs Liked: " 
+            + Arrays.toString(songsLiked);
     }
 
 
