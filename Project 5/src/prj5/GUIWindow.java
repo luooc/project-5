@@ -13,7 +13,6 @@ package prj5;
 import CS2114.Button;
 import CS2114.Window;
 import java.io.FileNotFoundException;
-import java.io.Reader;
 import CS2114.WindowSide;
 
 /**
