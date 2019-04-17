@@ -10,9 +10,10 @@
 
 package prj5;
 
+import java.awt.Button;
+import java.awt.Window;
 import java.io.FileNotFoundException;
-import CS2114.Button;
-import CS2114.Window;
+import java.io.Reader;
 import CS2114.WindowSide;
 
 /**
@@ -38,6 +39,14 @@ public class GUIWindow {
     private int glyphIndex;
 
 
+    /**
+     * two-argument constructor
+     * 
+     * @param songFileName
+     *            name of the file containing the song information
+     * @param studentFileName
+     *            name of the file containing the student information
+     */
     public GUIWindow(String songFileName, String studentFileName) {
         window = new Window();
         previous = new Button("<- Previous");
@@ -84,6 +93,13 @@ public class GUIWindow {
     }
 
 
+    /**
+     * Goes to the previous page of glyphs
+     * 
+     * @param button
+     *            Button that will execute method when clicked *
+     */
+    @SuppressWarnings("deprecation")
     public void clickedPrevious(Button button) {
         if (glyphIndex > 8) {
             glyphIndex = glyphIndex - 9;
@@ -96,41 +112,12 @@ public class GUIWindow {
     }
 
 
-    public void clikedArtist(Button button) {
-        sorter.sortByArtist();
-    }
-
-
-    public void clickedTitle(Button button) {
-        sorter.sortByTitle();
-    }
-
-
-    public void clickedGenre(Button button) {
-        sorter.sortByGenre();
-    }
-
-
-    public void clickedDate(Button button) {
-        sorter.sortByDate();
-    }
-
-
-    public void lickedHobby(Button button) {
-        sorter.sortByHobby();
-    }
-
-
-    public void clickedMajor(Button button) {
-        sorter.sortByMajor();
-    }
-
-
-    public void clickedState(Button button) {
-        sorter.sortByRegion();
-    }
-
-
+    /**
+     * Goes to the next page of glyphs
+     * 
+     * @param button
+     *            Button that will execute method when clicked
+     */
     public void clickedNext(Button button) {
         if (glyphIndex > 8) {
             glyphIndex = glyphIndex - 9;
@@ -143,21 +130,113 @@ public class GUIWindow {
     }
 
 
-    public void clickedQuit(Button button) {
-
+    /**
+     * When button is clicked, glyphs are sorted by artist
+     * 
+     * @param button
+     *            Button that will execute method when clicked
+     */
+    public void clikedArtist(Button button) {
+        sorter.sortByArtist();
     }
 
 
+    /**
+     * When button is clicked, glyphs are sorted by song title
+     * 
+     * @param button
+     *            Button that will execute method when clicked
+     */
+    public void clickedTitle(Button button) {
+        sorter.sortByTitle();
+    }
+
+
+    /**
+     * When button is clicked, glyphs are sorted by song genre
+     * 
+     * @param button
+     *            Button that will execute method when clicked
+     */
+    public void clickedGenre(Button button) {
+        sorter.sortByGenre();
+    }
+
+
+    /**
+     * When button is clicked, glyphs are sorted by song release date
+     * 
+     * @param button
+     *            Button that will execute method when clicked
+     */
+    public void clickedDate(Button button) {
+        sorter.sortByDate();
+    }
+
+
+    /**
+     * When button is clicked, glyphs are sorted by student hobby
+     * 
+     * @param button
+     *            Button that will execute method when clicked
+     */
+    public void lickedHobby(Button button) {
+        sorter.sortByHobby();
+    }
+
+
+    /**
+     * When button is clicked, glyphs are sorted by student major
+     * 
+     * @param button
+     *            Button that will execute method when clicked
+     */
+    public void clickedMajor(Button button) {
+        sorter.sortByMajor();
+    }
+
+
+    /**
+     * When button is clicked, glyphs are sorted by student's state
+     * 
+     * @param button
+     *            Button that will execute method when clicked
+     */
+    public void clickedState(Button button) {
+        sorter.sortByRegion();
+    }
+
+
+    /**
+     * When clicked, program is exited and window is closed
+     * 
+     * @param button
+     *            Button that will execute method when clicked
+     */
+    public void clickedQuit(Button button) {
+        System.exit(0);
+    }
+
+
+    /**
+     * draws the glyph representation of the data
+     */
     private void drawGlyph() {
 
     }
 
 
+    /**
+     * draws the key that the user can use to understand the glyphs
+     */
     private void drawLegend() {
 
     }
 
 
+    /**
+     * ~ INNER GLYPH CLASS ....................................................
+     */
     private class Glyph {
 
     }
