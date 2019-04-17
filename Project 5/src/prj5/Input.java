@@ -22,11 +22,12 @@ package prj5;
  */
 
 public class Input {
+
     /**
      * Constructor intentionally left blank
      */
     public Input() {
-
+        // nothing goes here
     }
 
 
