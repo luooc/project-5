@@ -4,11 +4,11 @@
 // I will not lie, cheat, or steal, nor will I accept the actions of those who
 // do.
 // -- Avni Trasi (avnitrasi)
+// -- James Livingston (jamesrliving)
+// -- Oliver Luo (luooc)
+// -- Sabrina Lesser (brinalesser)
 
 package prj5;
-
-import java.util.Observable;
-import java.util.Observer;
 
 /**
  * @author Avni Trasi (avnitrasi)
@@ -21,7 +21,7 @@ import java.util.Observer;
  * @version 2019.04.15
  */
 
-public class Sorter extends Observable {
+public class Sorter {
 
     /**
      * ~ FIELDS ...............................................................
