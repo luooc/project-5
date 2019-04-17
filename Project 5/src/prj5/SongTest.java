@@ -17,7 +17,6 @@ public class SongTest extends student.TestCase {
      */
 
     private Song song;
-    private Song otherSong;
     private Song sameSong;
     private Song nullSong;
     private Song differentArtist;
@@ -34,7 +33,6 @@ public class SongTest extends student.TestCase {
     @Override
     public void setUp() {
         song = new Song("Title", "Artist", 2000, "Genre");
-        otherSong = new Song("Other Title", "Artist", 2000, "Genre");
         sameSong = new Song("Title", "Artist", 2000, "Genre");
         differentArtist = new Song("Title", "Different Artist", 2000, "Genre");
         differentDate = new Song("Different Title", "Artist", 2000, "Genre");
@@ -92,7 +90,6 @@ public class SongTest extends student.TestCase {
     public void testEquals() {
         assertTrue(song.equals(sameSong));
         assertTrue(song.equals(song));
-        assertFalse(song.equals(otherSong));
         assertFalse(song.equals(nullSong));
         assertFalse(song.equals(obj));
         assertFalse(song.equals(differentArtist));
