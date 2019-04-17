@@ -42,8 +42,7 @@ public class Input {
     public static void main(String[] files) {
         String studentFile = files[0];
         String songFile = files[1];
-        GUIWindow window = new GUIWindow("SongList2018.csv",
-            "MusicSurveyData2018.csv");
+        GUIWindow window = new GUIWindow(songFile, studentFile);
 
         Reader reader = null;
         try {
@@ -73,8 +72,11 @@ public class Input {
             System.out.println("Song Year: " + songs.get(i).getDate());
             int j = 0;
             int art = 0;
+            while (students.get(j).getHobby().equals("")) {
+                j++;
+            }
             while (students.get(j).getHobby().equals("art")) {
-                if (students.get(j).getSongsHeard()[i].equals("yes")) {
+                if (students.get(j).getSongsHeard()[i].equals("Yes")) {
                     art++;
                 }
                 j++;
@@ -82,21 +84,21 @@ public class Input {
 
             int music = 0;
             while (students.get(j).getHobby().equals("music")) {
-                if (students.get(j).getSongsHeard()[i].equals("yes")) {
+                if (students.get(j).getSongsHeard()[i].equals("Yes")) {
                     music++;
                 }
                 j++;
             }
             int sports = 0;
             while (students.get(j).getHobby().equals("sports")) {
-                if (students.get(j).getSongsHeard()[i].equals("yes")) {
+                if (students.get(j).getSongsHeard()[i].equals("Yes")) {
                     sports++;
                 }
                 j++;
             }
             int reading = 0;
             while (students.get(j).getHobby().equals("reading")) {
-                if (students.get(j).getSongsHeard()[i].equals("yes")) {
+                if (students.get(j).getSongsHeard()[i].equals("Yes")) {
                     reading++;
                 }
                 j++;
@@ -107,7 +109,7 @@ public class Input {
             j = 0;
             art = 0;
             while (students.get(j).getHobby().equals("art")) {
-                if (students.get(j).getSongsLiked()[i].equals("yes")) {
+                if (students.get(j).getSongsLiked()[i].equals("Yes")) {
                     art++;
                 }
                 j++;
@@ -115,21 +117,21 @@ public class Input {
 
             music = 0;
             while (students.get(j).getHobby().equals("music")) {
-                if (students.get(j).getSongsLiked()[i].equals("yes")) {
+                if (students.get(j).getSongsLiked()[i].equals("Yes")) {
                     music++;
                 }
                 j++;
             }
             sports = 0;
             while (students.get(j).getHobby().equals("sports")) {
-                if (students.get(j).getSongsLiked()[i].equals("yes")) {
+                if (students.get(j).getSongsLiked()[i].equals("Yes")) {
                     sports++;
                 }
                 j++;
             }
             reading = 0;
             while (students.get(j).getHobby().equals("reading")) {
-                if (students.get(j).getSongsLiked()[i].equals("yes")) {
+                if (students.get(j).getSongsLiked()[i].equals("Yes")) {
                     reading++;
                 }
                 j++;
