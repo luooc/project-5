@@ -66,6 +66,16 @@ public class Input {
 
 
     private static void output(DLList<Student> students, DLList<Song> songs) {
-
+        for (int i = 0; i < songs.size(); i++) {
+            System.out.println("Song Title: " + songs.get(i).getTitle());
+            System.out.println("Song Artist: " + songs.get(i).getArtist());
+            System.out.println("Song Genre: " + songs.get(i).getGenre());
+            System.out.println("Song Year: " + songs.get(i).getDate());
+            
+            System.out.println("Heard");
+            System.out.println("");
+            System.out.println("Heard");
+            System.out.println("");
+        }
     }
 }
