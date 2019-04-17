@@ -98,15 +98,19 @@ public class Reader {
             String hobby = info[4];
             String major = info[2];
             String region = info[3];
-            String[] songsHeard = new String[info.length - 5];
-            String[] songsLiked = new String[info.length - 5];
+            String[] songsHeard = new String[(info.length - 5) / 2];
+            String[] songsLiked = new String[(info.length - 5) / 2];
+            int count = 0;
             for (int i = 5; i < info.length; i += 2)
             {
-                songsHeard[i - 5] = info[i];
+                songsHeard[count] = info[i];
+                count++;
             }
+            count = 0;
             for (int i = 6; i < info.length; i += 2)
             {
-                songsLiked[i - 5] = info[i];
+                songsLiked[count] = info[i];
+                count++;
             }
             Student student = new Student(hobby, major, region, songsHeard,
                 songsLiked);
