@@ -40,8 +40,8 @@ public class Input {
      *            a String array
      */
     public static void main(String[] files) {
-        studentFile = files[0];
-        songFile = files[1];
+        String studentFile = files[0];
+        String songFile = files[1];
         GUIWindow window = new GUIWindow("SongList2018.csv",
             "MusicSurveyData2018.csv");
 
