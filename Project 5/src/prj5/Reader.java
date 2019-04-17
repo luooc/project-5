@@ -63,27 +63,20 @@ public class Reader {
         throws FileNotFoundException {
         Scanner file = new Scanner(new File(fileName));
         DLList<Student> copy = new DLList<Student>();
-        StringBuilder s = new StringBuilder();
-
-        while (file.hasNext()) {
-            String nextLine = file.nextLine();
-            if (!nextLine.contains("\n")) {
-                s.append(nextLine);
+        file.nextLine();
+        while(file.hasNextLine()) {
+            String[] info = file.nextLine().split(",");
+            String hobby = info[4];
+            String major = info[2];
+            String region = info[3];
+            String[] songsHeard = new String[info.length-5];
+            String[] songsLiked = new String[info.length-5];
+            for(int i = 5; i < info.length; i += 2) {
+                songsHeard[i-5] = info[i];
+                songsLiked[i-5] = info[i + 1];
             }
-            else {
-                String info = s.toString();
-                String[] student = info.split(",");
-                ArrayList<String> likes = new ArrayList<String>();
-                ArrayList<String> heard = new ArrayList<String>();
-                for (int i = 5; i < student.length; i += 2) {
-                    heard.add(student[i]);
-                }
-                for (int i = 6; i < student.length; i += 2) {
-                    likes.add(student[i]);
-                }
-                copy.add(new Student(student[4], student[2], student[3],
-                    (String[])heard.toArray(), (String[])likes.toArray()));
-            }
+            Student student = new Student(hobby,major,region,songsHeard,songsLiked);
+            copy.add(student);
         }
         file.close();
         return copy;
