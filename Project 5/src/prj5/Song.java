@@ -22,6 +22,10 @@ package prj5;
  */
 
 public class Song {
+
+    /**
+     * ~ FIELDS ...............................................................
+     */
     private String artist;
     private String title;
     private String genre;
@@ -51,7 +55,7 @@ public class Song {
     /**
      * getter for artist field
      * 
-     * @return artist field
+     * @return artist name
      */
     public String getArtist() {
         return artist;
@@ -61,7 +65,7 @@ public class Song {
     /**
      * getter for title field
      * 
-     * @return
+     * @return song title
      */
     public String getTitle() {
         return title;
@@ -71,7 +75,7 @@ public class Song {
     /**
      * getter for genre field
      * 
-     * @return genre field
+     * @return song genre
      */
     public String getGenre() {
         return genre;
@@ -81,7 +85,7 @@ public class Song {
     /**
      * getter for date field
      * 
-     * @return date field
+     * @return song release date
      */
     public int getDate() {
         return date;
@@ -89,10 +93,15 @@ public class Song {
 
 
     /**
-     * Returns a String representation of a Song object
+     * Returns a String representation of a Song object.
+     * EX: a Song tune with the following criteria-
+     * ("Ivy", "Frank Ocean", 2016, "R&B")
+     * tune.toString() will return "Artist: Frank Ocean Title: Ivy Genre: R&B
+     * Release Year: 2016"
      * 
-     * @return a String representation of a Song object
+     * @return a String representation of this Song object
      */
+    @Override
     public String toString() {
         return "Artist: " + artist + " Title: " + title + " Genre: " + genre
             + " Release Year: " + date;
@@ -100,14 +109,14 @@ public class Song {
 
 
     /**
-     * Returns a boolean value representing whether an object is equal to this
-     * Song
-     * 2 Songs are considered equal if all 4 of their input values are the same
+     * Compares two Song objects.
      * 
      * @param obj
-     *            an Object to compare aginst
-     * @return true if the the object is equal to this Song
+     *            an Object to compare against
+     * @return true if if all title, artist, date and genre are identical, false
+     *         otherwise
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == null) {
             return false;
