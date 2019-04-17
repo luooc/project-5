@@ -24,7 +24,7 @@ import java.util.Arrays;
  */
 
 public class StudentTest extends student.TestCase {
-   
+
     /**
      * ~ FIELDS ...............................................................
      */
@@ -43,7 +43,6 @@ public class StudentTest extends student.TestCase {
     private String[] differentLiked = { "no", "yes", "no" };
 
 
-
     /**
      * Instantiates variables to be used in testing, runs before every test
      * case
@@ -51,14 +50,14 @@ public class StudentTest extends student.TestCase {
     public void setUp() {
         student = new Student("Hobby", "Major", "State", songsHeard,
             songsLiked);
-        differentHobby = new Student("Different Hobby", "Other Major", "Other State",
+        differentHobby = new Student("Different Hobby", "Other Major",
+            "Other State", songsHeard, songsLiked);
+        differentMajor = new Student("Hobby", "Different Major", "State",
             songsHeard, songsLiked);
-        differentMajor = new Student("Hobby", "Different Major", "State", songsHeard,
-            songsLiked);
-        differentState = new Student("Hobby", "Major", "Different State", songsHeard,
-            songsLiked);
-        differentSongsHeard = new Student("Hobby", "Major", "State", differentHeard,
-            songsLiked);
+        differentState = new Student("Hobby", "Major", "Different State",
+            songsHeard, songsLiked);
+        differentSongsHeard = new Student("Hobby", "Major", "State",
+            differentHeard, songsLiked);
         differentSongsLiked = new Student("Hobby", "Major", "State", songsHeard,
             differentLiked);
         sameStudent = new Student("Hobby", "Major", "State", songsHeard,
