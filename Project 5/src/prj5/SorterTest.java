@@ -44,9 +44,9 @@ public class SorterTest extends student.TestCase {
     public void setUp() {
         songs = new DLList<Song>();
         students = new DLList<Student>();
-        song1 = new Song("Ariana Grande", "R.E.M.", 2018, "Pop");
-        song2 = new Song("Marc E. Bassy", "Morning", 2016, "R&B");
-        song3 = new Song("Whitney Houston", "I Will Always Love You", 1974,
+        song1 = new Song("R.E.M.", "Ariana Grande", 2018, "Pop");
+        song2 = new Song("Morning", "Marc E. Bassy", 2016, "R&B");
+        song3 = new Song("I Will Always Love You", "Whitney Houston", 1974,
             "Balad");
         songs.add(song1);
         songs.add(song2);
