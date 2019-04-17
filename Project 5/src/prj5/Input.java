@@ -10,6 +10,9 @@
 
 package prj5;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+
 /**
  * @author Avni Trasi (avnitrasi)
  * @version 2019.04.15
@@ -22,12 +25,11 @@ package prj5;
  */
 
 public class Input {
-
     /**
      * Constructor intentionally left blank
      */
     public Input() {
-        // nothing goes here
+
     }
 
 
@@ -37,8 +39,33 @@ public class Input {
      * @param args
      *            a String array
      */
-    public static void main(String[] args) {
+    public static void main(File surveyData, File songList) {
         GUIWindow window = new GUIWindow("SongList2018.csv",
             "MusicSurveyData2018.csv");
+        String studentFile = surveyData.getName();
+        String songFile = songList.getName();
+
+        Reader reader = null;
+        try {
+            reader = new Reader(songFile, studentFile);
+        }
+        catch (FileNotFoundException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        Sorter sorter = new Sorter(reader.getSongs(), reader.getStudents());
+
+        DLList<Student> students = sorter.sortByHobby();
+        DLList<Song> songs = sorter.sortByGenre();
+        output(students, songs);
+
+        songs = sorter.sortByTitle();
+        output(students, songs);
+
+    }
+
+
+    private static void output(DLList<Student> students, DLList<Song> songs) {
+
     }
 }
