@@ -34,7 +34,7 @@ public class StudentTest extends student.TestCase {
     private Student nullStudent;
     private Object obj;
     private String[] songsHeard = { "yes", "no", "yes" };
-    private String[] songsLiked = { "yes", "no", "yes" };;
+    private String[] songsLiked = { "yes", "no", "yes" };
 
 
 
