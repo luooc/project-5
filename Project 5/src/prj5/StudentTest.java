@@ -10,6 +10,8 @@
 
 package prj5;
 
+import java.util.Arrays;
+
 /**
  * @author Avni Trasi (avnitrasi)
  * @version 2019.04.15
@@ -92,9 +94,9 @@ public class StudentTest extends student.TestCase {
      */
     public void testToString() {
         assertEquals(student.toString(),
-            "Hobby: Hobby Major: Major State: State Songs heard: " 
-                + Arrays.toString(songsHeard) + "Songs Liked: " 
-                     + Arrays.toString(songsLiked));
+            "Hobby: Hobby Major: Major State: State Songs heard: " + Arrays
+                .toString(songsHeard) + "Songs Liked: " + Arrays.toString(
+                    songsLiked));
     }
 
 
