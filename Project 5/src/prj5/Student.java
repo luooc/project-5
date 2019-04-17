@@ -115,7 +115,7 @@ public class Student {
      * EX: a Student pupil with the following criteria-
      * 
      * arrayHeard = { "Ivy", "Africa", "Silver Soul"}
-     * arrayLiked = {"Ivy", "Silver Soul}
+     * arrayLiked = {"Ivy", "Silver Soul"}
      * ("Painting", "Neuroscience", "Virginia, "Virginia", arrayHeard,
      * arrayLiked)
      * 
