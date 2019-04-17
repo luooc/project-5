@@ -23,13 +23,17 @@ import java.io.FileNotFoundException;
  * @version 2019.04.15
  */
 public class ReaderTest extends student.TestCase {
-    // Fields -----------------------------------------------
+    /**
+     * ~ FIELDS ...............................................................
+     */
     private Reader reader;
 
 
     /**
-     * Sets up variables for testing
+     * Instantiates variables to be used in testing, runs before every test
+     * case
      */
+    @Override
     public void setUp() {
         try {
             reader = new Reader("SongList2018.csv", "MusicSurveyData2018.csv");
