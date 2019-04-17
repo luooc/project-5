@@ -22,11 +22,20 @@ package prj5;
  */
 
 public class Input {
+    /**
+     * Constructor intentionally left blank
+     */
     public Input() {
 
     }
 
 
+    /**
+     * Creates a GUIWindow and sends two input files
+     * 
+     * @param args
+     *            a String array
+     */
     public static void main(String[] args) {
         GUIWindow window = new GUIWindow("SongList2018.csv",
             "MusicSurveyData2018.csv");
