@@ -74,7 +74,7 @@ public class Input {
             
             System.out.println("Heard");
             System.out.println("");
-            System.out.println("Heard");
+            System.out.println("Liked");
             System.out.println("");
         }
     }
