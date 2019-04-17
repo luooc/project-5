@@ -29,12 +29,18 @@ public class StudentTest extends student.TestCase {
      * ~ FIELDS ...............................................................
      */
     private Student student;
-    private Student otherStudent;
+    private Student differentHobby;
+    private Student differentMajor;
+    private Student differentState;
+    private Student differentSongsHeard;
+    private Student differentSongsLiked;
     private Student sameStudent;
     private Student nullStudent;
     private Object obj;
     private String[] songsHeard = { "yes", "no", "yes" };
     private String[] songsLiked = { "yes", "no", "yes" };
+    private String[] differentHeard = { "no", "yes", "no" };
+    private String[] differentLiked = { "no", "yes", "no" };
 
 
 
@@ -45,8 +51,16 @@ public class StudentTest extends student.TestCase {
     public void setUp() {
         student = new Student("Hobby", "Major", "State", songsHeard,
             songsLiked);
-        otherStudent = new Student("Other Hobby", "Other Major", "Other State",
+        differentHobby = new Student("Different Hobby", "Other Major", "Other State",
             songsHeard, songsLiked);
+        differentMajor = new Student("Hobby", "Different Major", "State", songsHeard,
+            songsLiked);
+        differentState = new Student("Hobby", "Major", "Different State", songsHeard,
+            songsLiked);
+        differentSongsHeard = new Student("Hobby", "Major", "State", differentHeard,
+            songsLiked);
+        differentSongsLiked = new Student("Hobby", "Major", "State", songsHeard,
+            differentLiked);
         sameStudent = new Student("Hobby", "Major", "State", songsHeard,
             songsLiked);
         nullStudent = null;
@@ -111,7 +125,12 @@ public class StudentTest extends student.TestCase {
     public void testEquals() {
         assertTrue(student.equals(student));
         assertTrue(student.equals(sameStudent));
-        assertFalse(student.equals(otherStudent));
+        assertFalse(student.equals(differentHobby));
+        assertFalse(student.equals(differentHobby));
+        assertFalse(student.equals(differentMajor));
+        assertFalse(student.equals(differentState));
+        assertFalse(student.equals(differentSongsHeard));
+        assertFalse(student.equals(differentSongsLiked));
         assertFalse(student.equals(nullStudent));
         assertFalse(student.equals(obj));
     }
