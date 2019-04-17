@@ -92,8 +92,9 @@ public class StudentTest extends student.TestCase {
      */
     public void testToString() {
         assertEquals(student.toString(),
-            "Hobby: Hobby Major: Major State: State Songs heard: " + songsHeard
-                + "Songs Liked: " + songsLiked);
+            "Hobby: Hobby Major: Major State: State Songs heard: " 
+                + Arrays.toString(songsHeard) + "Songs Liked: " 
+                     + Arrays.toString(songsLiked));
     }
 
 
