@@ -23,9 +23,9 @@ public class SongTest extends student.TestCase {
      * Sets up variables for testing
      */
     public void setUp() {
-        song = new Song("Artist", "Title", 2000, "Genre");
-        otherSong = new Song("Other Artist", "Title", 2000, "Genre");
-        sameSong = new Song("Artist", "Title", 2000, "Genre");
+        song = new Song("Title", "Artist", 2000, "Genre");
+        otherSong = new Song("Other Title", "Artist", 2000, "Genre");
+        sameSong = new Song("Title", "Artist", 2000, "Genre");
         nullSong = null;
         obj = new Object();
     }
