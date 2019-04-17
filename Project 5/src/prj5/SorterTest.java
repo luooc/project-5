@@ -21,10 +21,11 @@ package prj5;
  * @version 2019.04.15
  */
 public class SorterTest extends student.TestCase {
-    /**
-     * fields
-     */
 
+    
+    /**
+     * ~ FIELDS ...............................................................
+     */
     private Song song1;
     private Song song2;
     private Song song3;
