@@ -26,6 +26,11 @@ import java.util.NoSuchElementException;
  *            The type of object the class will store
  */
 public class DLList<T> {
+
+    /**
+     * ~ INNER NODE CLASS .....................................................
+     */
+
     /**
      * A doubly linked node that stores data of type E
      *
@@ -33,12 +38,22 @@ public class DLList<T> {
      *            The type of object that this class will store
      */
     private static class Node<T> {
+
+        /**
+         * ~ FIELDS ...........................................................
+         */
         private Node<T> next;
         private Node<T> previous;
         private T data;
 
 
         /**
+         * ~ CONSTRUCTOR ......................................................
+         */
+
+        /**
+         * one-argument constructor
+         *
          * Creates a new node
          *
          * @param data
@@ -99,16 +114,103 @@ public class DLList<T> {
         public T getData() {
             return data;
         }
-    }
+    } // end Node class
 
-    // Fields -----------------------------------------------------
+
+    /**
+     * ~ INNER ITERATOR CLASS
+     * .....................................................
+     */
+
+    /**
+     * Creates an iterator for a DLList
+     */
+    private class DLListIterator<A> implements Iterator<T> {
+        // Fields
+        private Node<T> node;
+        private boolean nextCalled;
+
+
+        // Constructor
+        /**
+         * Creates a new DLListIterator
+         */
+        public DLListIterator() {
+            node = head;
+            nextCalled = false;
+        }
+
+
+        /**
+         * Checks if there are more elements in the list
+         *
+         * @return true if there are more elements in the list
+         */
+        @Override
+        public boolean hasNext() {
+            return node.next() != tail;
+        }
+
+
+        /**
+         * Gets the next value in the list
+         *
+         * @return the next value
+         * @throws NoSuchElementException
+         *             if there are no nodes left in the list
+         */
+        @Override
+        public T next() {
+            if (hasNext()) {
+                node = node.next();
+                nextCalled = true;
+                return node.getData();
+            }
+            else {
+                throw new NoSuchElementException("Illegal call to next(); "
+                    + "iterator is after end of list.");
+            }
+        }
+
+
+        /**
+         * Removes the last object returned with next() from the list
+         *
+         * @throws IllegalStateException
+         *             if next has not been called yet
+         *             and if the element has already been removed
+         */
+        @Override
+        public void remove() {
+            if (nextCalled) {
+                node.previous().setNext(node.next());
+                node.next().setPrevious(node.previous());
+                size--;
+                nextCalled = false;
+            }
+            else {
+                throw new IllegalStateException("Illegal call to remove(); "
+                    + "next() was not called.");
+            }
+
+        }
+    } // end DLListIterator class
+
+    /**
+     * ~ FIELDS ...........................................................
+     */
     private int size;
     private Node<T> head;
     private Node<T> tail;
 
 
-    // Constructor ------------------------------------------------
     /**
+     * ~ CONSTRUCTOR ......................................................
+     */
+
+    /**
+     * default constructor
+     * 
      * Creates a new DLList object
      */
     public DLList() {
@@ -172,7 +274,7 @@ public class DLList<T> {
      * Returns the object at the given index
      *
      * @param index
-     *            where the object is
+     *            where the object is located in the list
      * @return The object at the given index
      * @throws IndexOutOfBoundsException
      *             if the index is not within the size of the list
@@ -339,81 +441,6 @@ public class DLList<T> {
 
 
     /**
-     * Creates an iterator for a DLList
-     */
-    private class DLListIterator<A> implements Iterator<T> {
-        // Fields
-        private Node<T> node;
-        private boolean nextCalled;
-
-
-        // Constructor
-        /**
-         * Creates a new DLListIterator
-         */
-        public DLListIterator() {
-            node = head;
-            nextCalled = false;
-        }
-
-
-        /**
-         * Checks if there are more elements in the list
-         *
-         * @return true if there are more elements in the list
-         */
-        @Override
-        public boolean hasNext() {
-            return node.next() != tail;
-        }
-
-
-        /**
-         * Gets the next value in the list
-         *
-         * @return the next value
-         * @throws NoSuchElementException
-         *             if there are no nodes left in the list
-         */
-        @Override
-        public T next() {
-            if (hasNext()) {
-                node = node.next();
-                nextCalled = true;
-                return node.getData();
-            }
-            else {
-                throw new NoSuchElementException("Illegal call to next(); "
-                    + "iterator is after end of list.");
-            }
-        }
-
-
-        /**
-         * Removes the last object returned with next() from the list
-         *
-         * @throws IllegalStateException
-         *             if next has not been called yet
-         *             and if the element has already been removed
-         */
-        @Override
-        public void remove() {
-            if (nextCalled) {
-                node.previous().setNext(node.next());
-                node.next().setPrevious(node.previous());
-                size--;
-                nextCalled = false;
-            }
-            else {
-                throw new IllegalStateException("Illegal call to remove(); "
-                    + "next() was not called.");
-            }
-
-        }
-    }
-
-
-    /**
      * Iterator method creates Iterator object
      *
      * @return new Iterator object
@@ -438,4 +465,4 @@ public class DLList<T> {
         return arr;
     }
 
-}
+} // end DLList class
