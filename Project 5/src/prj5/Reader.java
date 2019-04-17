@@ -95,26 +95,28 @@ public class Reader {
         file.nextLine();
         while (file.hasNextLine()) {
             String[] info = file.nextLine().split(",");
-            String hobby = info[4];
-            String major = info[2];
-            String region = info[3];
-            String[] songsHeard = new String[((info.length - 5) / 2)+1];
-            String[] songsLiked = new String[((info.length - 5) / 2)+1];
-            int count = 0;
-            for (int i = 5; i < info.length; i += 2)
-            {
-                songsHeard[count] = info[i];
-                count++;
+            if(info.length >= 6) {
+                String hobby = info[4];
+                String major = info[2];
+                String region = info[3];
+                String[] songsHeard = new String[((info.length - 5) / 2)+1];
+                String[] songsLiked = new String[((info.length - 5) / 2)+1];
+                int count = 0;
+                for (int i = 5; i < info.length; i += 2)
+                {
+                    songsHeard[count] = info[i];
+                    count++;
+                }
+                count = 0;
+                for (int i = 6; i < info.length; i += 2)
+                {
+                    songsLiked[count] = info[i];
+                    count++;
+                }
+                Student student = new Student(hobby, major, region, songsHeard,
+                    songsLiked);
+                copy.add(student);
             }
-            count = 0;
-            for (int i = 6; i < info.length; i += 2)
-            {
-                songsLiked[count] = info[i];
-                count++;
-            }
-            Student student = new Student(hobby, major, region, songsHeard,
-                songsLiked);
-            copy.add(student);
         }
         file.close();
         return copy;
