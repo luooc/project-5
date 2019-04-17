@@ -10,8 +10,6 @@
 
 package prj5;
 
-import java.io.FileNotFoundException;
-
 /**
  * @author Avni Trasi (avnitrasi)
  * @version 2019.04.15
@@ -39,8 +37,10 @@ public class SorterTest extends student.TestCase {
 
 
     /**
-     * sets up variables for testing
+     * Instantiates variables to be used in testing, runs before every test
+     * case
      */
+    @Override
     public void setUp() {
         songs = new DLList<Song>();
         students = new DLList<Student>();
@@ -69,9 +69,9 @@ public class SorterTest extends student.TestCase {
      */
     public void testSortByGenre() {
         DLList<Song> temp = sorter.sortByGenre();
-        assertEquals(temp.get(0), (Song)song3);
-        assertEquals(temp.get(1), (Song)song1);
-        assertEquals(temp.get(2), (Song)song2);
+        assertEquals(temp.get(0), song3);
+        assertEquals(temp.get(1), song1);
+        assertEquals(temp.get(2), song2);
     }
 
 
@@ -80,9 +80,9 @@ public class SorterTest extends student.TestCase {
      */
     public void testSortByArtist() {
         DLList<Song> temp = sorter.sortByArtist();
-        assertEquals(temp.get(0), (Song)song1);
-        assertEquals(temp.get(1), (Song)song2);
-        assertEquals(temp.get(2), (Song)song3);
+        assertEquals(temp.get(0), song1);
+        assertEquals(temp.get(1), song2);
+        assertEquals(temp.get(2), song3);
     }
 
 
@@ -91,9 +91,9 @@ public class SorterTest extends student.TestCase {
      */
     public void testSortByTitle() {
         DLList<Song> temp = sorter.sortByTitle();
-        assertEquals(temp.get(0), (Song)song3);
-        assertEquals(temp.get(1), (Song)song2);
-        assertEquals(temp.get(2), (Song)song1);
+        assertEquals(temp.get(0), song3);
+        assertEquals(temp.get(1), song2);
+        assertEquals(temp.get(2), song1);
     }
 
 
@@ -102,9 +102,9 @@ public class SorterTest extends student.TestCase {
      */
     public void testSortByDate() {
         DLList<Song> temp = sorter.sortByDate();
-        assertEquals(temp.get(0), (Song)song3);
-        assertEquals(temp.get(1), (Song)song2);
-        assertEquals(temp.get(2), (Song)song1);
+        assertEquals(temp.get(0), song3);
+        assertEquals(temp.get(1), song2);
+        assertEquals(temp.get(2), song1);
     }
 
 
@@ -113,9 +113,9 @@ public class SorterTest extends student.TestCase {
      */
     public void testSortByHobby() {
         DLList<Student> temp = sorter.sortByHobby();
-        assertEquals(temp.get(0), (Student)student3);
-        assertEquals(temp.get(1), (Student)student1);
-        assertEquals(temp.get(2), (Student)student2);
+        assertEquals(temp.get(0), student3);
+        assertEquals(temp.get(1), student1);
+        assertEquals(temp.get(2), student2);
     }
 
 
@@ -124,9 +124,9 @@ public class SorterTest extends student.TestCase {
      */
     public void testSortByMajor() {
         DLList<Student> temp = sorter.sortByMajor();
-        assertEquals(temp.get(0), (Student)student1);
-        assertEquals(temp.get(1), (Student)student2);
-        assertEquals(temp.get(2), (Student)student3);
+        assertEquals(temp.get(0), student1);
+        assertEquals(temp.get(1), student2);
+        assertEquals(temp.get(2), student3);
     }
 
 
@@ -135,8 +135,8 @@ public class SorterTest extends student.TestCase {
      */
     public void testSortByRegion() {
         DLList<Student> temp = sorter.sortByRegion();
-        assertEquals(temp.get(0), (Student)student3);
-        assertEquals(temp.get(1), (Student)student1);
-        assertEquals(temp.get(2), (Student)student2);
+        assertEquals(temp.get(0), student3);
+        assertEquals(temp.get(1), student1);
+        assertEquals(temp.get(2), student2);
     }
 }
