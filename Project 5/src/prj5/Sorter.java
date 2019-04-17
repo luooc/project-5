@@ -23,101 +23,129 @@ package prj5;
 
 public class Sorter {
 
+    /**
+     * ~ FIELDS ...............................................................
+     */
     private DLList<Song> songList;
     private DLList<Student> studentList;
 
 
+    /**
+     * two-argument constructor
+     * 
+     * @param songs
+     *            doubly linked list of Songs
+     * @param students
+     *            doubly linked list of Student
+     */
     public Sorter(DLList<Song> songs, DLList<Student> students) {
-        this.songList = songs;
-        this.studentList = students;
+        songList = songs;
+        studentList = students;
     }
 
 
-    public DLList<Song> getSongList() {
-        return songList;
-    }
-
-
-    public DLList<Student> getStudentList() {
-        return studentList;
-    }
-
-
+    /**
+     * Sorts list alphabetically by song genre
+     * 
+     * @return sorted DLList
+     */
     public DLList<Song> sortByGenre() {
         DLList<Song> sorted = new DLList<Song>();
         Object[] sortingArray = songList.toArray();
-        for (int i = 1; i < songList.size(); i++) {
-            Song song1 = (Song)sortingArray[i];
-            String genre = song1.getGenre();
-            int j = i - 1;
-            while (j >= 0) {
-                Song song2 = (Song)sortingArray[j];
-                if (genre.compareTo(song2.getGenre()) < 0) {
-                    break;
+        for (int i = 0; i < sortingArray.length - 1; i++) {
+            int min = i;
+            for (int j = i + 1; j < sortingArray.length; j++) {
+                if (((Song)sortingArray[i]).getGenre().compareTo(
+                    ((Song)sortingArray[j]).getGenre()) > 0) {
+                    min = j;
                 }
-                sortingArray[i + 1] = sortingArray[i];
-                i--;
             }
-            sortingArray[i + 1] = genre;
+            Object temp = sortingArray[i];
+            sortingArray[i] = sortingArray[min];
+            sortingArray[min] = temp;
+        }
+        for (int i = 0; i < sortingArray.length; i++) {
             sorted.add((Song)sortingArray[i]);
         }
         return sorted;
     }
 
 
+    /**
+     * Sorts list alphabetically by song artist
+     * 
+     * @return sorted DLList
+     */
     public DLList<Song> sortByArtist() {
         DLList<Song> sorted = new DLList<Song>();
         Object[] sortingArray = songList.toArray();
-        for (int i = 0; i < songList.size(); i++) {
-            Song song1 = (Song)sortingArray[i];
-            String artist = song1.getArtist();
-            for (int j = 0; j < songList.size(); j++) {
-                Song song2 = (Song)sortingArray[j];
-                if (artist.compareTo(song2.getArtist()) < 0) {
-                    Object temp = sortingArray[i];
-                    sortingArray[i] = sortingArray[j];
-                    sortingArray[j] = temp;
+        for (int i = 0; i < sortingArray.length - 1; i++) {
+            int min = i;
+            for (int j = i + 1; j < sortingArray.length; j++) {
+                if (((Song)sortingArray[i]).getArtist().compareTo(
+                    ((Song)sortingArray[j]).getArtist()) > 0) {
+                    min = j;
                 }
             }
+            Object temp = sortingArray[i];
+            sortingArray[i] = sortingArray[min];
+            sortingArray[min] = temp;
+        }
+        for (int i = 0; i < sortingArray.length; i++) {
             sorted.add((Song)sortingArray[i]);
         }
         return sorted;
     }
 
 
+    /**
+     * Sorts list alphabetically by song title
+     * 
+     * @return sorted DLList
+     */
     public DLList<Song> sortByTitle() {
         DLList<Song> sorted = new DLList<Song>();
         Object[] sortingArray = songList.toArray();
-        for (int i = 0; i < songList.size(); i++) {
-            Song song1 = (Song)sortingArray[i];
-            String title = song1.getTitle();
-            for (int j = 0; j < songList.size(); j++) {
-                Song song2 = (Song)sortingArray[j];
-                if (title.compareTo(song2.getTitle()) < 0) {
-                    Object temp = sortingArray[i];
-                    sortingArray[i] = sortingArray[j];
-                    sortingArray[j] = temp;
+        for (int i = 0; i < sortingArray.length - 1; i++) {
+            int min = i;
+            for (int j = i + 1; j < sortingArray.length; j++) {
+                if (((Song)sortingArray[i]).getTitle().compareTo(
+                    ((Song)sortingArray[j]).getTitle()) > 0) {
+                    min = j;
                 }
             }
+            Object temp = sortingArray[i];
+            sortingArray[i] = sortingArray[min];
+            sortingArray[min] = temp;
+        }
+        for (int i = 0; i < sortingArray.length; i++) {
             sorted.add((Song)sortingArray[i]);
         }
         return sorted;
     }
 
 
+    /**
+     * Sorts list alphabetically by song date
+     * 
+     * @return sorted DLList
+     */
     public DLList<Song> sortByDate() {
         DLList<Song> sorted = new DLList<Song>();
         Object[] sortingArray = songList.toArray();
-        for (int i = 0; i < songList.size(); i++) {
-            Song song1 = (Song)sortingArray[i];
-            for (int j = 0; j < songList.size(); j++) {
-                Song song2 = (Song)sortingArray[j];
-                if (song1.getDate() < song2.getDate()) {
-                    Object temp = sortingArray[i];
-                    sortingArray[i] = sortingArray[j];
-                    sortingArray[j] = temp;
+        for (int i = 0; i < sortingArray.length - 1; i++) {
+            int min = i;
+            for (int j = i + 1; j < sortingArray.length; j++) {
+                if (((Song)sortingArray[i]).getDate() > ((Song)sortingArray[j])
+                    .getDate()) {
+                    min = j;
                 }
             }
+            Object temp = sortingArray[i];
+            sortingArray[i] = sortingArray[min];
+            sortingArray[min] = temp;
+        }
+        for (int i = 0; i < sortingArray.length; i++) {
             sorted.add((Song)sortingArray[i]);
         }
         return sorted;
@@ -130,18 +158,21 @@ public class Sorter {
      * @return sorted DLList
      */
     public DLList<Student> sortByHobby() {
-        DLList<Student> sorted = new DLList<>();
+        DLList<Student> sorted = new DLList<Student>();
         Object[] sortingArray = studentList.toArray();
-        for (int i = 0; i < studentList.size(); i++) {
-            Student student1 = (Student)sortingArray[i];
-            for (int j = 0; j < studentList.size(); j++) {
-                Student student2 = (Student)sortingArray[j];
-                if (student1.getHobby().compareTo(student2.getHobby()) < 0) {
-                    Object temp = sortingArray[i];
-                    sortingArray[i] = sortingArray[j];
-                    sortingArray[j] = temp;
+        for (int i = 0; i < sortingArray.length - 1; i++) {
+            int min = i;
+            for (int j = i + 1; j < sortingArray.length; j++) {
+                if (((Student)sortingArray[i]).getHobby().compareTo(
+                    ((Student)sortingArray[j]).getHobby()) > 0) {
+                    min = j;
                 }
             }
+            Object temp = sortingArray[i];
+            sortingArray[i] = sortingArray[min];
+            sortingArray[min] = temp;
+        }
+        for (int i = 0; i < sortingArray.length; i++) {
             sorted.add((Student)sortingArray[i]);
         }
         return sorted;
@@ -156,16 +187,19 @@ public class Sorter {
     public DLList<Student> sortByMajor() {
         DLList<Student> sorted = new DLList<Student>();
         Object[] sortingArray = studentList.toArray();
-        for (int i = 0; i < studentList.size(); i++) {
-            Student student1 = (Student)sortingArray[i];
-            for (int j = 0; j < studentList.size(); j++) {
-                Student student2 = (Student)sortingArray[j];
-                if (student1.getMajor().compareTo(student2.getMajor()) < 0) {
-                    Object temp = sortingArray[i];
-                    sortingArray[i] = sortingArray[j];
-                    sortingArray[j] = temp;
+        for (int i = 0; i < sortingArray.length - 1; i++) {
+            int min = i;
+            for (int j = i + 1; j < sortingArray.length; j++) {
+                if (((Student)sortingArray[i]).getMajor().compareTo(
+                    ((Student)sortingArray[j]).getMajor()) > 0) {
+                    min = j;
                 }
             }
+            Object temp = sortingArray[i];
+            sortingArray[i] = sortingArray[min];
+            sortingArray[min] = temp;
+        }
+        for (int i = 0; i < sortingArray.length; i++) {
             sorted.add((Student)sortingArray[i]);
         }
         return sorted;
@@ -180,16 +214,19 @@ public class Sorter {
     public DLList<Student> sortByRegion() {
         DLList<Student> sorted = new DLList<Student>();
         Object[] sortingArray = studentList.toArray();
-        for (int i = 0; i < studentList.size(); i++) {
-            Student student1 = (Student)sortingArray[i];
-            for (int j = 0; j < studentList.size(); j++) {
-                Student student2 = (Student)sortingArray[j];
-                if (student1.getState().compareTo(student2.getState()) < 0) {
-                    Object temp = sortingArray[i];
-                    sortingArray[i] = sortingArray[j];
-                    sortingArray[j] = temp;
+        for (int i = 0; i < sortingArray.length - 1; i++) {
+            int min = i;
+            for (int j = i + 1; j < sortingArray.length; j++) {
+                if (((Student)sortingArray[i]).getState().compareTo(
+                    ((Student)sortingArray[j]).getState()) > 0) {
+                    min = j;
                 }
             }
+            Object temp = sortingArray[i];
+            sortingArray[i] = sortingArray[min];
+            sortingArray[min] = temp;
+        }
+        for (int i = 0; i < sortingArray.length; i++) {
             sorted.add((Student)sortingArray[i]);
         }
         return sorted;
