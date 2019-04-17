@@ -30,6 +30,16 @@ public class Reader {
     private DLList<Student> studentList;
 
 
+    /**
+     * two-argument constructor
+     * 
+     * @param songFileName
+     *            name of the file containing the song information
+     * @param studentFileName
+     *            name of the file containing the student information
+     * @throws FileNotFoundException
+     *             if file cannot be found
+     */
     public Reader(String songFileName, String studentFileName)
         throws FileNotFoundException {
         songList = readSongFile(songFileName);
@@ -37,6 +47,16 @@ public class Reader {
     }
 
 
+    /**
+     * helper-method, returns a DLList of type Song representing the information
+     * in the song file
+     * 
+     * @param fileName
+     *            name of song file
+     * @return DLList representation of song info
+     * @throws FileNotFoundException
+     *             if file cannot be found
+     */
     private DLList<Song> readSongFile(String fileName)
         throws FileNotFoundException {
         Scanner file = new Scanner(new File(fileName));
@@ -58,23 +78,34 @@ public class Reader {
     }
 
 
+    /**
+     * helper-method, returns a DLList of type Student representing the
+     * information in the student file
+     * 
+     * @param fileName
+     *            name of student file
+     * @return DLList representation of student info
+     * @throws FileNotFoundException
+     *             if file cannot be found
+     */
     private DLList<Student> readStudentFile(String fileName)
         throws FileNotFoundException {
         Scanner file = new Scanner(new File(fileName));
         DLList<Student> copy = new DLList<Student>();
         file.nextLine();
-        while(file.hasNextLine()) {
+        while (file.hasNextLine()) {
             String[] info = file.nextLine().split(",");
             String hobby = info[4];
             String major = info[2];
             String region = info[3];
-            String[] songsHeard = new String[info.length-5];
-            String[] songsLiked = new String[info.length-5];
-            for(int i = 5; i < info.length; i += 2) {
-                songsHeard[i-5] = info[i];
-                songsLiked[i-5] = info[i + 1];
+            String[] songsHeard = new String[info.length - 5];
+            String[] songsLiked = new String[info.length - 5];
+            for (int i = 5; i < info.length; i += 2) {
+                songsHeard[i - 5] = info[i];
+                songsLiked[i - 5] = info[i + 1];
             }
-            Student student = new Student(hobby,major,region,songsHeard,songsLiked);
+            Student student = new Student(hobby, major, region, songsHeard,
+                songsLiked);
             copy.add(student);
         }
         file.close();
