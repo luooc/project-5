@@ -11,7 +11,11 @@
 package prj5;
 
 public class SongTest extends student.TestCase {
-    // Fields -----------------------------------------------
+
+    /**
+     * ~ FIELDS ...............................................................
+     */
+
     private Song song;
     private Song otherSong;
     private Song sameSong;
@@ -20,8 +24,10 @@ public class SongTest extends student.TestCase {
 
 
     /**
-     * Sets up variables for testing
+     * Instantiates variables to be used in testing, runs before every test
+     * case
      */
+    @Override
     public void setUp() {
         song = new Song("Title", "Artist", 2000, "Genre");
         otherSong = new Song("Other Title", "Artist", 2000, "Genre");
