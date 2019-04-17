@@ -71,11 +71,73 @@ public class Input {
             System.out.println("Song Artist: " + songs.get(i).getArtist());
             System.out.println("Song Genre: " + songs.get(i).getGenre());
             System.out.println("Song Year: " + songs.get(i).getDate());
-            
+            int j = 0;
+            int art = 0;
+            while (students.get(j).getHobby().equals("art")) {
+                if (students.get(j).getSongsHeard()[i].equals("yes")) {
+                    art++;
+                }
+                j++;
+            }
+
+            int music = 0;
+            while (students.get(j).getHobby().equals("music")) {
+                if (students.get(j).getSongsHeard()[i].equals("yes")) {
+                    music++;
+                }
+                j++;
+            }
+            int sports = 0;
+            while (students.get(j).getHobby().equals("sports")) {
+                if (students.get(j).getSongsHeard()[i].equals("yes")) {
+                    sports++;
+                }
+                j++;
+            }
+            int reading = 0;
+            while (students.get(j).getHobby().equals("reading")) {
+                if (students.get(j).getSongsHeard()[i].equals("yes")) {
+                    reading++;
+                }
+                j++;
+            }
             System.out.println("Heard");
-            System.out.println("");
+            System.out.println("reading:" + reading + " art:" + art + " sports:"
+                + sports + " music:" + music);
+            j = 0;
+            art = 0;
+            while (students.get(j).getHobby().equals("art")) {
+                if (students.get(j).getSongsLiked()[i].equals("yes")) {
+                    art++;
+                }
+                j++;
+            }
+
+            music = 0;
+            while (students.get(j).getHobby().equals("music")) {
+                if (students.get(j).getSongsLiked()[i].equals("yes")) {
+                    music++;
+                }
+                j++;
+            }
+            sports = 0;
+            while (students.get(j).getHobby().equals("sports")) {
+                if (students.get(j).getSongsLiked()[i].equals("yes")) {
+                    sports++;
+                }
+                j++;
+            }
+            reading = 0;
+            while (students.get(j).getHobby().equals("reading")) {
+                if (students.get(j).getSongsLiked()[i].equals("yes")) {
+                    reading++;
+                }
+                j++;
+            }
             System.out.println("Liked");
-            System.out.println("");
+            System.out.println("reading:" + reading + " art:" + art + " sports:"
+                + sports + " music:" + music);
         }
+
     }
 }
