@@ -39,11 +39,9 @@ public class Input {
      * @param args
      *            a String array
      */
-    public static void main(File surveyData, File songList) {
+    public static void main(String studentFile, String songFile) {
         GUIWindow window = new GUIWindow("SongList2018.csv",
             "MusicSurveyData2018.csv");
-        String studentFile = surveyData.getName();
-        String songFile = songList.getName();
 
         Reader reader = null;
         try {
