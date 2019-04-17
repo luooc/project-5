@@ -40,7 +40,7 @@ public class Song {
      * @param date
      *            param for date field
      */
-    public Song(String artist, String title, int date, String genre) {
+    public Song(String title, String artist, int date, String genre) {
         this.artist = artist;
         this.title = title;
         this.genre = genre;
