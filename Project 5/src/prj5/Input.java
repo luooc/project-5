@@ -39,9 +39,9 @@ public class Input {
      * @param args
      *            a String array
      */
-    public static void main(String[] files) {
-        String studentFile = files[0];
-        String songFile = files[1];
+    public static void main(String[] args) {
+        String studentFile = args[0];
+        String songFile = args[1];
         GUIWindow window = new GUIWindow(songFile, studentFile);
 
         Reader reader = null;
@@ -64,13 +64,28 @@ public class Input {
     }
 
 
-    private static void output(DLList<Student> students, DLList<Song> songs) {
-        for (int i = 0; i < songs.size(); i++) {
+    private static void output(DLList<Student> students, DLList<Song> songs)
+    {
+        for (int i = 0; i < songs.size(); i++)
+        {
             System.out.println("Song Title: " + songs.get(i).getTitle());
             System.out.println("Song Artist: " + songs.get(i).getArtist());
             System.out.println("Song Genre: " + songs.get(i).getGenre());
             System.out.println("Song Year: " + songs.get(i).getDate());
-            int j = 0;
+            
+            int[] reading = getPercentage(students, "reading", i);
+            int[] art = getPercentage(students, "art", i);
+            int[] sports = getPercentage(students, "sports", i);
+            int[] music = getPercentage(students, "music", i);
+            
+            System.out.println("Heard");
+            System.out.println("reading:" + reading[1] + " art:" + art[1] + " sports:"
+                + sports[1] + " music:" + music[1]);
+            
+            System.out.println("Likes");
+            System.out.println("reading:" + reading[0] + " art:" + art[0] + " sports:"
+                + sports[0] + " music:" + music[0]);
+            /*int j = 0;
             int art = 0;
             while (students.get(j).getHobby().equals("")) {
                 j++;
@@ -139,7 +154,48 @@ public class Input {
             System.out.println("Liked");
             System.out.println("reading:" + reading + " art:" + art + " sports:"
                 + sports + " music:" + music);
+            */
         }
 
+    }
+    
+    /**
+     * Helper method to find count of students who liked/heard the song
+     * @param students
+     * @param hobby
+     * @param songIndex
+     * @return an array [liked, heard]
+     */
+    private static int[] getPercentage(DLList<Student> students, String hobby, int songIndex)
+    {
+        int totalHobby = 0;
+        int countLiked = 0;
+        int countHeard = 0;
+        
+        for (int i = 0; i < students.size(); i++)
+        {
+            Student check = students.get(i);
+            if (check.getHobby().equals(hobby))
+            {
+                totalHobby++;
+                if (check.getSongsLiked()[songIndex].equals("Yes"))
+                {
+                    countLiked++;
+                }
+                if (check.getSongsHeard()[songIndex].equals("Yes"))
+                {
+                    countHeard++;
+                }
+            }
+        }
+        if (totalHobby == 0)
+        {
+            int[] info = {0, 0};
+            return info;
+        }
+        int percentageLiked = (int)countLiked * 100 / totalHobby;
+        int percentageHeard = (int)countHeard * 100 / totalHobby;
+        int[] info = {percentageLiked, percentageHeard};
+        return info;
     }
 }
