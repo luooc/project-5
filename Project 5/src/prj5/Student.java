@@ -32,14 +32,18 @@ public class Student {
 
 
     /**
-     * Constructor for student object
+     * five-argument constructor
      * 
      * @param hobby
-     *            param for hobby field
+     *            student's hobby
      * @param major
-     *            param for major field
+     *            student's major
      * @param state
-     *            param for state field
+     *            student's state of residence
+     * @param songsHeard
+     *            array of songs that a student has heard
+     * @param songsLiked
+     *            array of songs that a student liked from those they have heard
      */
     public Student(
         String hobby,
@@ -106,10 +110,22 @@ public class Student {
 
 
     /**
-     * Returns a String representation of the Student
+     * Returns a String representation of a Student object.
      * 
-     * @return a String representation of the Student
+     * EX: a Student pupil with the following criteria-
+     * 
+     * arrayHeard = { "Ivy", "Africa", "Silver Soul"}
+     * arrayLiked = {"Ivy", "Silver Soul}
+     * ("Painting", "Neuroscience", "Virginia, "Virginia", arrayHeard,
+     * arrayLiked)
+     * 
+     * pupil.toString() will return "Hobby: Painting Major: Neuroscience State:
+     * Virginia Songs heard: [Ivy, Africa, Silver Soul] Songs liked: [Ivy,
+     * Silver Soul]"
+     * 
+     * @return a String representation of this Student object
      */
+    @Override
     public String toString() {
         return "Hobby: " + hobby + " Major: " + major + " State: " + state
             + " Songs heard: " + Arrays.toString(songsHeard) + "Songs Liked: "
@@ -118,13 +134,14 @@ public class Student {
 
 
     /**
-     * Returns whether or not an object is equal to this student
-     * 2 students are considered equal if their 5 input fields are the same
+     * Compares two Student objects
      * 
      * @param obj
      *            an object to compare against
-     * @return true if they are equals
+     * @return true if hobby, major, state, songsHeard, and songsLiked are
+     *         identical, false if otherwise
      */
+    @Override
     public boolean equals(Object obj) {
         if (obj == null) {
             return false;
