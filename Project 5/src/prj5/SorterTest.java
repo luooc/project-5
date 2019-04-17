@@ -32,8 +32,6 @@ public class SorterTest extends student.TestCase {
     private Student student1;
     private Student student2;
     private Student student3;
-    private DLList<Song> songs;
-    private DLList<Student> students;
     private Sorter sorter;
 
 
@@ -43,8 +41,9 @@ public class SorterTest extends student.TestCase {
      */
     @Override
     public void setUp() {
-        songs = new DLList<Song>();
-        students = new DLList<Student>();
+        private DLList<Song> songs = new DLList<Song>();
+        private DLList<Student> students = new DLList<Student>();
+
         song1 = new Song("R.E.M.", "Ariana Grande", 2018, "Pop");
         song2 = new Song("Morning", "Marc E. Bassy", 2016, "R&B");
         song3 = new Song("I Will Always Love You", "Whitney Houston", 1974,
