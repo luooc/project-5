@@ -10,6 +10,8 @@
 
 package prj5;
 
+import java.util.Arrays;
+
 /**
  * @author Avni Trasi (avnitrasi)
  * @version 2019.04.15
@@ -110,7 +112,7 @@ public class Student {
      */
     public String toString() {
         return "Hobby: " + hobby + " Major: " + major + " State: " + state
-            + " Songs heard: " + Arrays.toString(songsHeard) + "Songs Liked: " 
+            + " Songs heard: " + Arrays.toString(songsHeard) + "Songs Liked: "
             + Arrays.toString(songsLiked);
     }
 
