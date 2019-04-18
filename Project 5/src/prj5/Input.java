@@ -56,27 +56,35 @@ public class Input {
 
         DLList<Student> students = sorter.sortByHobby();
         DLList<Song> songs = sorter.sortByGenre();
-        output(students, songs);
+        output(students, songs, sorter.getSongList());
 
         songs = sorter.sortByTitle();
-        output(students, songs);
-
+        output(students, songs, sorter.getSongList());
     }
 
 
-    private static void output(DLList<Student> students, DLList<Song> songs)
+    private static void output(DLList<Student> students, DLList<Song> songs, DLList<Song> original)
     {
         for (int i = 0; i < songs.size(); i++)
         {
+            int index = 0;
+            for (int j = 0; j < original.size(); j++)
+            {
+                if (songs.get(i).equals(original.get(j)))
+                {
+                    index = j;
+                }
+            }
+            
             System.out.println("Song Title: " + songs.get(i).getTitle());
             System.out.println("Song Artist: " + songs.get(i).getArtist());
             System.out.println("Song Genre: " + songs.get(i).getGenre());
             System.out.println("Song Year: " + songs.get(i).getDate());
             
-            int[] reading = getPercentage(students, "reading", i);
-            int[] art = getPercentage(students, "art", i);
-            int[] sports = getPercentage(students, "sports", i);
-            int[] music = getPercentage(students, "music", i);
+            int[] reading = getPercentage(students, "reading", index);
+            int[] art = getPercentage(students, "art", index);
+            int[] sports = getPercentage(students, "sports", index);
+            int[] music = getPercentage(students, "music", index);
             
             System.out.println("Heard");
             System.out.println("reading:" + reading[1] + " art:" + art[1] + " sports:"
@@ -85,76 +93,6 @@ public class Input {
             System.out.println("Likes");
             System.out.println("reading:" + reading[0] + " art:" + art[0] + " sports:"
                 + sports[0] + " music:" + music[0] + "\n");
-            /*int j = 0;
-            int art = 0;
-            while (students.get(j).getHobby().equals("")) {
-                j++;
-            }
-            while (students.get(j).getHobby().equals("art")) {
-                if (students.get(j).getSongsHeard()[i].equals("Yes")) {
-                    art++;
-                }
-                j++;
-            }
-
-            int music = 0;
-            while (students.get(j).getHobby().equals("music")) {
-                if (students.get(j).getSongsHeard()[i].equals("Yes")) {
-                    music++;
-                }
-                j++;
-            }
-            int sports = 0;
-            while (students.get(j).getHobby().equals("sports")) {
-                if (students.get(j).getSongsHeard()[i].equals("Yes")) {
-                    sports++;
-                }
-                j++;
-            }
-            int reading = 0;
-            while (students.get(j).getHobby().equals("reading")) {
-                if (students.get(j).getSongsHeard()[i].equals("Yes")) {
-                    reading++;
-                }
-                j++;
-            }
-            System.out.println("Heard");
-            System.out.println("reading:" + reading + " art:" + art + " sports:"
-                + sports + " music:" + music);
-            j = 0;
-            art = 0;
-            while (students.get(j).getHobby().equals("art")) {
-                if (students.get(j).getSongsLiked()[i].equals("Yes")) {
-                    art++;
-                }
-                j++;
-            }
-
-            music = 0;
-            while (students.get(j).getHobby().equals("music")) {
-                if (students.get(j).getSongsLiked()[i].equals("Yes")) {
-                    music++;
-                }
-                j++;
-            }
-            sports = 0;
-            while (students.get(j).getHobby().equals("sports")) {
-                if (students.get(j).getSongsLiked()[i].equals("Yes")) {
-                    sports++;
-                }
-                j++;
-            }
-            reading = 0;
-            while (students.get(j).getHobby().equals("reading")) {
-                if (students.get(j).getSongsLiked()[i].equals("Yes")) {
-                    reading++;
-                }
-                j++;
-            }
-            System.out.println("Liked");
-            System.out.println("reading:" + reading + " art:" + art + " sports:"
-                + sports + " music:" + music);
-            */
         }
 
     }
@@ -176,31 +114,35 @@ public class Input {
         for (int i = 0; i < students.size(); i++)
         {
             Student check = students.get(i);
-            if (check.getHobby().equals(hobby))
+            if (check.getHobby() != null && check.getMajor() != null && check.getState() != null)
             {
-                if (check.getSongsLiked()[songIndex] != null)
+                if (check.getHobby().equals(hobby))
                 {
-                    if (check.getSongsLiked()[songIndex].equals("Yes"))
+                    if (check.getSongsLiked()[songIndex] != null)
                     {
-                        yesLiked++;
+                        if (check.getSongsLiked()[songIndex].equals("Yes"))
+                        {
+                            yesLiked++;
+                        }
+                        else if (check.getSongsLiked()[songIndex].equals("No"))
+                        {
+                            noLiked++;
+                        }
                     }
-                    else if (check.getSongsLiked()[songIndex].equals("No"))
+                    if (check.getSongsHeard()[songIndex] != null)
                     {
-                        noLiked++;
-                    }
-                }
-                if (check.getSongsHeard()[songIndex] != null)
-                {
-                    if (check.getSongsHeard()[songIndex].equals("Yes"))
-                    {
-                        yesHeard++;
-                    }
-                    else if (check.getSongsHeard()[songIndex].equals("No"))
-                    {
-                        noHeard++;
+                        if (check.getSongsHeard()[songIndex].equals("Yes"))
+                        {
+                            yesHeard++;
+                        }
+                        else if (check.getSongsHeard()[songIndex].equals("No"))
+                        {
+                            noHeard++;
+                        }
                     }
                 }
             }
+            
         }
         int percentageLiked = 0;
         if (yesLiked != 0)
