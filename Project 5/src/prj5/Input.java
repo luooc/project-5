@@ -56,10 +56,10 @@ public class Input {
 
         DLList<Student> students = sorter.sortByHobby();
         DLList<Song> songs = sorter.sortByGenre();
-        output(students, songs, sorter.getSongList());
+        output(students, songs, reader.getSongs());
 
         songs = sorter.sortByTitle();
-        output(students, songs, sorter.getSongList());
+        output(students, songs, reader.getSongs());
     }
 
 
