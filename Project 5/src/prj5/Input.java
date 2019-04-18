@@ -73,6 +73,7 @@ public class Input {
                 if (songs.get(i).equals(original.get(j)))
                 {
                     index = j;
+                    break;
                 }
             }
             
@@ -99,9 +100,9 @@ public class Input {
     
     /**
      * Helper method to find count of students who liked/heard the song
-     * @param students
+     * @param students the DLList of students to look 
      * @param hobby
-     * @param songIndex
+     * @param songIndex index of the song within the original liked and heard lists
      * @return an array [liked, heard]
      */
     private static int[] getPercentage(DLList<Student> students, String hobby, int songIndex)
@@ -110,11 +111,23 @@ public class Input {
         int yesHeard = 0;
         int noLiked = 0;
         int noHeard = 0;
+        Object[] array = students.toArray();
+        int index = 0;
+        for (int i = 0; i < array.length; i++)
+        {
+            Student student = (Student)array[i];
+            if (student.getSongsLiked().length != 18)
+            {
+                index = i;
+                break;
+            }
+        }
         
         for (int i = 0; i < students.size(); i++)
         {
             Student check = students.get(i);
-            if (check.getHobby() != null && check.getMajor() != null && check.getState() != null)
+            if (check.getHobby() != null && check.getMajor() != null && check.getState() != null
+                && check.getSongsLiked().length > songIndex && check.getSongsHeard().length > songIndex)
             {
                 if (check.getHobby().equals(hobby))
                 {
