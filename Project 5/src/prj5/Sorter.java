@@ -65,6 +65,42 @@ public class Sorter {
 
 
     /**
+     * Recursive helper method to alphabetize a list of genres
+     * 
+     * @param sortingArray
+     *            an array of objects that can be cast as songs
+     * @param i
+     *            the index of an object in sortingArray
+     * @param j
+     *            the index of an object in sortingArray
+     * @param index
+     *            a cursor that keeps track of where in the string the method
+     *            looks at
+     * @return the index of the string that comes first alphabetically
+     */
+    private int alphabetize(Object[] sortingArray, int i, int j, int index) {
+        if (index >= ((Song)sortingArray[i]).getGenre().length()) {
+            return i;
+        }
+        if (index >= ((Song)sortingArray[j]).getGenre().length()) {
+            return j;
+        }
+
+        if (((Song)sortingArray[i]).getGenre().charAt(
+            index) > ((Song)sortingArray[j]).getGenre().charAt(index)) {
+            return j;
+        }
+        else if (((Song)sortingArray[i]).getGenre().charAt(
+            index) == ((Song)sortingArray[j]).getGenre().charAt(index)) {
+            return alphabetize(sortingArray, i, j, index + 1);
+        }
+        else {
+            return i;
+        }
+    }
+
+
+    /**
      * Sorts list alphabetically by song genre
      * 
      * @return sorted DLList
@@ -75,10 +111,7 @@ public class Sorter {
         for (int i = 0; i < sortingArray.length - 1; i++) {
             int min = i;
             for (int j = i + 1; j < sortingArray.length; j++) {
-                if (((Song)sortingArray[i]).getGenre().compareTo(
-                    ((Song)sortingArray[j]).getGenre()) > 0) {
-                    min = j;
-                }
+                min = alphabetize(sortingArray, min, j, 0);
             }
             Object temp = sortingArray[i];
             sortingArray[i] = sortingArray[min];
