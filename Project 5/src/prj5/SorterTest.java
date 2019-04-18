@@ -22,7 +22,6 @@ package prj5;
  */
 public class SorterTest extends student.TestCase {
 
-    
     /**
      * ~ FIELDS ...............................................................
      */
@@ -33,6 +32,8 @@ public class SorterTest extends student.TestCase {
     private Student student2;
     private Student student3;
     private Sorter sorter;
+    private DLList<Song> songs;
+    private DLList<Student> students;
 
 
     /**
@@ -41,8 +42,8 @@ public class SorterTest extends student.TestCase {
      */
     @Override
     public void setUp() {
-        DLList<Song> songs = new DLList<Song>();
-        DLList<Student> students = new DLList<Student>();
+        songs = new DLList<Song>();
+        students = new DLList<Student>();
 
         song1 = new Song("R.E.M.", "Ariana Grande", 2018, "Pop");
         song2 = new Song("Morning", "Marc E. Bassy", 2016, "R&B");
@@ -55,12 +56,28 @@ public class SorterTest extends student.TestCase {
             new String[3], new String[3]);
         student2 = new Student("Singing", "Food Science", "Wisconsin",
             new String[3], new String[3]);
-        student3 = new Student("Animation", "Computer Science",
-            "California", new String[3], new String[3]);
+        student3 = new Student("Animation", "Computer Science", "California",
+            new String[3], new String[3]);
         students.add(student1);
         students.add(student2);
         students.add(student3);
         sorter = new Sorter(songs, students);
+    }
+
+
+    /**
+     * tests getSongList() method
+     */
+    public void testGetSongList() {
+        assertEquals(sorter.getSongList(), (DLList<Song>)songs);
+    }
+
+
+    /**
+     * tests getStudentList() method
+     */
+    public void testGetStudentList() {
+        assertEquals(sorter.getStudentList(), (DLList<Student>)students);
     }
 
 
