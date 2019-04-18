@@ -58,7 +58,7 @@ public class Input {
         DLList<Song> songs = sorter.sortByGenre();
         output(students, songs);
 
-        songs = sorter.sortByTitle();
+        //songs = sorter.sortByTitle();
         output(students, songs);
 
     }
@@ -84,7 +84,7 @@ public class Input {
             
             System.out.println("Likes");
             System.out.println("reading:" + reading[0] + " art:" + art[0] + " sports:"
-                + sports[0] + " music:" + music[0]);
+                + sports[0] + " music:" + music[0] + "\n");
             /*int j = 0;
             int art = 0;
             while (students.get(j).getHobby().equals("")) {
@@ -168,33 +168,51 @@ public class Input {
      */
     private static int[] getPercentage(DLList<Student> students, String hobby, int songIndex)
     {
-        int totalHobby = 0;
-        int countLiked = 0;
-        int countHeard = 0;
+        int yesLiked = 0;
+        int yesHeard = 0;
+        int noLiked = 0;
+        int noHeard = 0;
         
         for (int i = 0; i < students.size(); i++)
         {
             Student check = students.get(i);
             if (check.getHobby().equals(hobby))
             {
-                totalHobby++;
-                if (check.getSongsLiked()[songIndex].equals("Yes"))
+                if (check.getSongsLiked()[songIndex] != null)
                 {
-                    countLiked++;
+                    if (check.getSongsLiked()[songIndex].equals("Yes"))
+                    {
+                        yesLiked++;
+                    }
+                    else if (check.getSongsLiked()[songIndex].equals("No"))
+                    {
+                        noLiked++;
+                    }
                 }
-                if (check.getSongsHeard()[songIndex].equals("Yes"))
+                if (check.getSongsHeard()[songIndex] != null)
                 {
-                    countHeard++;
+                    if (check.getSongsHeard()[songIndex].equals("Yes"))
+                    {
+                        yesHeard++;
+                    }
+                    else if (check.getSongsHeard()[songIndex].equals("No"))
+                    {
+                        noHeard++;
+                    }
                 }
             }
         }
-        if (totalHobby == 0)
+        int percentageLiked = 0;
+        if (yesLiked != 0)
         {
-            int[] info = {0, 0};
-            return info;
+            percentageLiked = (int)(yesLiked * 100 / (yesLiked + noLiked));
         }
-        int percentageLiked = (int)countLiked * 100 / totalHobby;
-        int percentageHeard = (int)countHeard * 100 / totalHobby;
+        
+        int percentageHeard = 0;
+        if (yesHeard != 0)
+        {
+            percentageHeard = (int)(yesHeard * 100 / (yesHeard + noHeard));
+        }
         int[] info = {percentageLiked, percentageHeard};
         return info;
     }
