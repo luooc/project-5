@@ -9,7 +9,7 @@ import student.testingsupport.annotations.Hint;
  * @author margaretellis
  * @version 11-12-2015
  */
-public class InputReferenceTest3 extends student.TestCase {
+public class InputTest extends student.TestCase {
     private String fileName;
     private Scanner fileData;
 
