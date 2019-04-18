@@ -10,7 +10,6 @@
 
 package prj5;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 
 /**
@@ -42,7 +41,6 @@ public class Input {
     public static void main(String[] args) {
         String studentFile = args[0];
         String songFile = args[1];
-        GUIWindow window = new GUIWindow(songFile, studentFile);
 
         Reader reader = null;
         try {
