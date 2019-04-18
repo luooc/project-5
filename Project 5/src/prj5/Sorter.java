@@ -45,6 +45,26 @@ public class Sorter {
 
 
     /**
+     * getter for studentList
+     * 
+     * @return studentList DLList
+     */
+    public DLList<Song> getSongList() {
+        return songList;
+    }
+
+
+    /**
+     * getter for songList
+     * 
+     * @return songList DLList
+     */
+    public DLList<Student> getStudentList() {
+        return studentList;
+    }
+
+
+    /**
      * Sorts list alphabetically by song genre
      * 
      * @return sorted DLList
