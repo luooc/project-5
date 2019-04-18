@@ -58,7 +58,7 @@ public class Input {
         DLList<Song> songs = sorter.sortByGenre();
         output(students, songs);
 
-        //songs = sorter.sortByTitle();
+        songs = sorter.sortByTitle();
         output(students, songs);
 
     }
