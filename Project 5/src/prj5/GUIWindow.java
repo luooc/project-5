@@ -246,6 +246,7 @@ public class GUIWindow {
             this.text = text;
             this.likes = likes;
             this.dislikes = dislikes;
+        }
     }
 
 }
