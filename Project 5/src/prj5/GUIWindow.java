@@ -137,6 +137,7 @@ public class GUIWindow {
      */
     public void clickedArtist(Button button) {
         sorter.sortByArtist();
+        drawGlyph("artist");
     }
 
 
@@ -148,6 +149,7 @@ public class GUIWindow {
      */
     public void clickedTitle(Button button) {
         sorter.sortByTitle();
+        drawGlyph("title");
     }
 
 
@@ -159,6 +161,7 @@ public class GUIWindow {
      */
     public void clickedGenre(Button button) {
         sorter.sortByGenre();
+        drawGlyph("genre");
     }
 
 
@@ -170,6 +173,7 @@ public class GUIWindow {
      */
     public void clickedDate(Button button) {
         sorter.sortByDate();
+        drawGlyph("date");
     }
 
 
