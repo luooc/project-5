@@ -181,6 +181,7 @@ public class GUIWindow {
      */
     public void clickedHobby(Button button) {
         sorter.sortByHobby();
+        drawLegend("hobby");
     }
 
 
@@ -192,6 +193,7 @@ public class GUIWindow {
      */
     public void clickedMajor(Button button) {
         sorter.sortByMajor();
+        drawLegend("major");
     }
 
 
@@ -203,6 +205,7 @@ public class GUIWindow {
      */
     public void clickedState(Button button) {
         sorter.sortByRegion();
+        drawLegend("region");
     }
 
 
