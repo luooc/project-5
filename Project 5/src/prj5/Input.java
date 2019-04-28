@@ -53,11 +53,9 @@ public class Input {
         Sorter sorter = new Sorter(reader.getSongs(), reader.getStudents());
 
         DLList<Student> students = sorter.sortByHobby();
-        DLList<Song> songs = sorter.sortByGenre();
-        output(students, songs, reader.getSongs());
-
-        songs = sorter.sortByTitle();
-        output(students, songs, reader.getSongs());
+        DLList<Song> songs = sorter.sortTitle();
+        
+        GUIWidow window = new GUIWindow(songs,students);
     }
 
 
