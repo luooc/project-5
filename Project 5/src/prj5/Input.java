@@ -50,12 +50,8 @@ public class Input {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        Sorter sorter = new Sorter(reader.getSongs(), reader.getStudents());
-
-        DLList<Student> students = sorter.sortByHobby();
-        DLList<Song> songs = sorter.sortTitle();
         
-        GUIWidow window = new GUIWindow(songs,students);
+        GUIWidow window = new GUIWindow(reader.getSongs, reader.getStudents);
     }
 
 
