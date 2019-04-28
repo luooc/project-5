@@ -135,7 +135,7 @@ public class GUIWindow {
      * @param button
      *            Button that will execute method when clicked
      */
-    public void clikedArtist(Button button) {
+    public void clickedArtist(Button button) {
         sorter.sortByArtist();
     }
 
@@ -179,7 +179,7 @@ public class GUIWindow {
      * @param button
      *            Button that will execute method when clicked
      */
-    public void lickedHobby(Button button) {
+    public void clickedHobby(Button button) {
         sorter.sortByHobby();
     }
 
