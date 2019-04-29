@@ -229,8 +229,11 @@ public class GUIWindow {
      */
     private void drawGlyph(String str) {
         if(str.equals("artist")){
-            for(int i = 0; i < ){
-
+            for(i = glyphIndex; i < glyphIndex + 9; i++){
+                if(i > 0 && i < songs.size()){
+                    s = songs.get(i);
+                    Glyph g = new Glyph(s.getTitle() + "\n by " + s.getArtist(),s.getSongsLiked());
+                }
             }
         }
         else if(str.equals("genre")){
@@ -268,10 +271,9 @@ public class GUIWindow {
     private class Glyph {
         private String text;
         private int[] likes;
-        private int[] dislikes;
 
 
-        public Glyph(String text, int[] likes, int[] dislikes) {
+        public Glyph(String text, int[] likes) {
             this.text = text;
             this.likes = likes;
             this.dislikes = dislikes;
