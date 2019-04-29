@@ -258,6 +258,8 @@ public class GUIWindow {
         }
         
         public void draw(int index){
+            Shape verticalBar = new Shape((col*50) + 75,(row*50) + GLYPH_BAR_WIDTH,GLYPH_BAR_WIDTH*4,GLYPH_BAR_WIDTH,GLYPH_BAR_WIDTH,Color.BLACK);
+            window.addShape(verticalBar);
             int pos = index - glyphIndex;
             int col = pos % 3;
             int row;
@@ -293,11 +295,13 @@ public class GUIWindow {
                     totalHeard++;
                 }
             }
-            Shape bar1 = new Shape((col*50) + 25,(row*50) + GLYPH_BAR_WIDTH,,GLYPH_BAR_WIDTH,Color.MAGENTA);
-            Shape bar2 = new Shape((col*50) + 25,(row*50) + GLYPH_BAR_WIDTH*2,,GLYPH_BAR_WIDTH,Color.BLUE);
-            Shape bar1 = new Shape((col*50) + 25,(row*50) + GLYPH_BAR_WIDTH*3,,GLYPH_BAR_WIDTH,Color.YELLOW);
-            Shape bar2 = new Shape((col*50) + 25,(row*50) + GLYPH_BAR_WIDTH*4,,GLYPH_BAR_WIDTH,Color.GREEN);
-            Shape vertBar = new Shape(,,height,GLYPH_BAR_WIDTH,Color.BLACK);
+            
+            Shape heard = new Shape((col*50) + 25,(row*50) + GLYPH_BAR_WIDTH,(yesHeard/totalHeard),GLYPH_BAR_WIDTH,Color.MAGENTA);
+            Shape liked = new Shape((col*50) + 125,(row*50) + GLYPH_BAR_WIDTH,(yesLiked/totalLiked),GLYPH_BAR_WIDTH,Color.MAGENTA);
+            window.addShape(heard);
+            window.addShape(liked);
+
+           
         }
     }
 
