@@ -100,7 +100,7 @@ public class GUIWindow {
             previous.disable();
         }
         next.enable();
-        drawGlyph();
+        drawGlyphs();
     }
 
 
@@ -118,7 +118,7 @@ public class GUIWindow {
             next.disable();
         }
         previous.enable();
-        drawGlyph();
+        drawGlyphs();
     }
 
 
@@ -130,6 +130,7 @@ public class GUIWindow {
      */
     public void clickedArtist(Button button) {
         sorter.sortByArtist();
+        drawGlyphs();
     }
 
 
@@ -141,6 +142,7 @@ public class GUIWindow {
      */
     public void clickedTitle(Button button) {
         sorter.sortByTitle();
+        drawGlyphs();
     }
 
 
@@ -152,6 +154,7 @@ public class GUIWindow {
      */
     public void clickedGenre(Button button) {
         sorter.sortByGenre();
+        drawGlyphs();
     }
 
 
@@ -163,6 +166,7 @@ public class GUIWindow {
      */
     public void clickedDate(Button button) {
         sorter.sortByDate();
+        drawGlyphs();
     }
 
 
@@ -219,7 +223,8 @@ public class GUIWindow {
     /**
      * draws the glyph representation of the data
      */
-    private void drawGlyph() {
+    private void drawGlyphs() {
+        window.removeAllShapes()
         for(i = glyphIndex; i < glyphIndex + 9; i++){
             if(i > 0 && i < songs.size()){
                 s = songs.get(i);
@@ -227,6 +232,7 @@ public class GUIWindow {
                 g.draw(i % 9);
             }
         }
+        drawLegend(sortedBy);
     }
 
 
