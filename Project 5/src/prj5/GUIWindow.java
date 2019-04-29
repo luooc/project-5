@@ -257,8 +257,8 @@ public class GUIWindow {
             this.likes = likes;
         }
         
-        public void draw(int num){
-            int pos = num - glyphIndex;
+        public void draw(int index){
+            int pos = index - glyphIndex;
             int col = pos % 3;
             int row;
             if(pos < 3){
@@ -271,7 +271,13 @@ public class GUIWindow {
                 row = 2;
             }
             for(int i = 0;i++;i<students.size()){
-                
+                String yesNo = students.get(i).getSongsLiked()[index];
+                if(yesNo.equals("Yes")){
+                    
+                }
+                else if(yesNo.equals("No")){
+
+                }
             }
             Shape bar1 = new Shape((col*50) + 25,(row*50) + GLYPH_BAR_WIDTH,,GLYPH_BAR_WIDTH,Color.MAGENTA);
             Shape bar2 = new Shape((col*50) + 25,(row*50) + GLYPH_BAR_WIDTH*2,,GLYPH_BAR_WIDTH,Color.BLUE);
