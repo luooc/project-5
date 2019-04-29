@@ -240,16 +240,7 @@ public class GUIWindow {
      * draws the key that the user can use to understand the glyphs
      */
     private void drawLegend(String str) {
-        Shape border = new Shape();
-        if(str.equals("hobby")){
-            
-        }
-        else if(str.equals("major")){
 
-        }
-        else{
-            
-        }
     }
 
 
