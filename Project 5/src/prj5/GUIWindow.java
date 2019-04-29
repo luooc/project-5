@@ -270,13 +270,27 @@ public class GUIWindow {
             else{
                 row = 2;
             }
+            int yesLiked = 0;
+            int totalLiked = 0;
+            int yesHeard = 0;
+            int totalHeard = 0;
             for(int i = 0;i++;i<students.size()){
-                String yesNo = students.get(i).getSongsLiked()[index];
-                if(yesNo.equals("Yes")){
-                    
+                String yesNoLiked = students.get(i).getSongsLiked()[index];
+                if(yesNoLiked.equals("Yes")){
+                    yesLiked++;
+                    totalLiked++;
                 }
-                else if(yesNo.equals("No")){
-
+                else if(yesNoLiked.equals("No")){
+                    totalLiked++;
+                }
+                
+                String yesNoHeard = students.get(i).getSongsHeard()[index];
+                if(yesNoHeard.equals("Yes")){
+                    yesHeard++;
+                    totalHeard++;
+                }
+                else if(yesNoHeard.equals("No")){
+                    totalHeard++;
                 }
             }
             Shape bar1 = new Shape((col*50) + 25,(row*50) + GLYPH_BAR_WIDTH,,GLYPH_BAR_WIDTH,Color.MAGENTA);
