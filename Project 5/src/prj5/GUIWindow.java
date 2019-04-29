@@ -36,7 +36,7 @@ public class GUIWindow {
     private Reader reader;
     private Sorter sorter;
     private int glyphIndex;
-
+    private final int GLYPH_BAR_WIDTH = 20;
 
     /**
      * two-argument constructor
@@ -229,7 +229,9 @@ public class GUIWindow {
      */
     private void drawGlyph(String str) {
         if(str.equals("artist")){
-            
+            for(int i = 0; i < ){
+
+            }
         }
         else if(str.equals("genre")){
 
