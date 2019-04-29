@@ -265,7 +265,16 @@ public class GUIWindow {
         }
         
         public void draw(int pos){
-            
+            int row;
+            if(pos > 0 && pos <= 3){
+                row = 1;
+            }
+            else if(pos <= 6){
+                row = 2;
+            }
+            else{
+                row = 3;
+            }
         }
     }
 
