@@ -264,17 +264,25 @@ public class GUIWindow {
             this.likes = likes;
         }
         
-        public void draw(int pos){
+        public void draw(int num){
+            pos = num - glyphIndex;
+            int col = pos % 3;
             int row;
-            if(pos > 0 && pos <= 3){
+            if(pos < 3){
+                row = 0;
+            }
+            else if(pos < 6){
                 row = 1;
             }
-            else if(pos <= 6){
+            else{
                 row = 2;
             }
-            else{
-                row = 3;
-            }
+            
+            Shape bar1 = new Shape((col*50) + 25,(row*50) + GLYPH_BAR_WIDTH,,GLYPH_BAR_WIDTH,Color.MAGENTA);
+            Shape bar2 = new Shape((col*50) + 25,(row*50) + GLYPH_BAR_WIDTH*2,,GLYPH_BAR_WIDTH,Color.BLUE);
+            Shape bar1 = new Shape((col*50) + 25,(row*50) + GLYPH_BAR_WIDTH*3,,GLYPH_BAR_WIDTH,Color.YELLOW);
+            Shape bar2 = new Shape((col*50) + 25,(row*50) + GLYPH_BAR_WIDTH*4,,GLYPH_BAR_WIDTH,Color.GREEN);
+            Shape vertBar = new Shape(,,height,GLYPH_BAR_WIDTH,Color.BLACK);
         }
     }
 
