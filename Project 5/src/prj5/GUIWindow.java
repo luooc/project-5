@@ -227,16 +227,35 @@ public class GUIWindow {
     /**
      * draws the glyph representation of the data
      */
-    private void drawGlyph() {
+    private void drawGlyph(String str) {
+        if(str.equals("artist")){
+            
+        }
+        else if(str.equals("genre")){
 
+        }
+        else if(str.equals("date")){
+
+        }
+        else{
+            
+        }
     }
 
 
     /**
      * draws the key that the user can use to understand the glyphs
      */
-    private void drawLegend() {
+    private void drawLegend(String str) {
+        if(str.equals("hobby")){
+            
+        }
+        else if(str.equals("major")){
 
+        }
+        else{
+            
+        }
     }
 
 
