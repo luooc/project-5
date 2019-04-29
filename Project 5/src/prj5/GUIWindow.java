@@ -46,7 +46,9 @@ public class GUIWindow {
      * @param studentFileName
      *            name of the file containing the student information
      */
-    public GUIWindow(String songFileName, String studentFileName) {
+    public GUIWindow(DLList<Song> songs, DLList<Student> students) {
+        this.songs = songs;
+        this.students = students;
         window = new Window();
         previous = new Button("<- Previous");
         window.addButton(previous, WindowSide.NORTH);
@@ -76,15 +78,6 @@ public class GUIWindow {
         state.onClick(this, "clickedState");
         hobby.onClick(this, "clickedHobby");
 
-        try {
-            reader = new Reader(songFileName, studentFileName);
-        }
-        catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        students = reader.getStudents();
-        songs = reader.getSongs();
         sorter = new Sorter(songs, students);
 
         glyphIndex = 0;
