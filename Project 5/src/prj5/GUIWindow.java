@@ -263,6 +263,12 @@ public class GUIWindow {
         public void draw(int index){
             Shape verticalBar = new Shape((col*50) + 75,(row*50) + GLYPH_BAR_WIDTH,GLYPH_BAR_WIDTH*4,GLYPH_BAR_WIDTH,GLYPH_BAR_WIDTH,Color.BLACK);
             window.addShape(verticalBar);
+            Color[] colors = new Color[4];
+            colors[0] = Color.MAGENTA;
+            colors[1] = Color.BLUE;
+            colors[2] = Color.YELLOW;
+            colors[3] = Color.GREEN;
+            
             int pos = index - glyphIndex;
             int col = pos % 3;
             int row;
@@ -275,37 +281,129 @@ public class GUIWindow {
             else{
                 row = 2;
             }
-            int yesLiked = 0;
-            int totalLiked = 0;
-            int yesHeard = 0;
-            int totalHeard = 0;
-            int i = 0;
-            while(students.get(i).&& i<students.size()){
-                String yesNoLiked = students.get(i).getSongsLiked()[index];
-                if(yesNoLiked.equals("Yes")){
-                    yesLiked++;
-                    totalLiked++;
-                }
-                else if(yesNoLiked.equals("No")){
-                    totalLiked++;
-                }
+            
+            String[] categories = new String[];
+            if(sortedBy.equals("hobby")){
+                categories[0] = "art";
+                categories[1] = "music";
+                categories[2] = "read";
+                categories[3] = "sports";
                 
-                String yesNoHeard = students.get(i).getSongsHeard()[index];
-                if(yesNoHeard.equals("Yes")){
-                    yesHeard++;
-                    totalHeard++;
+                for(int j = 0; j < 4; j++){
+                int yesLiked = 0;
+                int totalLiked = 0;
+                int yesHeard = 0;
+                int totalHeard = 0;
+                
+                int i = 0;
+                while(students.get(i).getHobby() != categories[j]){
+                    String yesNoLiked = students.get(i).getSongsLiked()[index];
+                    if(yesNoLiked.equals("Yes")){
+                        yesLiked++;
+                        totalLiked++;
+                    }
+                    else if(yesNoLiked.equals("No")){
+                        totalLiked++;
+                    }
+                
+                    String yesNoHeard = students.get(i).getSongsHeard()[index];
+                    if(yesNoHeard.equals("Yes")){
+                        yesHeard++;
+                        totalHeard++;
+                    }
+                    else if(yesNoHeard.equals("No")){
+                     totalHeard++;
+                    }
+                    i++;
                 }
-                else if(yesNoHeard.equals("No")){
-                    totalHeard++;
+            
+                Shape heard = new Shape(col,row,heard,GLYPH_BAR_WIDTH,color[j]);
+                Shape liked = new Shape(col,row,liked,GLYPH_BAR_WIDTH,color[j]);
+                window.addShape(heard);
+                window.addShape(liked);
+            }
+            }
+            else if(sortedBy.equals("major")){
+                categories[0] = "Computer Science";
+                categories[1] = "Math or CMDA";
+                categories[2] = "Other";
+                categories[3] = "Other Engineering";
+                
+                for(int j = 0; j < 4; j++){
+                int yesLiked = 0;
+                int totalLiked = 0;
+                int yesHeard = 0;
+                int totalHeard = 0;
+                
+                int i = 0;
+                while(students.get(i).getMajor() != categories[j]){
+                    String yesNoLiked = students.get(i).getSongsLiked()[index];
+                    if(yesNoLiked.equals("Yes")){
+                        yesLiked++;
+                        totalLiked++;
+                    }
+                    else if(yesNoLiked.equals("No")){
+                        totalLiked++;
+                    }
+                
+                    String yesNoHeard = students.get(i).getSongsHeard()[index];
+                    if(yesNoHeard.equals("Yes")){
+                        yesHeard++;
+                        totalHeard++;
+                    }
+                    else if(yesNoHeard.equals("No")){
+                     totalHeard++;
+                    }
+                    i++;
                 }
-                i++;
+            
+                Shape heard = new Shape(col,row,heard,GLYPH_BAR_WIDTH,color[j]);
+                Shape liked = new Shape(col,row,liked,GLYPH_BAR_WIDTH,color[j]);
+                window.addShape(heard);
+                window.addShape(liked);
+            }
+            }
+            else{
+                categories[0] = "Northeast US";
+                categories[1] =  "Southeast US";
+                categories[2] = "outside the US";
+                categories[3] = "the rest of US";
+                for(int j = 0; j < 4; j++){
+                int yesLiked = 0;
+                int totalLiked = 0;
+                int yesHeard = 0;
+                int totalHeard = 0;
+                
+                int i = 0;
+                while(students.get(i).getState() != categories[j]){
+                    String yesNoLiked = students.get(i).getSongsLiked()[index];
+                    if(yesNoLiked.equals("Yes")){
+                        yesLiked++;
+                        totalLiked++;
+                    }
+                    else if(yesNoLiked.equals("No")){
+                        totalLiked++;
+                    }
+                
+                    String yesNoHeard = students.get(i).getSongsHeard()[index];
+                    if(yesNoHeard.equals("Yes")){
+                        yesHeard++;
+                        totalHeard++;
+                    }
+                    else if(yesNoHeard.equals("No")){
+                     totalHeard++;
+                    }
+                    i++;
+                }
+            
+                Shape heard = new Shape(col,row,heard,GLYPH_BAR_WIDTH,color[j]);
+                Shape liked = new Shape(col,row,liked,GLYPH_BAR_WIDTH,color[j]);
+                window.addShape(heard);
+                window.addShape(liked);
+            }
             }
             
-            Shape heard = new Shape((col*50) + 25,(row*50) + GLYPH_BAR_WIDTH,(yesHeard/totalHeard),GLYPH_BAR_WIDTH,Color.MAGENTA);
-            Shape liked = new Shape((col*50) + 125,(row*50) + GLYPH_BAR_WIDTH,(yesLiked/totalLiked),GLYPH_BAR_WIDTH,Color.MAGENTA);
-            window.addShape(heard);
-            window.addShape(liked);
-
+            
            
         }
     }
