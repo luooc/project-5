@@ -37,6 +37,7 @@ public class GUIWindow {
     private Sorter sorter;
     private int glyphIndex;
     private final int GLYPH_BAR_WIDTH = 20;
+    private String sortedBy;
 
     /**
      * two-argument constructor
@@ -50,6 +51,7 @@ public class GUIWindow {
         this.songs = songs;
         this.students = students;
         window = new Window();
+        sortedBy = "";
         previous = new Button("<- Previous");
         window.addButton(previous, WindowSide.NORTH);
         Button artist = new Button("Sort by Artist Name");
@@ -174,7 +176,8 @@ public class GUIWindow {
      */
     public void clickedHobby(Button button) {
         sorter.sortByHobby();
-        drawLegend("hobby");
+        sortedBy = "hobby";
+        drawLegend(sortedBy);
     }
 
 
@@ -186,7 +189,8 @@ public class GUIWindow {
      */
     public void clickedMajor(Button button) {
         sorter.sortByMajor();
-        drawLegend("major");
+        sortedBy = "major";
+        drawLegend(sortedBy);
     }
 
 
@@ -198,7 +202,8 @@ public class GUIWindow {
      */
     public void clickedState(Button button) {
         sorter.sortByRegion();
-        drawLegend("region");
+        sortedBy = "region";
+        drawLegend(sortedBy);
     }
 
 
@@ -276,7 +281,8 @@ public class GUIWindow {
             int totalLiked = 0;
             int yesHeard = 0;
             int totalHeard = 0;
-            for(int i = 0;i++;i<students.size()){
+            int i = 0;
+            while(students.get(i).&& i<students.size()){
                 String yesNoLiked = students.get(i).getSongsLiked()[index];
                 if(yesNoLiked.equals("Yes")){
                     yesLiked++;
@@ -294,6 +300,7 @@ public class GUIWindow {
                 else if(yesNoHeard.equals("No")){
                     totalHeard++;
                 }
+                i++;
             }
             
             Shape heard = new Shape((col*50) + 25,(row*50) + GLYPH_BAR_WIDTH,(yesHeard/totalHeard),GLYPH_BAR_WIDTH,Color.MAGENTA);
