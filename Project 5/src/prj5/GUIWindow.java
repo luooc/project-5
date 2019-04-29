@@ -295,7 +295,6 @@ public class GUIWindow {
                 int yesHeard = 0;
                 int totalHeard = 0;
                 
-                int i = 0;
                 while(students.get(i).getHobby() != categories[j]){
                     String yesNoLiked = students.get(i).getSongsLiked()[index];
                     if(yesNoLiked.equals("Yes")){
@@ -314,7 +313,6 @@ public class GUIWindow {
                     else if(yesNoHeard.equals("No")){
                      totalHeard++;
                     }
-                    i++;
                 }
             
                 Shape heard = new Shape(col*50,row+(j*GLYPH_BAR_WIDTH),(yesHeard/totalHeard)*100,GLYPH_BAR_WIDTH,color[j]);
@@ -322,6 +320,7 @@ public class GUIWindow {
                 window.addShape(heard);
                 window.addShape(liked);
             }
+                
             else if(sortedBy.equals("major")){
                 categories[0] = "Computer Science";
                 categories[1] = "Math or CMDA";
@@ -334,7 +333,6 @@ public class GUIWindow {
                 int yesHeard = 0;
                 int totalHeard = 0;
                 
-                int i = 0;
                 while(students.get(i).getMajor() != categories[j]){
                     String yesNoLiked = students.get(i).getSongsLiked()[index];
                     if(yesNoLiked.equals("Yes")){
@@ -353,7 +351,6 @@ public class GUIWindow {
                     else if(yesNoHeard.equals("No")){
                      totalHeard++;
                     }
-                    i++;
                 }
             
                 Shape heard = new Shape(col*50,row+(j*GLYPH_BAR_WIDTH),(yesHeard/totalHeard)*100,GLYPH_BAR_WIDTH,color[j]);
@@ -361,7 +358,7 @@ public class GUIWindow {
                 window.addShape(heard);
                 window.addShape(liked);
             }
-            }
+
             else{
                 categories[0] = "Northeast US";
                 categories[1] =  "Southeast US";
@@ -373,7 +370,6 @@ public class GUIWindow {
                 int yesHeard = 0;
                 int totalHeard = 0;
                 
-                int i = 0;
                 while(students.get(i).getState() != categories[j]){
                     String yesNoLiked = students.get(i).getSongsLiked()[index];
                     if(yesNoLiked.equals("Yes")){
@@ -392,7 +388,6 @@ public class GUIWindow {
                     else if(yesNoHeard.equals("No")){
                      totalHeard++;
                     }
-                    i++;
                 }
             
                 Shape heard = new Shape(col*50,row+(j*GLYPH_BAR_WIDTH),(yesHeard/totalHeard)*100,GLYPH_BAR_WIDTH,color[j]);
