@@ -51,7 +51,7 @@ public class Input {
             e.printStackTrace();
         }
         
-        GUIWidow window = new GUIWindow(reader.getSongs, reader.getStudents);
+        GUIWindow window = new GUIWindow(reader.getSongs(), reader.getStudents());
     }
 
 
