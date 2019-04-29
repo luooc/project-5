@@ -224,12 +224,13 @@ public class GUIWindow {
      * draws the glyph representation of the data
      */
     private void drawGlyph() {
-            for(i = glyphIndex; i < glyphIndex + 9; i++){
-                if(i > 0 && i < songs.size()){
-                    s = songs.get(i);
-                    Glyph g = new Glyph(s.getTitle() + "\n by " + s.getArtist(),s.getSongsLiked());
-                }
+        for(i = glyphIndex; i < glyphIndex + 9; i++){
+            if(i > 0 && i < songs.size()){
+                s = songs.get(i);
+                Glyph g = new Glyph(s.getTitle() + "\n by " + s.getArtist(),s.getSongsLiked());
+                g.draw
             }
+        }
     }
 
 
@@ -261,7 +262,10 @@ public class GUIWindow {
         public Glyph(String text, int[] likes) {
             this.text = text;
             this.likes = likes;
-            this.dislikes = dislikes;
+        }
+        
+        public void draw(){
+            
         }
     }
 
