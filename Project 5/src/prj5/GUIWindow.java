@@ -258,7 +258,7 @@ public class GUIWindow {
         }
         
         public void draw(int num){
-            pos = num - glyphIndex;
+            int pos = num - glyphIndex;
             int col = pos % 3;
             int row;
             if(pos < 3){
@@ -270,7 +270,9 @@ public class GUIWindow {
             else{
                 row = 2;
             }
-            
+            for(int i = 0;i++;i<students.size()){
+                
+            }
             Shape bar1 = new Shape((col*50) + 25,(row*50) + GLYPH_BAR_WIDTH,,GLYPH_BAR_WIDTH,Color.MAGENTA);
             Shape bar2 = new Shape((col*50) + 25,(row*50) + GLYPH_BAR_WIDTH*2,,GLYPH_BAR_WIDTH,Color.BLUE);
             Shape bar1 = new Shape((col*50) + 25,(row*50) + GLYPH_BAR_WIDTH*3,,GLYPH_BAR_WIDTH,Color.YELLOW);
