@@ -228,7 +228,7 @@ public class GUIWindow {
             if(i > 0 && i < songs.size()){
                 s = songs.get(i);
                 Glyph g = new Glyph(s.getTitle() + "\n by " + s.getArtist(),s.getSongsLiked());
-                g.draw
+                g.draw(i % 9);
             }
         }
     }
@@ -264,7 +264,7 @@ public class GUIWindow {
             this.likes = likes;
         }
         
-        public void draw(){
+        public void draw(int pos){
             
         }
     }
