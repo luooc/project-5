@@ -322,7 +322,6 @@ public class GUIWindow {
                 window.addShape(heard);
                 window.addShape(liked);
             }
-            }
             else if(sortedBy.equals("major")){
                 categories[0] = "Computer Science";
                 categories[1] = "Math or CMDA";
@@ -357,8 +356,8 @@ public class GUIWindow {
                     i++;
                 }
             
-                Shape heard = new Shape(col,row,heard,GLYPH_BAR_WIDTH,color[j]);
-                Shape liked = new Shape(col,row,liked,GLYPH_BAR_WIDTH,color[j]);
+                Shape heard = new Shape(col*50,row+(j*GLYPH_BAR_WIDTH),(yesHeard/totalHeard)*100,GLYPH_BAR_WIDTH,color[j]);
+                Shape liked = new Shape(col*50 + 50,row(j*GLYPH_BAR_WIDTH),(yesLiked/totalLiked)*100,GLYPH_BAR_WIDTH,color[j]);
                 window.addShape(heard);
                 window.addShape(liked);
             }
@@ -396,15 +395,11 @@ public class GUIWindow {
                     i++;
                 }
             
-                Shape heard = new Shape(col,row,heard,GLYPH_BAR_WIDTH,color[j]);
-                Shape liked = new Shape(col,row,liked,GLYPH_BAR_WIDTH,color[j]);
+                Shape heard = new Shape(col*50,row+(j*GLYPH_BAR_WIDTH),(yesHeard/totalHeard)*100,GLYPH_BAR_WIDTH,color[j]);
+                Shape liked = new Shape(col*50 + 50,row(j*GLYPH_BAR_WIDTH),(yesLiked/totalLiked)*100,GLYPH_BAR_WIDTH,color[j]);
                 window.addShape(heard);
                 window.addShape(liked);
             }
-            }
-            
-            
-           
         }
     }
 
