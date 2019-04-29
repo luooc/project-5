@@ -137,7 +137,6 @@ public class GUIWindow {
      */
     public void clickedArtist(Button button) {
         sorter.sortByArtist();
-        drawGlyph("artist");
     }
 
 
@@ -149,7 +148,6 @@ public class GUIWindow {
      */
     public void clickedTitle(Button button) {
         sorter.sortByTitle();
-        drawGlyph("title");
     }
 
 
@@ -161,7 +159,6 @@ public class GUIWindow {
      */
     public void clickedGenre(Button button) {
         sorter.sortByGenre();
-        drawGlyph("genre");
     }
 
 
@@ -173,7 +170,6 @@ public class GUIWindow {
      */
     public void clickedDate(Button button) {
         sorter.sortByDate();
-        drawGlyph("date");
     }
 
 
@@ -227,24 +223,13 @@ public class GUIWindow {
     /**
      * draws the glyph representation of the data
      */
-    private void drawGlyph(String str) {
-        if(str.equals("artist")){
+    private void drawGlyph() {
             for(i = glyphIndex; i < glyphIndex + 9; i++){
                 if(i > 0 && i < songs.size()){
                     s = songs.get(i);
                     Glyph g = new Glyph(s.getTitle() + "\n by " + s.getArtist(),s.getSongsLiked());
                 }
             }
-        }
-        else if(str.equals("genre")){
-
-        }
-        else if(str.equals("date")){
-
-        }
-        else{
-            
-        }
     }
 
 
