@@ -32,7 +32,6 @@ public class GUIWindow {
     private DLList<Song> songs;
     private Button previous;
     private Button next;
-    private Glyph[] glyphs;
     private Reader reader;
     private Sorter sorter;
     private int glyphIndex;
@@ -83,7 +82,6 @@ public class GUIWindow {
         sorter = new Sorter(songs, students);
 
         glyphIndex = 0;
-        glyphs = new Glyph[songs.size()];
     }
 
 
