@@ -262,6 +262,10 @@ public class GUIWindow {
      * PRECONDITION: str is "hobby", "major", or "state"
      * 
      * draws the key that the user can use to understand the glyphs
+     *
+     * @param str
+     *            The string that represents what the students are
+     *            sorted by (e.g. hobby, major,or state)
      */
     private void drawLegend(String str) {
         // variables to reference window's dimensions
@@ -405,7 +409,8 @@ public class GUIWindow {
         /**
          * Constructor for glyph object
          * 
-         * @param text Text to be shown on the glyph
+         * @param text 
+         *          Text to be shown on the glyph
          */
         public Glyph(String songTitle, String songArtist) {
             this.songTitle = songTitle;
