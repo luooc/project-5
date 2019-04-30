@@ -239,7 +239,7 @@ public class GUIWindow {
                 g.draw(i);
             }
         }
-        drawLegend(sortedBy);
+        drawLegend(studentInfo);
     }
 
 
@@ -248,23 +248,22 @@ public class GUIWindow {
      * 
      * draws the key that the user can use to understand the glyphs
      */
-    private void drawLegend(String str) {
-        window.removeAllShapes();
-
+    private void drawLegend(String str)
+    {
         // variables to reference window's dimensions
         int windowWidth = window.getGraphPanelWidth();
         int windowHeight = window.getGraphPanelHeight();
 
         // initializes an empty title for the legend at the correct place in the
         // window
-        title = new TextShape(windowWidth - 112, windowHeight / 2 + 3, "");
+        TextShape title = new TextShape(windowWidth - 112, windowHeight / 2 + 3, "");
 
         // initializes an empty pink, blue, orange, and green text object at the
         // correct place in the window
-        pink = new TextShape(windowWidth - 105, windowHeight / 2 + 20, "");
-        blue = new TextShape(windowWidth - 105, windowHeight / 2 + 34, "");
-        orange = new TextShape(windowWidth - 105, windowHeight / 2 + 49, "");
-        green = new TextShape(windowWidth - 105, windowHeight / 2 + 64, "");
+        TextShape pink = new TextShape(windowWidth - 105, windowHeight / 2 + 20, "");
+        TextShape blue = new TextShape(windowWidth - 105, windowHeight / 2 + 34, "");
+        TextShape orange = new TextShape(windowWidth - 105, windowHeight / 2 + 49, "");
+        TextShape green = new TextShape(windowWidth - 105, windowHeight / 2 + 64, "");
 
         // creates a black rectangle to be placed behind the legend to serve as
         // a black outline
@@ -276,26 +275,26 @@ public class GUIWindow {
             (windowHeight / 2) - 9, Color.WHITE);
 
         // creates a black text for "Song Title" in the legend,
-        songTitle = new TextShape((windowWidth - 93), (windowHeight / 2) + 79,
+        TextShape songTitle = new TextShape((windowWidth - 93), (windowHeight / 2) + 79,
             "Song Title");
         songTitle.setForegroundColor(Color.BLACK);
         songTitle.setBackgroundColor(Color.WHITE);
 
         // creates a rectangle in legend to visualize glyph layout
-        legendGlyphBar = new Shape(windowWidth - songTitle.getWidth() + 8, 250,
+        Shape legendGlyphBar = new Shape(windowWidth - songTitle.getWidth() + 8, 250,
             5, 40, Color.BLACK);
 
         // legendGlyphBar = new Shape(50, 50, 5, legend.getHeight() - songTitle
         // .getY(), Color.BLACK);
 
         // creates a black text for "Heard" in legend for glyph visualization
-        heard = new TextShape(windowWidth - 105, (windowHeight / 2) + 110,
+        TextShape heard = new TextShape(windowWidth - 105, (windowHeight / 2) + 110,
             "Heard");
         heard.setBackgroundColor(Color.WHITE);
         heard.setForegroundColor(Color.BLACK);
 
         // creates a black text for "Likes" in legend for glyph visualization
-        likes = new TextShape(windowWidth - 55, (windowHeight / 2) + 110,
+        TextShape likes = new TextShape(windowWidth - 55, (windowHeight / 2) + 110,
             "Likes");
         likes.setBackgroundColor(Color.WHITE);
         likes.setForegroundColor(Color.BLACK);
