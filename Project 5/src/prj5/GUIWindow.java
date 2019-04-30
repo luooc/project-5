@@ -28,8 +28,7 @@ import java.awt.Color;
  * @version 2019.04.15
  */
 
-public class GUIWindow
-{
+public class GUIWindow {
     private Window window;
     private DLList<Student> students;
     private DLList<Song> songs;
@@ -39,7 +38,7 @@ public class GUIWindow
     private int glyphIndex;
     private final int GLYPH_BAR_WIDTH = 25;
     private String sortedBy;
-    private DLList<Song> originalSongs;
+
 
     /**
      * two-argument constructor
@@ -51,12 +50,11 @@ public class GUIWindow
      */
     public GUIWindow(DLList<Song> songs, DLList<Student> students) {
         this.songs = songs;
-        this.originalSongs = songs;
         this.students = students;
         window = new Window();
         sortedBy = "hobby";
-        
-        //create and add the buttons to the screen
+
+        // create and add the buttons to the screen
         previous = new Button("<- Previous");
         window.addButton(previous, WindowSide.NORTH);
         Button artist = new Button("Sort by Artist Name");
@@ -76,7 +74,7 @@ public class GUIWindow
         Button hobby = new Button("Represent Hobby");
         window.addButton(hobby, WindowSide.SOUTH);
 
-        //link the buttons with their respective onClick methods
+        // link the buttons with their respective onClick methods
         next.onClick(this, "clickedNext");
         previous.onClick(this, "clickedPrevious");
         artist.onClick(this, "clickedArtist");
@@ -99,8 +97,7 @@ public class GUIWindow
      * @param button
      *            Button that will execute method when clicked *
      */
-    public void clickedPrevious(Button button)
-    {
+    public void clickedPrevious(Button button) {
         if (glyphIndex > 8) {
             glyphIndex = glyphIndex - 9;
         }
@@ -109,6 +106,7 @@ public class GUIWindow
         }
         next.enable();
         drawGlyphs();
+        drawLegend(sortedBy);
     }
 
 
@@ -118,9 +116,8 @@ public class GUIWindow
      * @param button
      *            Button that will execute method when clicked
      */
-    public void clickedNext(Button button)
-    {
-        if (glyphIndex < songs.size()) {
+    public void clickedNext(Button button) {
+        if (glyphIndex < songs.size() - 9) {
             glyphIndex = glyphIndex + 9;
         }
         else {
@@ -128,6 +125,7 @@ public class GUIWindow
         }
         previous.enable();
         drawGlyphs();
+        drawLegend(sortedBy);
     }
 
 
@@ -137,10 +135,10 @@ public class GUIWindow
      * @param button
      *            Button that will execute method when clicked
      */
-    public void clickedArtist(Button button)
-    {
+    public void clickedArtist(Button button) {
         songs = sorter.sortByArtist();
         drawGlyphs();
+        drawLegend(sortedBy);
     }
 
 
@@ -150,10 +148,10 @@ public class GUIWindow
      * @param button
      *            Button that will execute method when clicked
      */
-    public void clickedTitle(Button button)
-    {
+    public void clickedTitle(Button button) {
         songs = sorter.sortByTitle();
         drawGlyphs();
+        drawLegend(sortedBy);
     }
 
 
@@ -163,10 +161,10 @@ public class GUIWindow
      * @param button
      *            Button that will execute method when clicked
      */
-    public void clickedGenre(Button button)
-    {
+    public void clickedGenre(Button button) {
         songs = sorter.sortByGenre();
         drawGlyphs();
+        drawLegend(sortedBy);
     }
 
 
@@ -176,10 +174,10 @@ public class GUIWindow
      * @param button
      *            Button that will execute method when clicked
      */
-    public void clickedDate(Button button)
-    {
+    public void clickedDate(Button button) {
         songs = sorter.sortByDate();
         drawGlyphs();
+        drawLegend(sortedBy);
     }
 
 
@@ -189,10 +187,11 @@ public class GUIWindow
      * @param button
      *            Button that will execute method when clicked
      */
-    public void clickedHobby(Button button)
-    {
+    public void clickedHobby(Button button) {
         sortedBy = "hobby";
+        students = sorter.sortByHobby();
         drawGlyphs();
+        drawLegend(sortedBy);
     }
 
 
@@ -202,10 +201,11 @@ public class GUIWindow
      * @param button
      *            Button that will execute method when clicked
      */
-    public void clickedMajor(Button button)
-    {
+    public void clickedMajor(Button button) {
         sortedBy = "major";
+        students = sorter.sortByMajor();
         drawGlyphs();
+        drawLegend(sortedBy);
     }
 
 
@@ -215,10 +215,11 @@ public class GUIWindow
      * @param button
      *            Button that will execute method when clicked
      */
-    public void clickedState(Button button)
-    {
+    public void clickedState(Button button) {
         sortedBy = "region";
+        students = sorter.sortByRegion();
         drawGlyphs();
+        drawLegend(sortedBy);
     }
 
 
@@ -228,8 +229,7 @@ public class GUIWindow
      * @param button
      *            Button that will execute method when clicked
      */
-    public void clickedQuit(Button button)
-    {
+    public void clickedQuit(Button button) {
         System.exit(0);
     }
 
@@ -237,15 +237,12 @@ public class GUIWindow
     /**
      * draws the glyph representation of the data
      */
-    private void drawGlyphs()
-    {
+    private void drawGlyphs() {
         window.removeAllShapes();
-        for (int i = glyphIndex; i < glyphIndex + 9; i++)
-        {
-            if (i >= 0 && i < songs.size())
-            {
-                Song s = songs.get(i);
-                Glyph g = new Glyph(s.getTitle() + "\n by " + s.getArtist());
+        for (int i = glyphIndex; i < glyphIndex + 9; i++) {
+            if (i >= 0 && i < songs.size()) {
+                Glyph g = new Glyph(songs.get(i).getTitle(), songs.get(i)
+                    .getArtist());
                 g.draw(i);
             }
         }
@@ -258,22 +255,26 @@ public class GUIWindow
      * 
      * draws the key that the user can use to understand the glyphs
      */
-    private void drawLegend(String str)
-    {
+    private void drawLegend(String str) {
         // variables to reference window's dimensions
         int windowWidth = window.getGraphPanelWidth();
         int windowHeight = window.getGraphPanelHeight();
 
         // initializes an empty title for the legend at the correct place in the
         // window
-        TextShape title = new TextShape(windowWidth - 112, windowHeight / 2 + 3, "");
+        TextShape title = new TextShape(windowWidth - 112, windowHeight / 2 + 3,
+            "");
 
         // initializes an empty pink, blue, orange, and green text object at the
         // correct place in the window
-        TextShape pink = new TextShape(windowWidth - 105, windowHeight / 2 + 20, "");
-        TextShape blue = new TextShape(windowWidth - 105, windowHeight / 2 + 34, "");
-        TextShape orange = new TextShape(windowWidth - 105, windowHeight / 2 + 49, "");
-        TextShape green = new TextShape(windowWidth - 105, windowHeight / 2 + 64, "");
+        TextShape pink = new TextShape(windowWidth - 105, windowHeight / 2 + 20,
+            "");
+        TextShape blue = new TextShape(windowWidth - 105, windowHeight / 2 + 34,
+            "");
+        TextShape orange = new TextShape(windowWidth - 105, windowHeight / 2
+            + 49, "");
+        TextShape green = new TextShape(windowWidth - 105, windowHeight / 2
+            + 64, "");
 
         // creates a black rectangle to be placed behind the legend to serve as
         // a black outline
@@ -285,27 +286,27 @@ public class GUIWindow
             (windowHeight / 2) - 9, Color.WHITE);
 
         // creates a black text for "Song Title" in the legend,
-        TextShape songTitle = new TextShape((windowWidth - 93), (windowHeight / 2) + 79,
-            "Song Title");
+        TextShape songTitle = new TextShape((windowWidth - 93), (windowHeight
+            / 2) + 79, "Song Title");
         songTitle.setForegroundColor(Color.BLACK);
         songTitle.setBackgroundColor(Color.WHITE);
 
         // creates a rectangle in legend to visualize glyph layout
-        Shape legendGlyphBar = new Shape(windowWidth - songTitle.getWidth() + 8, 250,
-            5, 40, Color.BLACK);
+        Shape legendGlyphBar = new Shape(windowWidth - songTitle.getWidth() + 8,
+            400, 5, 40, Color.BLACK);
 
         // legendGlyphBar = new Shape(50, 50, 5, legend.getHeight() - songTitle
         // .getY(), Color.BLACK);
 
         // creates a black text for "Heard" in legend for glyph visualization
-        TextShape heard = new TextShape(windowWidth - 105, (windowHeight / 2) + 110,
-            "Heard");
+        TextShape heard = new TextShape(windowWidth - 105, (windowHeight / 2)
+            + 110, "Heard");
         heard.setBackgroundColor(Color.WHITE);
         heard.setForegroundColor(Color.BLACK);
 
         // creates a black text for "Likes" in legend for glyph visualization
-        TextShape likes = new TextShape(windowWidth - 55, (windowHeight / 2) + 110,
-            "Likes");
+        TextShape likes = new TextShape(windowWidth - 55, (windowHeight / 2)
+            + 110, "Likes");
         likes.setBackgroundColor(Color.WHITE);
         likes.setForegroundColor(Color.BLACK);
 
@@ -386,16 +387,20 @@ public class GUIWindow
      * ~ INNER GLYPH CLASS ....................................................
      */
     private class Glyph {
-        private String text;
+        private String songTitle;
+        private String songArtist;
         private Color[] colors;
         private String[] categories;
 
+
         /**
          * Constructor for glyph object
-         * @param text 
+         * 
+         * @param text
          */
-        public Glyph(String text) {
-            this.text = text;
+        public Glyph(String songTitle, String songArtist) {
+            this.songTitle = songTitle;
+            this.songArtist = songArtist;
             colors = new Color[4];
             colors[0] = Color.MAGENTA;
             colors[1] = Color.BLUE;
@@ -418,106 +423,99 @@ public class GUIWindow
                 categories[0] = "Northeast";
                 categories[1] = "Southeast";
                 categories[2] = "Outside of United States";
-                categories[3] = "United States (other than Southeast or Northwest)";
+                categories[3] =
+                    "United States (other than Southeast or Northwest)";
             }
         }
 
+
         /**
          * draws the glyph on the window
-         * @param index index in songs of the specified song glyph
+         * 
+         * @param index
+         *            index in songs of the specified song glyph
          */
         public void draw(int index) {
             int pos = index - glyphIndex;
             int col = pos % 3;
-            int row = 0;
+            int row = 2;
             if (pos < 3) {
                 row = 0;
             }
             else if (pos < 6) {
                 row = 1;
             }
-            else {
-                row = 2;
-            }
 
-            //add title and vertical black bar to glyph
+            // add title and vertical black bar to glyph
             Shape verticalBar = new Shape((col * 750) + 150, (row * 325) + 75,
                 GLYPH_BAR_WIDTH, GLYPH_BAR_WIDTH * 4, Color.BLACK);
             window.addShape(verticalBar);
 
-            TextShape title = new TextShape((col * 750) + 50, (row * 325) + 50,
-                text);
-            title.setBackgroundColor(Color.WHITE);
-            window.addShape(title);
+            // add the song info for the glyph
+            TextShape songName = new TextShape((col * 750) + 50, (row * 325)
+                + 30, songTitle);
+            songName.setBackgroundColor(Color.WHITE);
+            window.addShape(songName);
+            TextShape artistName = new TextShape((col * 750) + 50, (row * 325)
+                + 50, "by " + songArtist);
+            artistName.setBackgroundColor(Color.WHITE);
+            window.addShape(artistName);
 
-            //add the colored bars to the glyph
-            for (int j = 0; j < 4; j++)
-            {
-                int songIndex = 0;
-                for (int i = 0; i < originalSongs.size(); i++)
-                {
-                    if (songs.get(index).equals(originalSongs.get(i)))
-                    {
-                        songIndex = i;
-                        break;
-                    }
-                }
-                int[] barWidths = getBarLengths(songIndex, j);
-                int likedWidth = (int)(((double)barWidths[1] / (double)barWidths[3])
-                    * 100.0);
-                int heardWidth = (int)(((double)barWidths[0] / (double)barWidths[2])
-                    * 100.0);
+            // add the colored bars to the glyph
+            for (int j = 0; j < 4; j++) {
+                int[] barWidths = getBarLengths(index, j);
+                int likedWidth = (int)(((double)barWidths[1]
+                    / (double)barWidths[3]) * 100.0);
+                int heardWidth = (int)(((double)barWidths[0]
+                    / (double)barWidths[2]) * 100.0);
                 Shape heard = new Shape((col * 750) + 150 - heardWidth, (row
                     * 325) + GLYPH_BAR_WIDTH * (j + 3), heardWidth,
                     GLYPH_BAR_WIDTH, colors[j]);
                 window.addShape(heard);
-                Shape likes = new Shape((col * 750) + 150 + GLYPH_BAR_WIDTH, (row
-                    * 325) + GLYPH_BAR_WIDTH * (j + 3), likedWidth,
+                Shape likes = new Shape((col * 750) + 150 + GLYPH_BAR_WIDTH,
+                    (row * 325) + GLYPH_BAR_WIDTH * (j + 3), likedWidth,
                     GLYPH_BAR_WIDTH, colors[j]);
                 window.addShape(likes);
             }
         }
 
+
         /**
          * returns an array of the lengths of the bars for the glyphs
+         * 
          * @param songIndex
-         * @param catIndex index of categories to be checked
+         * @param catIndex
+         *            index of categories to be checked
          * @return counts
-         *     counts[0] = yesHeard
-         *     counts[1] = yesLiked
-         *     counts[2] = totalHeard
-         *     counts[3] = totalLiked
+         *         counts[0] = yesHeard
+         *         counts[1] = yesLiked
+         *         counts[2] = totalHeard
+         *         counts[3] = totalLiked
          */
-        private int[] getBarLengths(int songIndex, int catIndex)
-        {
+        private int[] getBarLengths(int songIndex, int catIndex) {
             int[] counts = new int[4];
             int yesHeard = 0;
             int yesLiked = 0;
             int totalHeard = 0;
             int totalLiked = 0;
 
-            //go through the student list and tally heard and liked
-            for (int i = 0; i < students.size(); i++)
-            {
+            // go through the student list and tally heard and liked
+            for (int i = 0; i < students.size(); i++) {
                 Student s = students.get(i);
                 if (getSortedBy(s).equals(categories[catIndex])) {
-                    if (s.getSongsHeard()[songIndex].equals("Yes"))
-                    {
+                    if (s.getSongsHeard()[songIndex].equals("Yes")) {
                         totalHeard++;
                         yesHeard++;
                     }
-                    else if (s.getSongsHeard()[songIndex].equals("No")) 
-                    {
+                    else if (s.getSongsHeard()[songIndex].equals("No")) {
                         totalHeard++;
                     }
 
-                    if (s.getSongsLiked()[songIndex].equals("Yes"))
-                    {
+                    if (s.getSongsLiked()[songIndex].equals("Yes")) {
                         totalLiked++;
                         yesLiked++;
                     }
-                    else if (s.getSongsLiked()[songIndex].equals("No"))
-                    {
+                    else if (s.getSongsLiked()[songIndex].equals("No")) {
                         totalLiked++;
                     }
                 }
@@ -531,19 +529,20 @@ public class GUIWindow
             return counts;
         }
 
+
         /**
          * 
          * @param s
          * @return
          */
         private String getSortedBy(Student s) {
-            if (sortedBy.equals("hobby")) {
+            if (sortedBy.equals("hobby") && s.getHobby() != null) {
                 return s.getHobby();
             }
-            else if (sortedBy.equals("major")) {
+            else if (sortedBy.equals("major") && s.getMajor() != null) {
                 return s.getMajor();
             }
-            else if (sortedBy.equals("region")) {
+            else if (sortedBy.equals("region") && s.getState() != null) {
                 return s.getState();
             }
             else {
