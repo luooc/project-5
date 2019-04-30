@@ -36,8 +36,9 @@ public class GUIWindow {
     private Button next;
     private Sorter sorter;
     private int glyphIndex;
-    private final int GLYPH_BAR_WIDTH = 25;
+    private final int GLYPH_BAR_WIDTH = 15;
     private String sortedBy;
+    private String studentInfo;
 
 
     /**
@@ -53,6 +54,8 @@ public class GUIWindow {
         this.students = students;
         window = new Window();
         sortedBy = "";
+        studentInfo = "hobby";
+        
         previous = new Button("<- Previous");
         window.addButton(previous, WindowSide.NORTH);
         Button artist = new Button("Sort by Artist Name");
@@ -71,6 +74,7 @@ public class GUIWindow {
         window.addButton(state, WindowSide.SOUTH);
         Button hobby = new Button("Represent Hobby");
         window.addButton(hobby, WindowSide.SOUTH);
+        
         next.onClick(this, "clickedNext");
         previous.onClick(this, "clickedPrevious");
         artist.onClick(this, "clickedArtist");
@@ -179,9 +183,8 @@ public class GUIWindow {
      *            Button that will execute method when clicked
      */
     public void clickedHobby(Button button) {
-        sorter.sortByHobby();
-        sortedBy = "hobby";
-        drawLegend(sortedBy);
+        studentInfo = "hobby";
+        drawLegend(studentInfo);
     }
 
 
@@ -191,10 +194,10 @@ public class GUIWindow {
      * @param button
      *            Button that will execute method when clicked
      */
-    public void clickedMajor(Button button) {
-        sorter.sortByMajor();
-        sortedBy = "major";
-        drawLegend(sortedBy);
+    public void clickedMajor(Button button)
+    {
+        studentInfo = "major";
+        drawLegend(studentInfo);
     }
 
 
@@ -204,10 +207,10 @@ public class GUIWindow {
      * @param button
      *            Button that will execute method when clicked
      */
-    public void clickedState(Button button) {
-        sorter.sortByRegion();
-        sortedBy = "region";
-        drawLegend(sortedBy);
+    public void clickedState(Button button)
+    {
+        studentInfo = "region";
+        drawLegend(studentInfo);
     }
 
 
@@ -228,7 +231,7 @@ public class GUIWindow {
     private void drawGlyphs() {
         window.removeAllShapes();
         for (int i = glyphIndex; i < glyphIndex + 9; i++) {
-            if (i > 0 && i < songs.size()) {
+            if (i >= 0 && i < songs.size()) {
                 Song s = songs.get(i);
                 Glyph g = new Glyph(s.getTitle() + "\n by " + s.getArtist());
                 g.draw(i);
@@ -263,19 +266,19 @@ public class GUIWindow {
             colors[2] = Color.YELLOW;
             colors[3] = Color.GREEN;
             categories = new String[4];
-            if (sortedBy.equals("hobby")) {
+            if (studentInfo.equals("hobby")) {
                 categories[0] = "art";
                 categories[1] = "music";
                 categories[2] = "reading";
                 categories[3] = "sports";
             }
-            else if (sortedBy.equals("major")) {
+            else if (studentInfo.equals("major")) {
                 categories[0] = "Computer Science";
                 categories[1] = "Math or CMDA";
                 categories[2] = "Other";
                 categories[3] = "Other Engineering";
             }
-            else if (sortedBy.equals("region")) {
+            else if (studentInfo.equals("region")) {
                 categories[0] = "Northeast US";
                 categories[1] = "Southeast US";
                 categories[2] = "outside the US";
@@ -306,27 +309,33 @@ public class GUIWindow {
                 text);
             window.addShape(title);
 
-            for (int j = 0; j < 4; j++) {
+            for (int j = 0; j < 4; j++)
+            {
                 int yesHeard = 0;
                 int yesLiked = 0;
                 int totalHeard = 0;
                 int totalLiked = 0;
-                for (int i = 0; i < students.size(); i++) {
+                for (int i = 0; i < students.size(); i++)
+                {
                     Student s = students.get(i);
                     if (getSortedBy(s).equals(categories[j])) {
-                        if (s.getSongsHeard()[index].equals("Yes")) {
+                        if (s.getSongsHeard()[index].equals("Yes"))
+                        {
                             totalHeard++;
                             yesHeard++;
                         }
-                        else if (s.getSongsHeard()[index].equals("No")) {
+                        else if (s.getSongsHeard()[index].equals("No")) 
+                        {
                             totalHeard++;
                         }
 
-                        if (s.getSongsLiked()[index].equals("Yes")) {
+                        if (s.getSongsLiked()[index].equals("Yes"))
+                        {
                             totalLiked++;
                             yesLiked++;
                         }
-                        else if (s.getSongsLiked()[index].equals("No")) {
+                        else if (s.getSongsLiked()[index].equals("No"))
+                        {
                             totalLiked++;
                         }
                     }
@@ -349,13 +358,13 @@ public class GUIWindow {
 
 
         private String getSortedBy(Student s) {
-            if (sortedBy.equals("hobby")) {
+            if (studentInfo.equals("hobby")) {
                 return s.getHobby();
             }
-            else if (sortedBy.equals("major")) {
+            else if (studentInfo.equals("major")) {
                 return s.getMajor();
             }
-            else if (sortedBy.equals("region")) {
+            else if (studentInfo.equals("region")) {
                 return s.getState();
             }
             else {
