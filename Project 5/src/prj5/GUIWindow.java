@@ -531,9 +531,12 @@ public class GUIWindow {
 
 
         /**
+         * Returns a student's hobby, major, or region depending on what is
+         * being sorted by
          * 
          * @param s
-         * @return
+         *            a student object
+         * @return the student's hobby, major, or region
          */
         private String getSortedBy(Student s) {
             if (sortedBy.equals("hobby") && s.getHobby() != null) {
