@@ -232,8 +232,7 @@ public class GUIWindow {
      * @param button
      *            Button that will execute method when clicked
      */
-    public void clickedQuit(Button button)
-    {
+    public void clickedQuit(Button button) {
         System.exit(0);
     }
 
@@ -241,10 +240,9 @@ public class GUIWindow {
     /**
      * draws the glyph representation of the data
      */
-    private void drawGlyphs()
-    {
+    private void drawGlyphs() {
         window.removeAllShapes();
-        //draws the 9 glyphs on the screen
+        // draws the 9 glyphs on the screen
         for (int i = glyphIndex; i < glyphIndex + 9; i++) {
             if (i >= 0 && i < songs.size()) {
                 Glyph g = new Glyph(songs.get(i).getTitle(), songs.get(i)
@@ -252,8 +250,8 @@ public class GUIWindow {
                 g.draw(i);
             }
         }
-        
-        //draws the legend on the screen
+
+        // draws the legend on the screen
         drawLegend(sortedBy);
     }
 
@@ -398,8 +396,7 @@ public class GUIWindow {
     /**
      * ~ INNER GLYPH CLASS ....................................................
      */
-    private class Glyph
-    {
+    private class Glyph {
         private String songTitle;
         private String songArtist;
         private Color[] colors;
@@ -409,8 +406,8 @@ public class GUIWindow {
         /**
          * Constructor for glyph object
          * 
-         * @param text 
-         *          Text to be shown on the glyph
+         * @param text
+         *            Text to be shown on the glyph
          */
         public Glyph(String songTitle, String songArtist) {
             this.songTitle = songTitle;
@@ -450,7 +447,7 @@ public class GUIWindow {
          *            index in songs of the specified song glyph
          */
         public void draw(int index) {
-            //get the row and column positions for the glyph
+            // get the row and column positions for the glyph
             int pos = index - glyphIndex;
             int col = pos % 3;
             int row = 2;
@@ -477,8 +474,7 @@ public class GUIWindow {
             window.addShape(artistName);
 
             // add the colored bars to the glyph
-            for (int j = 0; j < 4; j++)
-            {
+            for (int j = 0; j < 4; j++) {
                 int[] barWidths = getBarLengths(index, j);
                 int likedWidth = (int)(((double)barWidths[1]
                     / (double)barWidths[3]) * 100.0);
