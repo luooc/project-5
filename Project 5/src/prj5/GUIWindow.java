@@ -292,8 +292,8 @@ public class GUIWindow {
         songTitle.setBackgroundColor(Color.WHITE);
 
         // creates a rectangle in legend to visualize glyph layout
-        Shape legendGlyphBar = new Shape(windowWidth - songTitle.getWidth() + 8,
-            400, 5, 40, Color.BLACK);
+        Shape legendGlyphBar = new Shape(windowWidth - songTitle.getWidth() + 4,
+            565, 7, 40, Color.BLACK);
 
         // legendGlyphBar = new Shape(50, 50, 5, legend.getHeight() - songTitle
         // .getY(), Color.BLACK);
