@@ -244,9 +244,129 @@ public class GUIWindow {
 
 
     /**
+     * PRECONDITION: str is "hobby", "major", or "state"
+     * 
      * draws the key that the user can use to understand the glyphs
      */
     private void drawLegend(String str) {
+        window.removeAllShapes();
+
+        // variables to reference window's dimensions
+        int windowWidth = window.getGraphPanelWidth();
+        int windowHeight = window.getGraphPanelHeight();
+
+        // initializes an empty title for the legend at the correct place in the
+        // window
+        title = new TextShape(windowWidth - 112, windowHeight / 2 + 3, "");
+
+        // initializes an empty pink, blue, orange, and green text object at the
+        // correct place in the window
+        pink = new TextShape(windowWidth - 105, windowHeight / 2 + 20, "");
+        blue = new TextShape(windowWidth - 105, windowHeight / 2 + 34, "");
+        orange = new TextShape(windowWidth - 105, windowHeight / 2 + 49, "");
+        green = new TextShape(windowWidth - 105, windowHeight / 2 + 64, "");
+
+        // creates a black rectangle to be placed behind the legend to serve as
+        // a black outline
+        Shape border = new Shape(windowWidth - 115, windowHeight / 2, 110,
+            (windowHeight / 2) - 5, Color.BLACK);
+
+        // creates a white rectangle to serve as the legend
+        Shape legend = new Shape(windowWidth - 113, (windowHeight / 2) + 2, 106,
+            (windowHeight / 2) - 9, Color.WHITE);
+
+        // creates a black text for "Song Title" in the legend,
+        songTitle = new TextShape((windowWidth - 93), (windowHeight / 2) + 79,
+            "Song Title");
+        songTitle.setForegroundColor(Color.BLACK);
+        songTitle.setBackgroundColor(Color.WHITE);
+
+        // creates a rectangle in legend to visualize glyph layout
+        legendGlyphBar = new Shape(50, 50, 5, legend.getHeight() - songTitle
+            .getY(), Color.CYAN);
+
+        // creates a black text for "Heard" in legend for glyph visualization
+        heard = new TextShape(windowWidth - 110, (windowHeight / 2) + 110,
+            "Heard");
+        heard.setBackgroundColor(Color.WHITE);
+        heard.setForegroundColor(Color.BLACK);
+
+        // creates a black text for "Likes" in legend for glyph visualization
+        likes = new TextShape(windowWidth - 50, (windowHeight / 2) + 110,
+            "Likes");
+        likes.setBackgroundColor(Color.WHITE);
+        likes.setForegroundColor(Color.BLACK);
+
+        // if input is "hobby", then show legend for Hobby
+        if (str.equals("hobby")) {
+            title.setText("Hobby Legend");
+            title.setForegroundColor(Color.BLACK);
+            title.setBackgroundColor(Color.WHITE);
+            pink.setText("Read");
+            pink.setForegroundColor(Color.MAGENTA);
+            pink.setBackgroundColor(Color.WHITE);
+            blue.setText("Art");
+            blue.setForegroundColor(Color.BLUE);
+            blue.setBackgroundColor(Color.WHITE);
+            orange.setText("Sports");
+            orange.setForegroundColor(Color.ORANGE);
+            orange.setBackgroundColor(Color.WHITE);
+            green.setText("Music");
+            green.setForegroundColor(Color.GREEN);
+            green.setBackgroundColor(Color.WHITE);
+
+        }
+        // if input is "major", then show legend for Major
+        else if (str.equals("major")) {
+            title.setText("Major Legend");
+            title.setForegroundColor(Color.BLACK);
+            title.setBackgroundColor(Color.WHITE);
+            pink.setText("Comp Sci");
+            pink.setForegroundColor(Color.MAGENTA);
+            pink.setBackgroundColor(Color.WHITE);
+            blue.setText("Other Eng");
+            blue.setForegroundColor(Color.BLUE);
+            blue.setBackgroundColor(Color.WHITE);
+            orange.setText("Math/CMDA");
+            orange.setForegroundColor(Color.ORANGE);
+            orange.setBackgroundColor(Color.WHITE);
+            green.setText("Other");
+            green.setForegroundColor(Color.GREEN);
+            green.setBackgroundColor(Color.WHITE);
+
+        }
+        // if input is "Region", then show legend for Region
+        else {
+            title.setText("Region Legend");
+            title.setForegroundColor(Color.BLACK);
+            title.setBackgroundColor(Color.WHITE);
+            pink.setText("N.East");
+            pink.setForegroundColor(Color.MAGENTA);
+            pink.setBackgroundColor(Color.WHITE);
+            blue.setText("S.East");
+            blue.setForegroundColor(Color.BLUE);
+            blue.setBackgroundColor(Color.WHITE);
+            orange.setText("Other US");
+            orange.setForegroundColor(Color.ORANGE);
+            orange.setBackgroundColor(Color.WHITE);
+            green.setText("Other");
+            green.setForegroundColor(Color.GREEN);
+            green.setBackgroundColor(Color.WHITE);
+        }
+
+        // adds everything to window
+        window.addShape(title);
+        window.addShape(pink);
+        window.addShape(blue);
+        window.addShape(orange);
+        window.addShape(green);
+        window.addShape(songTitle);
+        window.addShape(heard);
+        window.addShape(likes);
+        window.addShape(legendGlyphBar);
+        window.moveToFront(legendGlyphBar);
+        window.addShape(legend);
+        window.addShape(border);
 
     }
 
