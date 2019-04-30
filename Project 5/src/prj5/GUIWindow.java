@@ -81,7 +81,7 @@ public class GUIWindow {
         title.onClick(this, "clickedTitle");
         genre.onClick(this, "clickedGenre");
         year.onClick(this, "clickedDate");
-        major.onClick(this, "clickedNext");
+        major.onClick(this, "clickedMajor");
         state.onClick(this, "clickedState");
         hobby.onClick(this, "clickedHobby");
 
