@@ -67,12 +67,14 @@ public class GUIWindow {
         window.addButton(year, WindowSide.NORTH);
         next = new Button("Next ->");
         window.addButton(next, WindowSide.NORTH);
-        Button major = new Button("Represent Major");
-        window.addButton(major, WindowSide.SOUTH);
-        Button state = new Button("Represent State");
-        window.addButton(state, WindowSide.SOUTH);
         Button hobby = new Button("Represent Hobby");
         window.addButton(hobby, WindowSide.SOUTH);
+        Button major = new Button("Represent Major");
+        window.addButton(major, WindowSide.SOUTH);
+        Button state = new Button("Represent Region");
+        window.addButton(state, WindowSide.SOUTH);
+        Button quit = new Button("Quit");
+        window.addButton(quit, WindowSide.SOUTH);
 
         // link the buttons with their respective onClick methods
         next.onClick(this, "clickedNext");
@@ -81,9 +83,10 @@ public class GUIWindow {
         title.onClick(this, "clickedTitle");
         genre.onClick(this, "clickedGenre");
         year.onClick(this, "clickedDate");
+        hobby.onClick(this, "clickedHobby");
         major.onClick(this, "clickedMajor");
         state.onClick(this, "clickedState");
-        hobby.onClick(this, "clickedHobby");
+        quit.onClick(this, "clickedQuit");
 
         sorter = new Sorter(songs, students);
 
@@ -182,7 +185,7 @@ public class GUIWindow {
 
 
     /**
-     * When button is clicked, glyphs are sorted by student hobby
+     * When button is clicked, glyph info shows student hobby
      * 
      * @param button
      *            Button that will execute method when clicked
@@ -196,7 +199,7 @@ public class GUIWindow {
 
 
     /**
-     * When button is clicked, glyphs are sorted by student major
+     * When button is clicked, glyph info shows student major
      * 
      * @param button
      *            Button that will execute method when clicked
@@ -210,7 +213,7 @@ public class GUIWindow {
 
 
     /**
-     * When button is clicked, glyphs are sorted by student's state
+     * When button is clicked, glyph info shows student's state
      * 
      * @param button
      *            Button that will execute method when clicked
@@ -229,7 +232,8 @@ public class GUIWindow {
      * @param button
      *            Button that will execute method when clicked
      */
-    public void clickedQuit(Button button) {
+    public void clickedQuit(Button button)
+    {
         System.exit(0);
     }
 
@@ -237,8 +241,10 @@ public class GUIWindow {
     /**
      * draws the glyph representation of the data
      */
-    private void drawGlyphs() {
+    private void drawGlyphs()
+    {
         window.removeAllShapes();
+        //draws the 9 glyphs on the screen
         for (int i = glyphIndex; i < glyphIndex + 9; i++) {
             if (i >= 0 && i < songs.size()) {
                 Glyph g = new Glyph(songs.get(i).getTitle(), songs.get(i)
@@ -246,6 +252,8 @@ public class GUIWindow {
                 g.draw(i);
             }
         }
+        
+        //draws the legend on the screen
         drawLegend(sortedBy);
     }
 
@@ -386,7 +394,8 @@ public class GUIWindow {
     /**
      * ~ INNER GLYPH CLASS ....................................................
      */
-    private class Glyph {
+    private class Glyph
+    {
         private String songTitle;
         private String songArtist;
         private Color[] colors;
@@ -396,7 +405,7 @@ public class GUIWindow {
         /**
          * Constructor for glyph object
          * 
-         * @param text
+         * @param text Text to be shown on the glyph
          */
         public Glyph(String songTitle, String songArtist) {
             this.songTitle = songTitle;
@@ -436,6 +445,7 @@ public class GUIWindow {
          *            index in songs of the specified song glyph
          */
         public void draw(int index) {
+            //get the row and column positions for the glyph
             int pos = index - glyphIndex;
             int col = pos % 3;
             int row = 2;
@@ -462,7 +472,8 @@ public class GUIWindow {
             window.addShape(artistName);
 
             // add the colored bars to the glyph
-            for (int j = 0; j < 4; j++) {
+            for (int j = 0; j < 4; j++)
+            {
                 int[] barWidths = getBarLengths(index, j);
                 int likedWidth = (int)(((double)barWidths[1]
                     / (double)barWidths[3]) * 100.0);
