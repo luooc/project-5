@@ -184,7 +184,6 @@ public class GUIWindow {
     public void clickedHobby(Button button) {
         studentInfo = "hobby";
         drawGlyphs();
-        drawLegend(studentInfo);
     }
 
 
@@ -198,7 +197,6 @@ public class GUIWindow {
     {
         studentInfo = "major";
         drawGlyphs();
-        drawLegend(studentInfo);
     }
 
 
@@ -212,7 +210,6 @@ public class GUIWindow {
     {
         studentInfo = "region";
         drawGlyphs();
-        drawLegend(studentInfo);
     }
 
 
@@ -402,10 +399,10 @@ public class GUIWindow {
                 categories[3] = "Other Engineering";
             }
             else if (studentInfo.equals("region")) {
-                categories[0] = "Northeast US";
-                categories[1] = "Southeast US";
-                categories[2] = "outside the US";
-                categories[3] = "the rest of US";
+                categories[0] = "Northeast";
+                categories[1] = "Southeast";
+                categories[2] = "Outside of United States";
+                categories[3] = "United States (other than Southeast or Northwest)";
             }
         }
 
