@@ -117,8 +117,8 @@ public class GUIWindow {
      *            Button that will execute method when clicked
      */
     public void clickedNext(Button button) {
-        if (glyphIndex > 8) {
-            glyphIndex = glyphIndex - 9;
+        if (glyphIndex < songs.size()) {
+            glyphIndex = glyphIndex + 9;
         }
         else {
             next.disable();
