@@ -36,7 +36,7 @@ public class GUIWindow {
     private Button next;
     private Sorter sorter;
     private int glyphIndex;
-    private final int GLYPH_BAR_WIDTH = 15;
+    private final int GLYPH_BAR_WIDTH = 25;
     private String sortedBy;
     private String studentInfo;
 
@@ -346,11 +346,11 @@ public class GUIWindow {
                 int heardWidth = (int)(((double)yesHeard / (double)totalHeard)
                     * 100.0);
                 Shape heard = new Shape((col * 750) + 150 - heardWidth, (row
-                    * 325) + GLYPH_BAR_WIDTH * (j + 1), heardWidth,
+                    * 325) + GLYPH_BAR_WIDTH * (j + 3), heardWidth,
                     GLYPH_BAR_WIDTH, colors[j]);
                 window.addShape(heard);
-                Shape likes = new Shape((col * 750) + 150 - likedWidth, (row
-                    * 325) + GLYPH_BAR_WIDTH * (j + 1), likedWidth,
+                Shape likes = new Shape((col * 750) + 150 + GLYPH_BAR_WIDTH, (row
+                    * 325) + GLYPH_BAR_WIDTH * (j + 3), likedWidth,
                     GLYPH_BAR_WIDTH, colors[j]);
                 window.addShape(likes);
             }
