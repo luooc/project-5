@@ -10,13 +10,6 @@
 
 package prj5;
 
-import CS2114.Button;
-import CS2114.Window;
-import CS2114.WindowSide;
-import CS2114.Shape;
-import CS2114.TextShape;
-import java.awt.Color;
-
 /**
  * @author Avni Trasi (avnitrasi)
  * @version 2019.04.15
@@ -28,348 +21,267 @@ import java.awt.Color;
  * @version 2019.04.15
  */
 
-public class GUIWindow {
-    private Window window;
-    private DLList<Student> students;
-    private DLList<Song> songs;
-    private Button previous;
-    private Button next;
-    private Sorter sorter;
-    private int glyphIndex;
-    private final int GLYPH_BAR_WIDTH = 25;
-    private String sortedBy;
-    private String studentInfo;
+public class Sorter {
+
+    /**
+     * ~ FIELDS ...............................................................
+     */
+    private DLList<Song> songList;
+    private DLList<Student> studentList;
 
 
     /**
      * two-argument constructor
      * 
-     * @param songFileName
-     *            name of the file containing the song information
-     * @param studentFileName
-     *            name of the file containing the student information
+     * @param songs
+     *            doubly linked list of Songs
+     * @param students
+     *            doubly linked list of Student
      */
-    public GUIWindow(DLList<Song> songs, DLList<Student> students) {
-        this.songs = songs;
-        this.students = students;
-        window = new Window();
-        sortedBy = "";
-        studentInfo = "hobby";
-        
-        previous = new Button("<- Previous");
-        window.addButton(previous, WindowSide.NORTH);
-        Button artist = new Button("Sort by Artist Name");
-        window.addButton(artist, WindowSide.NORTH);
-        Button title = new Button("Sort by Song Title");
-        window.addButton(title, WindowSide.NORTH);
-        Button genre = new Button("Sort by Genre");
-        window.addButton(genre, WindowSide.NORTH);
-        Button year = new Button("Sort by Release Year");
-        window.addButton(year, WindowSide.NORTH);
-        next = new Button("Next ->");
-        window.addButton(next, WindowSide.NORTH);
-        Button major = new Button("Represent Major");
-        window.addButton(major, WindowSide.SOUTH);
-        Button state = new Button("Represent State");
-        window.addButton(state, WindowSide.SOUTH);
-        Button hobby = new Button("Represent Hobby");
-        window.addButton(hobby, WindowSide.SOUTH);
-        
-        next.onClick(this, "clickedNext");
-        previous.onClick(this, "clickedPrevious");
-        artist.onClick(this, "clickedArtist");
-        title.onClick(this, "clickedTitle");
-        genre.onClick(this, "clickedGenre");
-        year.onClick(this, "clickedDate");
-        major.onClick(this, "clickedNext");
-        state.onClick(this, "clickedState");
-        hobby.onClick(this, "clickedHobby");
-
-        sorter = new Sorter(songs, students);
-
-        glyphIndex = 0;
+    public Sorter(DLList<Song> songs, DLList<Student> students) {
+        songList = songs;
+        studentList = students;
     }
 
 
     /**
-     * Goes to the previous page of glyphs
+     * getter for studentList
      * 
-     * @param button
-     *            Button that will execute method when clicked *
+     * @return studentList DLList
      */
-    @SuppressWarnings("deprecation")
-    public void clickedPrevious(Button button) {
-        if (glyphIndex > 8) {
-            glyphIndex = glyphIndex - 9;
+    public DLList<Song> getSongList() {
+        return songList;
+    }
+
+
+    /**
+     * getter for songList
+     * 
+     * @return songList DLList
+     */
+    public DLList<Student> getStudentList() {
+        return studentList;
+    }
+
+
+    /**
+     * Recursive helper method to alphabetize a list of genres
+     * 
+     * @param sortingArray
+     *            an array of objects that can be cast as songs
+     * @param i
+     *            the index of an object in sortingArray
+     * @param j
+     *            the index of an object in sortingArray
+     * @param index
+     *            a cursor that keeps track of where in the string the method
+     *            looks at
+     * @return the index of the string that comes first alphabetically
+     */
+    private int alphabetize(Object[] sortingArray, int i, int j, int index) {
+        if (index >= ((Song)sortingArray[i]).getGenre().length()) {
+            return i;
+        }
+        if (index >= ((Song)sortingArray[j]).getGenre().length()) {
+            return j;
+        }
+
+        if (((Song)sortingArray[i]).getGenre().charAt(
+            index) > ((Song)sortingArray[j]).getGenre().charAt(index)) {
+            return j;
+        }
+        else if (((Song)sortingArray[i]).getGenre().charAt(
+            index) == ((Song)sortingArray[j]).getGenre().charAt(index)) {
+            return alphabetize(sortingArray, i, j, index + 1);
         }
         else {
-            previous.disable();
+            return i;
         }
-        next.enable();
-        drawGlyphs();
     }
 
 
     /**
-     * Goes to the next page of glyphs
+     * Sorts list alphabetically by song genre
      * 
-     * @param button
-     *            Button that will execute method when clicked
+     * @return sorted DLList
      */
-    public void clickedNext(Button button) {
-        if (glyphIndex < songs.size()) {
-            glyphIndex = glyphIndex + 9;
+    public DLList<Song> sortByGenre() {
+        DLList<Song> sorted = new DLList<Song>();
+        Object[] sortingArray = songList.toArray();
+        for (int i = 0; i < sortingArray.length - 1; i++) {
+            int min = i;
+            for (int j = i + 1; j < sortingArray.length; j++) {
+                min = alphabetize(sortingArray, min, j, 0);
+            }
+            Object temp = sortingArray[i];
+            sortingArray[i] = sortingArray[min];
+            sortingArray[min] = temp;
         }
-        else {
-            next.disable();
+        for (int i = 0; i < sortingArray.length; i++) {
+            sorted.add((Song)sortingArray[i]);
         }
-        previous.enable();
-        drawGlyphs();
+        return sorted;
     }
 
 
     /**
-     * When button is clicked, glyphs are sorted by artist
+     * Sorts list alphabetically by song artist
      * 
-     * @param button
-     *            Button that will execute method when clicked
+     * @return sorted DLList
      */
-    public void clickedArtist(Button button) {
-        songs = sorter.sortByArtist();
-        drawGlyphs();
-    }
-
-
-    /**
-     * When button is clicked, glyphs are sorted by song title
-     * 
-     * @param button
-     *            Button that will execute method when clicked
-     */
-    public void clickedTitle(Button button) {
-        songs = sorter.sortByTitle();
-        drawGlyphs();
-    }
-
-
-    /**
-     * When button is clicked, glyphs are sorted by song genre
-     * 
-     * @param button
-     *            Button that will execute method when clicked
-     */
-    public void clickedGenre(Button button) {
-        songs = sorter.sortByGenre();
-        drawGlyphs();
-    }
-
-
-    /**
-     * When button is clicked, glyphs are sorted by song release date
-     * 
-     * @param button
-     *            Button that will execute method when clicked
-     */
-    public void clickedDate(Button button) {
-        songs = sorter.sortByDate();
-        drawGlyphs();
-    }
-
-
-    /**
-     * When button is clicked, glyphs are sorted by student hobby
-     * 
-     * @param button
-     *            Button that will execute method when clicked
-     */
-    public void clickedHobby(Button button) {
-        studentInfo = "hobby";
-        drawLegend(studentInfo);
-    }
-
-
-    /**
-     * When button is clicked, glyphs are sorted by student major
-     * 
-     * @param button
-     *            Button that will execute method when clicked
-     */
-    public void clickedMajor(Button button)
-    {
-        studentInfo = "major";
-        drawLegend(studentInfo);
-    }
-
-
-    /**
-     * When button is clicked, glyphs are sorted by student's state
-     * 
-     * @param button
-     *            Button that will execute method when clicked
-     */
-    public void clickedState(Button button)
-    {
-        studentInfo = "region";
-        drawLegend(studentInfo);
-    }
-
-
-    /**
-     * When clicked, program is exited and window is closed
-     * 
-     * @param button
-     *            Button that will execute method when clicked
-     */
-    public void clickedQuit(Button button) {
-        System.exit(0);
-    }
-
-
-    /**
-     * draws the glyph representation of the data
-     */
-    private void drawGlyphs() {
-        window.removeAllShapes();
-        for (int i = glyphIndex; i < glyphIndex + 9; i++) {
-            if (i >= 0 && i < songs.size()) {
-                Song s = songs.get(i);
-                Glyph g = new Glyph(s.getTitle() + "\n by " + s.getArtist());
-                g.draw(i);
-            }
-        }
-        drawLegend(sortedBy);
-    }
-
-
-    /**
-     * draws the key that the user can use to understand the glyphs
-     */
-    private void drawLegend(String str) {
-
-    }
-
-
-    /**
-     * ~ INNER GLYPH CLASS ....................................................
-     */
-    private class Glyph {
-        private String text;
-        private Color[] colors;
-        private String[] categories;
-
-
-        public Glyph(String text) {
-            this.text = text;
-            colors = new Color[4];
-            colors[0] = Color.MAGENTA;
-            colors[1] = Color.BLUE;
-            colors[2] = Color.YELLOW;
-            colors[3] = Color.GREEN;
-            categories = new String[4];
-            if (studentInfo.equals("hobby")) {
-                categories[0] = "art";
-                categories[1] = "music";
-                categories[2] = "reading";
-                categories[3] = "sports";
-            }
-            else if (studentInfo.equals("major")) {
-                categories[0] = "Computer Science";
-                categories[1] = "Math or CMDA";
-                categories[2] = "Other";
-                categories[3] = "Other Engineering";
-            }
-            else if (studentInfo.equals("region")) {
-                categories[0] = "Northeast US";
-                categories[1] = "Southeast US";
-                categories[2] = "outside the US";
-                categories[3] = "the rest of US";
-            }
-        }
-
-
-        public void draw(int index) {
-            int pos = index - glyphIndex;
-            int col = pos % 3;
-            int row = 0;
-            if (pos < 3) {
-                row = 0;
-            }
-            else if (pos < 6) {
-                row = 1;
-            }
-            else {
-                row = 2;
-            }
-
-            Shape verticalBar = new Shape((col * 750) + 150, (row * 325) + 75,
-                GLYPH_BAR_WIDTH, GLYPH_BAR_WIDTH * 4, Color.BLACK);
-            window.addShape(verticalBar);
-
-            TextShape title = new TextShape((col * 750) + 50, (row * 325) + 50,
-                text);
-            window.addShape(title);
-
-            for (int j = 0; j < 4; j++)
-            {
-                int yesHeard = 0;
-                int yesLiked = 0;
-                int totalHeard = 0;
-                int totalLiked = 0;
-                for (int i = 0; i < students.size(); i++)
-                {
-                    Student s = students.get(i);
-                    if (getSortedBy(s).equals(categories[j])) {
-                        if (s.getSongsHeard()[index].equals("Yes"))
-                        {
-                            totalHeard++;
-                            yesHeard++;
-                        }
-                        else if (s.getSongsHeard()[index].equals("No")) 
-                        {
-                            totalHeard++;
-                        }
-
-                        if (s.getSongsLiked()[index].equals("Yes"))
-                        {
-                            totalLiked++;
-                            yesLiked++;
-                        }
-                        else if (s.getSongsLiked()[index].equals("No"))
-                        {
-                            totalLiked++;
-                        }
-                    }
-
+    public DLList<Song> sortByArtist() {
+        DLList<Song> sorted = new DLList<Song>();
+        Object[] sortingArray = songList.toArray();
+        for (int i = 0; i < sortingArray.length - 1; i++) {
+            int min = i;
+            for (int j = i + 1; j < sortingArray.length; j++) {
+                if (((Song)sortingArray[i]).getArtist().compareTo(
+                    ((Song)sortingArray[j]).getArtist()) > 0) {
+                    min = j;
                 }
-                int likedWidth = (int)(((double)yesLiked / (double)totalLiked)
-                    * 100.0);
-                int heardWidth = (int)(((double)yesHeard / (double)totalHeard)
-                    * 100.0);
-                Shape heard = new Shape((col * 750) + 150 - heardWidth, (row
-                    * 325) + GLYPH_BAR_WIDTH * (j + 3), heardWidth,
-                    GLYPH_BAR_WIDTH, colors[j]);
-                window.addShape(heard);
-                Shape likes = new Shape((col * 750) + 150 + GLYPH_BAR_WIDTH, (row
-                    * 325) + GLYPH_BAR_WIDTH * (j + 3), likedWidth,
-                    GLYPH_BAR_WIDTH, colors[j]);
-                window.addShape(likes);
             }
+            Object temp = sortingArray[i];
+            sortingArray[i] = sortingArray[min];
+            sortingArray[min] = temp;
         }
+        for (int i = 0; i < sortingArray.length; i++) {
+            sorted.add((Song)sortingArray[i]);
+        }
+        return sorted;
+    }
 
 
-        private String getSortedBy(Student s) {
-            if (studentInfo.equals("hobby")) {
-                return s.getHobby();
+    /**
+     * Sorts list alphabetically by song title
+     * 
+     * @return sorted DLList
+     */
+    public DLList<Song> sortByTitle() {
+        DLList<Song> sorted = new DLList<Song>();
+        Object[] sortingArray = songList.toArray();
+        for (int i = 0; i < sortingArray.length - 1; i++) {
+            int min = i;
+            for (int j = i + 1; j < sortingArray.length; j++) {
+                if (((Song)sortingArray[i]).getTitle().compareTo(
+                    ((Song)sortingArray[j]).getTitle()) > 0) {
+                    min = j;
+                }
             }
-            else if (studentInfo.equals("major")) {
-                return s.getMajor();
-            }
-            else if (studentInfo.equals("region")) {
-                return s.getState();
-            }
-            else {
-                return "";
-            }
+            Object temp = sortingArray[i];
+            sortingArray[i] = sortingArray[min];
+            sortingArray[min] = temp;
         }
+        for (int i = 0; i < sortingArray.length; i++) {
+            sorted.add((Song)sortingArray[i]);
+        }
+        return sorted;
+    }
+
+
+    /**
+     * Sorts list alphabetically by song date
+     * 
+     * @return sorted DLList
+     */
+    public DLList<Song> sortByDate() {
+        DLList<Song> sorted = new DLList<Song>();
+        Object[] sortingArray = songList.toArray();
+        for (int i = 0; i < sortingArray.length - 1; i++) {
+            int min = i;
+            for (int j = i + 1; j < sortingArray.length; j++) {
+                if (((Song)sortingArray[i]).getDate() > ((Song)sortingArray[j])
+                    .getDate()) {
+                    min = j;
+                }
+            }
+            Object temp = sortingArray[i];
+            sortingArray[i] = sortingArray[min];
+            sortingArray[min] = temp;
+        }
+        for (int i = 0; i < sortingArray.length; i++) {
+            sorted.add((Song)sortingArray[i]);
+        }
+        return sorted;
+    }
+
+
+    /**
+     * Sorts list alphabetically by student hobby
+     * 
+     * @return sorted DLList
+     */
+    public DLList<Student> sortByHobby() {
+        DLList<Student> sorted = new DLList<Student>();
+        Object[] sortingArray = studentList.toArray();
+        for (int i = 0; i < sortingArray.length - 1; i++) {
+            int min = i;
+            for (int j = i + 1; j < sortingArray.length; j++) {
+                if (((Student)sortingArray[i]).getHobby().compareTo(
+                    ((Student)sortingArray[j]).getHobby()) > 0) {
+                    min = j;
+                }
+            }
+            Object temp = sortingArray[i];
+            sortingArray[i] = sortingArray[min];
+            sortingArray[min] = temp;
+        }
+        for (int i = 0; i < sortingArray.length; i++) {
+            sorted.add((Student)sortingArray[i]);
+        }
+        return sorted;
+    }
+
+
+    /**
+     * Sorts list alphabetically by student major
+     * 
+     * @return sorted DLList
+     */
+    public DLList<Student> sortByMajor() {
+        DLList<Student> sorted = new DLList<Student>();
+        Object[] sortingArray = studentList.toArray();
+        for (int i = 0; i < sortingArray.length - 1; i++) {
+            int min = i;
+            for (int j = i + 1; j < sortingArray.length; j++) {
+                if (((Student)sortingArray[i]).getMajor().compareTo(
+                    ((Student)sortingArray[j]).getMajor()) > 0) {
+                    min = j;
+                }
+            }
+            Object temp = sortingArray[i];
+            sortingArray[i] = sortingArray[min];
+            sortingArray[min] = temp;
+        }
+        for (int i = 0; i < sortingArray.length; i++) {
+            sorted.add((Student)sortingArray[i]);
+        }
+        return sorted;
+    }
+
+
+    /**
+     * Sorts list alphabetically by student home state
+     * 
+     * @return sorted DLList
+     */
+    public DLList<Student> sortByRegion() {
+        DLList<Student> sorted = new DLList<Student>();
+        Object[] sortingArray = studentList.toArray();
+        for (int i = 0; i < sortingArray.length - 1; i++) {
+            int min = i;
+            for (int j = i + 1; j < sortingArray.length; j++) {
+                if (((Student)sortingArray[i]).getState().compareTo(
+                    ((Student)sortingArray[j]).getState()) > 0) {
+                    min = j;
+                }
+            }
+            Object temp = sortingArray[i];
+            sortingArray[i] = sortingArray[min];
+            sortingArray[min] = temp;
+        }
+        for (int i = 0; i < sortingArray.length; i++) {
+            sorted.add((Student)sortingArray[i]);
+        }
+        return sorted;
     }
 }
