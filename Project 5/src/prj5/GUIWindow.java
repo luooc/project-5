@@ -28,7 +28,8 @@ import java.awt.Color;
  * @version 2019.04.15
  */
 
-public class GUIWindow {
+public class GUIWindow
+{
     private Window window;
     private DLList<Student> students;
     private DLList<Song> songs;
@@ -38,8 +39,7 @@ public class GUIWindow {
     private int glyphIndex;
     private final int GLYPH_BAR_WIDTH = 25;
     private String sortedBy;
-    private String studentInfo;
-
+    private DLList<Song> originalSongs;
 
     /**
      * two-argument constructor
@@ -51,11 +51,12 @@ public class GUIWindow {
      */
     public GUIWindow(DLList<Song> songs, DLList<Student> students) {
         this.songs = songs;
+        this.originalSongs = songs;
         this.students = students;
         window = new Window();
-        sortedBy = "";
-        studentInfo = "hobby";
+        sortedBy = "hobby";
         
+        //create and add the buttons to the screen
         previous = new Button("<- Previous");
         window.addButton(previous, WindowSide.NORTH);
         Button artist = new Button("Sort by Artist Name");
@@ -74,7 +75,8 @@ public class GUIWindow {
         window.addButton(state, WindowSide.SOUTH);
         Button hobby = new Button("Represent Hobby");
         window.addButton(hobby, WindowSide.SOUTH);
-        
+
+        //link the buttons with their respective onClick methods
         next.onClick(this, "clickedNext");
         previous.onClick(this, "clickedPrevious");
         artist.onClick(this, "clickedArtist");
@@ -97,7 +99,8 @@ public class GUIWindow {
      * @param button
      *            Button that will execute method when clicked *
      */
-    public void clickedPrevious(Button button) {
+    public void clickedPrevious(Button button)
+    {
         if (glyphIndex > 8) {
             glyphIndex = glyphIndex - 9;
         }
@@ -115,7 +118,8 @@ public class GUIWindow {
      * @param button
      *            Button that will execute method when clicked
      */
-    public void clickedNext(Button button) {
+    public void clickedNext(Button button)
+    {
         if (glyphIndex < songs.size()) {
             glyphIndex = glyphIndex + 9;
         }
@@ -133,7 +137,8 @@ public class GUIWindow {
      * @param button
      *            Button that will execute method when clicked
      */
-    public void clickedArtist(Button button) {
+    public void clickedArtist(Button button)
+    {
         songs = sorter.sortByArtist();
         drawGlyphs();
     }
@@ -145,7 +150,8 @@ public class GUIWindow {
      * @param button
      *            Button that will execute method when clicked
      */
-    public void clickedTitle(Button button) {
+    public void clickedTitle(Button button)
+    {
         songs = sorter.sortByTitle();
         drawGlyphs();
     }
@@ -157,7 +163,8 @@ public class GUIWindow {
      * @param button
      *            Button that will execute method when clicked
      */
-    public void clickedGenre(Button button) {
+    public void clickedGenre(Button button)
+    {
         songs = sorter.sortByGenre();
         drawGlyphs();
     }
@@ -169,7 +176,8 @@ public class GUIWindow {
      * @param button
      *            Button that will execute method when clicked
      */
-    public void clickedDate(Button button) {
+    public void clickedDate(Button button)
+    {
         songs = sorter.sortByDate();
         drawGlyphs();
     }
@@ -181,8 +189,9 @@ public class GUIWindow {
      * @param button
      *            Button that will execute method when clicked
      */
-    public void clickedHobby(Button button) {
-        studentInfo = "hobby";
+    public void clickedHobby(Button button)
+    {
+        sortedBy = "hobby";
         drawGlyphs();
     }
 
@@ -195,7 +204,7 @@ public class GUIWindow {
      */
     public void clickedMajor(Button button)
     {
-        studentInfo = "major";
+        sortedBy = "major";
         drawGlyphs();
     }
 
@@ -208,7 +217,7 @@ public class GUIWindow {
      */
     public void clickedState(Button button)
     {
-        studentInfo = "region";
+        sortedBy = "region";
         drawGlyphs();
     }
 
@@ -219,7 +228,8 @@ public class GUIWindow {
      * @param button
      *            Button that will execute method when clicked
      */
-    public void clickedQuit(Button button) {
+    public void clickedQuit(Button button)
+    {
         System.exit(0);
     }
 
@@ -227,16 +237,19 @@ public class GUIWindow {
     /**
      * draws the glyph representation of the data
      */
-    private void drawGlyphs() {
+    private void drawGlyphs()
+    {
         window.removeAllShapes();
-        for (int i = glyphIndex; i < glyphIndex + 9; i++) {
-            if (i >= 0 && i < songs.size()) {
+        for (int i = glyphIndex; i < glyphIndex + 9; i++)
+        {
+            if (i >= 0 && i < songs.size())
+            {
                 Song s = songs.get(i);
                 Glyph g = new Glyph(s.getTitle() + "\n by " + s.getArtist());
                 g.draw(i);
             }
         }
-        drawLegend(studentInfo);
+        drawLegend(sortedBy);
     }
 
 
@@ -377,7 +390,10 @@ public class GUIWindow {
         private Color[] colors;
         private String[] categories;
 
-
+        /**
+         * Constructor for glyph object
+         * @param text 
+         */
         public Glyph(String text) {
             this.text = text;
             colors = new Color[4];
@@ -386,19 +402,19 @@ public class GUIWindow {
             colors[2] = Color.YELLOW;
             colors[3] = Color.GREEN;
             categories = new String[4];
-            if (studentInfo.equals("hobby")) {
+            if (sortedBy.equals("hobby")) {
                 categories[0] = "art";
                 categories[1] = "music";
                 categories[2] = "reading";
                 categories[3] = "sports";
             }
-            else if (studentInfo.equals("major")) {
+            else if (sortedBy.equals("major")) {
                 categories[0] = "Computer Science";
                 categories[1] = "Math or CMDA";
                 categories[2] = "Other";
                 categories[3] = "Other Engineering";
             }
-            else if (studentInfo.equals("region")) {
+            else if (sortedBy.equals("region")) {
                 categories[0] = "Northeast";
                 categories[1] = "Southeast";
                 categories[2] = "Outside of United States";
@@ -424,22 +440,23 @@ public class GUIWindow {
                 row = 2;
             }
 
+            //add title and vertical black bar to glyph
             Shape verticalBar = new Shape((col * 750) + 150, (row * 325) + 75,
                 GLYPH_BAR_WIDTH, GLYPH_BAR_WIDTH * 4, Color.BLACK);
             window.addShape(verticalBar);
 
             TextShape title = new TextShape((col * 750) + 50, (row * 325) + 50,
                 text);
+            title.setBackgroundColor(Color.WHITE);
             window.addShape(title);
 
-            
+            //add the colored bars to the glyph
             for (int j = 0; j < 4; j++)
             {
-                Student refStudent = students.get(0);
                 int songIndex = 0;
-                for (int i = 0; i < refStudent.getSongsHeard().length; i++)
+                for (int i = 0; i < originalSongs.size(); i++)
                 {
-                    if (songs.get(index).getTitle().equals(refStudent.getSongsHeard()[i]))
+                    if (songs.get(index).equals(originalSongs.get(i)))
                     {
                         songIndex = i;
                         break;
@@ -460,16 +477,16 @@ public class GUIWindow {
                 window.addShape(likes);
             }
         }
-        
+
         /**
          * returns an array of the lengths of the bars for the glyphs
-         * counts[0] = yesHeard
-         * counts[1] = yesLiked
-         * counts[2] = totalHeard
-         * counts[3] = totalLiked
          * @param songIndex
          * @param catIndex index of categories to be checked
-         * @return
+         * @return counts
+         *     counts[0] = yesHeard
+         *     counts[1] = yesLiked
+         *     counts[2] = totalHeard
+         *     counts[3] = totalLiked
          */
         private int[] getBarLengths(int songIndex, int catIndex)
         {
@@ -478,6 +495,8 @@ public class GUIWindow {
             int yesLiked = 0;
             int totalHeard = 0;
             int totalLiked = 0;
+
+            //go through the student list and tally heard and liked
             for (int i = 0; i < students.size(); i++)
             {
                 Student s = students.get(i);
@@ -508,18 +527,23 @@ public class GUIWindow {
             counts[1] = yesLiked;
             counts[2] = totalHeard;
             counts[3] = totalLiked;
-            
+
             return counts;
         }
 
+        /**
+         * 
+         * @param s
+         * @return
+         */
         private String getSortedBy(Student s) {
-            if (studentInfo.equals("hobby")) {
+            if (sortedBy.equals("hobby")) {
                 return s.getHobby();
             }
-            else if (studentInfo.equals("major")) {
+            else if (sortedBy.equals("major")) {
                 return s.getMajor();
             }
-            else if (studentInfo.equals("region")) {
+            else if (sortedBy.equals("region")) {
                 return s.getState();
             }
             else {
