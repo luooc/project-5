@@ -36,7 +36,7 @@ public class GUIWindow {
     private Button next;
     private Sorter sorter;
     private int glyphIndex;
-    private final int GLYPH_BAR_WIDTH = 20;
+    private final int GLYPH_BAR_WIDTH = 25;
     private String sortedBy;
 
 
@@ -266,7 +266,7 @@ public class GUIWindow {
             if (sortedBy.equals("hobby")) {
                 categories[0] = "art";
                 categories[1] = "music";
-                categories[2] = "read";
+                categories[2] = "reading";
                 categories[3] = "sports";
             }
             else if (sortedBy.equals("major")) {
@@ -287,7 +287,7 @@ public class GUIWindow {
         public void draw(int index) {
             int pos = index - glyphIndex;
             int col = pos % 3;
-            int row;
+            int row = 0;
             if (pos < 3) {
                 row = 0;
             }
@@ -298,21 +298,19 @@ public class GUIWindow {
                 row = 2;
             }
 
-            Shape verticalBar = new Shape((col * 50) + 50, (row * 50)
-                + GLYPH_BAR_WIDTH, GLYPH_BAR_WIDTH * 4, GLYPH_BAR_WIDTH,
-                Color.BLACK);
+            Shape verticalBar = new Shape((col * 750) + 150, (row * 325) + 75,
+                GLYPH_BAR_WIDTH, GLYPH_BAR_WIDTH * 4, Color.BLACK);
             window.addShape(verticalBar);
 
-            TextShape title = new TextShape((col * 50) + 25, (row * 50) + 25,
+            TextShape title = new TextShape((col * 750) + 50, (row * 325) + 50,
                 text);
             window.addShape(title);
 
-            int yesHeard = 0;
-            int yesLiked = 0;
-            int totalHeard = 0;
-            int totalLiked = 0;
-
             for (int j = 0; j < 4; j++) {
+                int yesHeard = 0;
+                int yesLiked = 0;
+                int totalHeard = 0;
+                int totalLiked = 0;
                 for (int i = 0; i < students.size(); i++) {
                     Student s = students.get(i);
                     if (getSortedBy(s).equals(categories[j])) {
@@ -334,12 +332,16 @@ public class GUIWindow {
                     }
 
                 }
-                Shape heard = new Shape((col * 50) + 25, (row * 50)
-                    + GLYPH_BAR_WIDTH * (j + 1), (yesHeard / totalHeard) * 10,
+                int likedWidth = (int)(((double)yesLiked / (double)totalLiked)
+                    * 100.0);
+                int heardWidth = (int)(((double)yesHeard / (double)totalHeard)
+                    * 100.0);
+                Shape heard = new Shape((col * 750) + 150 - heardWidth, (row
+                    * 325) + GLYPH_BAR_WIDTH * (j + 1), heardWidth,
                     GLYPH_BAR_WIDTH, colors[j]);
                 window.addShape(heard);
-                Shape likes = new Shape((col * 50) + 75, (row * 50)
-                    + GLYPH_BAR_WIDTH * (j + 1), (yesLiked / totalLiked) * 10,
+                Shape likes = new Shape((col * 750) + 150 - likedWidth, (row
+                    * 325) + GLYPH_BAR_WIDTH * (j + 1), likedWidth,
                     GLYPH_BAR_WIDTH, colors[j]);
                 window.addShape(likes);
             }
