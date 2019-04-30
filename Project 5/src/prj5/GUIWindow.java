@@ -131,7 +131,7 @@ public class GUIWindow {
      *            Button that will execute method when clicked
      */
     public void clickedArtist(Button button) {
-        sorter.sortByArtist();
+        songs = sorter.sortByArtist();
         drawGlyphs();
     }
 
@@ -143,7 +143,7 @@ public class GUIWindow {
      *            Button that will execute method when clicked
      */
     public void clickedTitle(Button button) {
-        sorter.sortByTitle();
+        songs = sorter.sortByTitle();
         drawGlyphs();
     }
 
@@ -155,7 +155,7 @@ public class GUIWindow {
      *            Button that will execute method when clicked
      */
     public void clickedGenre(Button button) {
-        sorter.sortByGenre();
+        songs = sorter.sortByGenre();
         drawGlyphs();
     }
 
@@ -167,7 +167,7 @@ public class GUIWindow {
      *            Button that will execute method when clicked
      */
     public void clickedDate(Button button) {
-        sorter.sortByDate();
+        songs = sorter.sortByDate();
         drawGlyphs();
     }
 
