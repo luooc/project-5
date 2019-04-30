@@ -76,23 +76,47 @@ public class Sorter {
      * @param index
      *            a cursor that keeps track of where in the string the method
      *            looks at
+     * @param sortedBy
+     *            a String representing what the array is being sorted by
      * @return the index of the string that comes first alphabetically
      */
-    private int alphabetize(Object[] sortingArray, int i, int j, int index) {
-        if (index >= ((Song)sortingArray[i]).getGenre().length()) {
+    private int alphabetize(
+        Object[] sortingArray,
+        int i,
+        int j,
+        int index,
+        String sortedBy) {
+        // Casts the songs to get the titles, genres, or artists
+        Song song1 = (Song)sortingArray[i];
+        Song song2 = (Song)sortingArray[j];
+        String sorter1 = "";
+        String sorter2 = "";
+        if (sortedBy.equals("title")) {
+            sorter1 = song1.getTitle();
+            sorter2 = song2.getTitle();
+        }
+        else if (sortedBy.equals("genre")) {
+            sorter1 = song1.getGenre();
+            sorter2 = song2.getGenre();
+        }
+        else if (sortedBy.equals("artist")) {
+            sorter1 = song1.getArtist();
+            sorter2 = song2.getArtist();
+        }
+
+        // Finds out which comes first alphabetically
+        if (index >= sorter1.length()) {
             return i;
         }
-        if (index >= ((Song)sortingArray[j]).getGenre().length()) {
+        if (index >= sorter2.length()) {
             return j;
         }
 
-        if (((Song)sortingArray[i]).getGenre().charAt(
-            index) > ((Song)sortingArray[j]).getGenre().charAt(index)) {
+        if (sorter1.charAt(index) > sorter2.charAt(index)) {
             return j;
         }
-        else if (((Song)sortingArray[i]).getGenre().charAt(
-            index) == ((Song)sortingArray[j]).getGenre().charAt(index)) {
-            return alphabetize(sortingArray, i, j, index + 1);
+        else if (sorter1.charAt(index) == sorter2.charAt(index)) {
+            return alphabetize(sortingArray, i, j, index + 1, sortedBy);
         }
         else {
             return i;
@@ -111,7 +135,7 @@ public class Sorter {
         for (int i = 0; i < sortingArray.length - 1; i++) {
             int min = i;
             for (int j = i + 1; j < sortingArray.length; j++) {
-                min = alphabetize(sortingArray, min, j, 0);
+                min = alphabetize(sortingArray, min, j, 0, "genre");
             }
             Object temp = sortingArray[i];
             sortingArray[i] = sortingArray[min];
@@ -135,10 +159,7 @@ public class Sorter {
         for (int i = 0; i < sortingArray.length - 1; i++) {
             int min = i;
             for (int j = i + 1; j < sortingArray.length; j++) {
-                if (((Song)sortingArray[i]).getArtist().compareTo(
-                    ((Song)sortingArray[j]).getArtist()) > 0) {
-                    min = j;
-                }
+                min = alphabetize(sortingArray, min, j, 0, "artist");
             }
             Object temp = sortingArray[i];
             sortingArray[i] = sortingArray[min];
@@ -162,10 +183,7 @@ public class Sorter {
         for (int i = 0; i < sortingArray.length - 1; i++) {
             int min = i;
             for (int j = i + 1; j < sortingArray.length; j++) {
-                if (((Song)sortingArray[i]).getTitle().compareTo(
-                    ((Song)sortingArray[j]).getTitle()) > 0) {
-                    min = j;
-                }
+                min = alphabetize(sortingArray, min, j, 0, "title");
             }
             Object temp = sortingArray[i];
             sortingArray[i] = sortingArray[min];
@@ -179,7 +197,7 @@ public class Sorter {
 
 
     /**
-     * Sorts list alphabetically by song date
+     * Sorts list by song release date
      * 
      * @return sorted DLList
      */
