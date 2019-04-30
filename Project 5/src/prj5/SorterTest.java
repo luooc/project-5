@@ -28,6 +28,7 @@ public class SorterTest extends student.TestCase {
     private Song song1;
     private Song song2;
     private Song song3;
+    private Song song4;
     private Student student1;
     private Student student2;
     private Student student3;
@@ -49,9 +50,11 @@ public class SorterTest extends student.TestCase {
         song2 = new Song("Morning", "Marc E. Bassy", 2016, "R&B");
         song3 = new Song("I Will Always Love You", "Houston, Whitney", 1974,
             "Balad");
+        song4 = new Song("Song Name", "Houston", 2018, "Pop Rock");
         songs.add(song1);
         songs.add(song2);
         songs.add(song3);
+        songs.add(song4);
         student1 = new Student("Art", "Human Foods & Nutrition", "Virginia",
             new String[3], new String[3]);
         student2 = new Student("Singing", "Food Science", "Wisconsin",
@@ -88,7 +91,8 @@ public class SorterTest extends student.TestCase {
         DLList<Song> temp = sorter.sortByGenre();
         assertEquals(temp.get(0), song3);
         assertEquals(temp.get(1), song1);
-        assertEquals(temp.get(2), song2);
+        assertEquals(temp.get(2), song4);
+        assertEquals(temp.get(3), song2);
     }
 
 
@@ -98,8 +102,9 @@ public class SorterTest extends student.TestCase {
     public void testSortByArtist() {
         DLList<Song> temp = sorter.sortByArtist();
         assertEquals(temp.get(0), song1);
-        assertEquals(temp.get(1), song3);
-        assertEquals(temp.get(2), song2);
+        assertEquals(temp.get(1), song4);
+        assertEquals(temp.get(2), song3);
+        assertEquals(temp.get(3), song2);
     }
 
 
