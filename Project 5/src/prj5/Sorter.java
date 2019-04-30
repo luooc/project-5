@@ -76,8 +76,6 @@ public class Sorter {
      * @param index
      *            a cursor that keeps track of where in the string the method
      *            looks at
-     * @param sortedBy
-     *            a String representing what the array is being sorted by
      * @return the index of the string that comes first alphabetically
      */
     private int alphabetize(
@@ -204,17 +202,16 @@ public class Sorter {
     public DLList<Song> sortByDate() {
         DLList<Song> sorted = new DLList<Song>();
         Object[] sortingArray = songList.toArray();
-        for (int i = 0; i < sortingArray.length - 1; i++) {
-            int min = i;
-            for (int j = i + 1; j < sortingArray.length; j++) {
-                if (((Song)sortingArray[i]).getDate() > ((Song)sortingArray[j])
-                    .getDate()) {
-                    min = j;
+        for (int i = 1; i < sortingArray.length; i++) {
+            Object temp;
+            for (int j = i; j > 0; j--) {
+                if (((Song)sortingArray[j]).getDate() < ((Song)sortingArray[j
+                    - 1]).getDate()) {
+                    temp = sortingArray[j];
+                    sortingArray[j] = sortingArray[j - 1];
+                    sortingArray[j - 1] = temp;
                 }
             }
-            Object temp = sortingArray[i];
-            sortingArray[i] = sortingArray[min];
-            sortingArray[min] = temp;
         }
         for (int i = 0; i < sortingArray.length; i++) {
             sorted.add((Song)sortingArray[i]);
