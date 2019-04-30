@@ -51,7 +51,7 @@ public class GUIWindow {
     public GUIWindow(DLList<Song> songs, DLList<Student> students) {
         this.songs = songs;
         this.students = students;
-        window = new Window();
+        window = new Window("Project 5");
         sortedBy = "hobby";
 
         // create and add the buttons to the screen
