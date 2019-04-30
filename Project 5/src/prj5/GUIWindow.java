@@ -282,17 +282,20 @@ public class GUIWindow {
         songTitle.setBackgroundColor(Color.WHITE);
 
         // creates a rectangle in legend to visualize glyph layout
-        legendGlyphBar = new Shape(50, 50, 5, legend.getHeight() - songTitle
-            .getY(), Color.CYAN);
+        legendGlyphBar = new Shape(windowWidth - songTitle.getWidth() + 8, 250,
+            5, 40, Color.BLACK);
+
+        // legendGlyphBar = new Shape(50, 50, 5, legend.getHeight() - songTitle
+        // .getY(), Color.BLACK);
 
         // creates a black text for "Heard" in legend for glyph visualization
-        heard = new TextShape(windowWidth - 110, (windowHeight / 2) + 110,
+        heard = new TextShape(windowWidth - 105, (windowHeight / 2) + 110,
             "Heard");
         heard.setBackgroundColor(Color.WHITE);
         heard.setForegroundColor(Color.BLACK);
 
         // creates a black text for "Likes" in legend for glyph visualization
-        likes = new TextShape(windowWidth - 50, (windowHeight / 2) + 110,
+        likes = new TextShape(windowWidth - 55, (windowHeight / 2) + 110,
             "Likes");
         likes.setBackgroundColor(Color.WHITE);
         likes.setForegroundColor(Color.BLACK);
@@ -335,7 +338,7 @@ public class GUIWindow {
             green.setBackgroundColor(Color.WHITE);
 
         }
-        // if input is "Region", then show legend for Region
+        // if input is "region", then show legend for Region
         else {
             title.setText("Region Legend");
             title.setForegroundColor(Color.BLACK);
@@ -352,9 +355,11 @@ public class GUIWindow {
             green.setText("Other");
             green.setForegroundColor(Color.GREEN);
             green.setBackgroundColor(Color.WHITE);
+
         }
 
         // adds everything to window
+        window.addShape(legendGlyphBar);
         window.addShape(title);
         window.addShape(pink);
         window.addShape(blue);
@@ -363,11 +368,8 @@ public class GUIWindow {
         window.addShape(songTitle);
         window.addShape(heard);
         window.addShape(likes);
-        window.addShape(legendGlyphBar);
-        window.moveToFront(legendGlyphBar);
         window.addShape(legend);
         window.addShape(border);
-
     }
 
 
