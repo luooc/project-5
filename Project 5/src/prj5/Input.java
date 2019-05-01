@@ -41,7 +41,7 @@ public class Input {
     public static void main(String[] args) {
         if(args[0] == null || args[1] == null) {
             args[0] = "MusicSurveyData2018.csv";
-            args[1] = "SongList2018.csv"
+            args[1] = "SongList2018.csv";
         }
         
         String studentFile = args[0];
