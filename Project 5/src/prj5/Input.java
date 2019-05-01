@@ -39,6 +39,11 @@ public class Input {
      *            a String array
      */
     public static void main(String[] args) {
+        if(args[0] == null || args[1] == null) {
+            args[0] = "MusicSurveyData2018.csv";
+            args[1] = "SongList2018.csv"
+        }
+        
         String studentFile = args[0];
         String songFile = args[1];
 
@@ -47,7 +52,7 @@ public class Input {
             reader = new Reader(songFile, studentFile);
         }
         catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
+            // Auto-generated catch block
             e.printStackTrace();
         }
         
