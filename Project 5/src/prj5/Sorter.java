@@ -97,7 +97,7 @@ public class Sorter {
             sorter1 = song1.getGenre();
             sorter2 = song2.getGenre();
         }
-        else if (sortedBy.equals("artist")) {
+        else {
             sorter1 = song1.getArtist();
             sorter2 = song2.getArtist();
         }
