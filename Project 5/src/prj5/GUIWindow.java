@@ -36,7 +36,7 @@ public class GUIWindow {
     private Button next;
     private Sorter sorter;
     private int glyphIndex;
-    private final int GLYPH_BAR_WIDTH = 25;
+    private final int GLYPH_BAR_WIDTH = 10;
     private String sortedBy;
 
 
@@ -272,51 +272,48 @@ public class GUIWindow {
 
         // initializes an empty title for the legend at the correct place in the
         // window
-        TextShape title = new TextShape(windowWidth - 112, windowHeight / 2 + 3,
+        TextShape title = new TextShape(windowWidth - 110, windowHeight - 145,
             "");
 
         // initializes an empty pink, blue, orange, and green text object at the
         // correct place in the window
-        TextShape pink = new TextShape(windowWidth - 105, windowHeight / 2 + 20,
+        TextShape pink = new TextShape(windowWidth - 110, windowHeight - 128,
             "");
-        TextShape blue = new TextShape(windowWidth - 105, windowHeight / 2 + 34,
+        TextShape blue = new TextShape(windowWidth - 110, windowHeight - 114,
             "");
-        TextShape orange = new TextShape(windowWidth - 105, windowHeight / 2
-            + 49, "");
-        TextShape green = new TextShape(windowWidth - 105, windowHeight / 2
-            + 64, "");
+        TextShape orange = new TextShape(windowWidth - 110, windowHeight - 100,
+            "");
+        TextShape green = new TextShape(windowWidth - 110, windowHeight - 86,
+            "");
 
         // creates a black rectangle to be placed behind the legend to serve as
         // a black outline
-        Shape border = new Shape(windowWidth - 115, windowHeight / 2, 110,
-            (windowHeight / 2) - 5, Color.BLACK);
+        Shape border = new Shape(windowWidth - 115, windowHeight - 150, 110,
+            145, Color.BLACK);
 
         // creates a white rectangle to serve as the legend
-        Shape legend = new Shape(windowWidth - 113, (windowHeight / 2) + 2, 106,
-            (windowHeight / 2) - 9, Color.WHITE);
+        Shape legend = new Shape(windowWidth - 113, windowHeight - 148, 106,
+            141, Color.WHITE);
 
         // creates a black text for "Song Title" in the legend,
-        TextShape songTitle = new TextShape((windowWidth - 93), (windowHeight
-            / 2) + 79, "Song Title");
+        TextShape songTitle = new TextShape((windowWidth - 93), windowHeight
+            - 70, "Song Title");
         songTitle.setForegroundColor(Color.BLACK);
         songTitle.setBackgroundColor(Color.WHITE);
 
         // creates a rectangle in legend to visualize glyph layout
-        Shape legendGlyphBar = new Shape(windowWidth - songTitle.getWidth() + 4,
-            565, 7, 40, Color.BLACK);
-
-        // legendGlyphBar = new Shape(50, 50, 5, legend.getHeight() - songTitle
-        // .getY(), Color.BLACK);
+        Shape legendGlyphBar = new Shape(windowWidth - songTitle.getWidth() + 6,
+            windowHeight - 50, 7, 40, Color.BLACK);
 
         // creates a black text for "Heard" in legend for glyph visualization
-        TextShape heard = new TextShape(windowWidth - 105, (windowHeight / 2)
-            + 110, "Heard");
+        TextShape heard = new TextShape(windowWidth - 105, windowHeight - 40,
+            "Heard");
         heard.setBackgroundColor(Color.WHITE);
         heard.setForegroundColor(Color.BLACK);
 
         // creates a black text for "Likes" in legend for glyph visualization
-        TextShape likes = new TextShape(windowWidth - 55, (windowHeight / 2)
-            + 110, "Likes");
+        TextShape likes = new TextShape(windowWidth - 55, windowHeight - 40,
+            "Likes");
         likes.setBackgroundColor(Color.WHITE);
         likes.setForegroundColor(Color.BLACK);
 
@@ -397,6 +394,8 @@ public class GUIWindow {
      * ~ INNER GLYPH CLASS ....................................................
      */
     private class Glyph {
+        private int glyphWidth = (window.getGraphPanelWidth() - 115) / 3;
+        private int glyphHeight = window.getGraphPanelHeight() / 3;
         private String songTitle;
         private String songArtist;
         private Color[] colors;
@@ -458,20 +457,26 @@ public class GUIWindow {
                 row = 1;
             }
 
-            // add title and vertical black bar to glyph
-            Shape verticalBar = new Shape((col * 750) + 150, (row * 325) + 75,
-                GLYPH_BAR_WIDTH, GLYPH_BAR_WIDTH * 4, Color.BLACK);
-            window.addShape(verticalBar);
-
             // add the song info for the glyph
-            TextShape songName = new TextShape((col * 750) + 50, (row * 325)
-                + 30, songTitle);
+            TextShape songName = new TextShape(0, (row * glyphHeight) + 5,
+                songTitle);
+            songName.setX((col * glyphWidth) + glyphWidth / 2 - songName
+                .getWidth() / 2);
             songName.setBackgroundColor(Color.WHITE);
             window.addShape(songName);
-            TextShape artistName = new TextShape((col * 750) + 50, (row * 325)
-                + 50, "by " + songArtist);
+
+            TextShape artistName = new TextShape(0, (row * glyphHeight) + 25,
+                "by " + songArtist);
+            artistName.setX((col * glyphWidth) + glyphWidth / 2 - artistName
+                .getWidth() / 2);
             artistName.setBackgroundColor(Color.WHITE);
             window.addShape(artistName);
+
+            // add title and vertical black bar to glyph
+            Shape verticalBar = new Shape((col * glyphWidth) + glyphWidth / 2,
+                (row * glyphHeight) + 50, GLYPH_BAR_WIDTH, GLYPH_BAR_WIDTH * 4,
+                Color.BLACK);
+            window.addShape(verticalBar);
 
             // add the colored bars to the glyph
             for (int j = 0; j < 4; j++) {
@@ -480,12 +485,13 @@ public class GUIWindow {
                     / (double)barWidths[3]) * 100.0);
                 int heardWidth = (int)(((double)barWidths[0]
                     / (double)barWidths[2]) * 100.0);
-                Shape heard = new Shape((col * 750) + 150 - heardWidth, (row
-                    * 325) + GLYPH_BAR_WIDTH * (j + 3), heardWidth,
-                    GLYPH_BAR_WIDTH, colors[j]);
+                Shape heard = new Shape((col * glyphWidth) + glyphWidth / 2
+                    - heardWidth, (row * glyphHeight) + 20 + GLYPH_BAR_WIDTH
+                        * (j + 3), heardWidth, GLYPH_BAR_WIDTH, colors[j]);
                 window.addShape(heard);
-                Shape likes = new Shape((col * 750) + 150 + GLYPH_BAR_WIDTH,
-                    (row * 325) + GLYPH_BAR_WIDTH * (j + 3), likedWidth,
+                Shape likes = new Shape((col * glyphWidth) + glyphWidth / 2
+                    + GLYPH_BAR_WIDTH, (row * glyphHeight) + 20
+                        + GLYPH_BAR_WIDTH * (j + 3), likedWidth,
                     GLYPH_BAR_WIDTH, colors[j]);
                 window.addShape(likes);
             }
